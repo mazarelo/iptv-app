@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ru/values-ru.xml",
+            "map": [
+                {
+                    "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/values-ru/values-ru.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,140,215,290,364,444,524,603,692,771",
+                        "endColumns": "84,74,74,73,79,79,78,88,78,70",
+                        "endOffsets": "135,210,285,359,439,519,598,687,766,837"
+                    }
+                }
+            ]
+        }
+    ]
+}

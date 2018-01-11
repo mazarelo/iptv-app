@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Settings
+    </ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+
+    <ion-list>
+        <ion-item>
+          <ion-label>Offline use</ion-label>
+          <ion-toggle [(ngModel)]="offlineData" checked="false"></ion-toggle>
+        </ion-item>
+      </ion-list>
+
+      <ion-list>
+       
+        <ion-item>
+            Playlist
+            <button ion-button outline item-end  (click)="refreshPlaylist()">Refresh</button>
+        </ion-item>
+        <ion-item>
+            m3u8 Url
+            <button ion-button outline item-end (click)="uploadPlaylist()">Upload</button>
+        </ion-item>
+      </ion-list>
+
+      <ion-list>
+        <ion-item>
+           Favorites
+          <button color="danger" ion-button outline item-end  (click)="cleanFavorites()">Delete</button>
+        </ion-item>
+
+        <ion-item>
+             Cache
+            <button color="danger" ion-button outline item-end  (click)="cleanPlaylist()">Delete</button>
+        </ion-item>
+        
+      </ion-list>
+</ion-content>

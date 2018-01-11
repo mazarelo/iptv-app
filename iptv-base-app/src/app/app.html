@@ -1,0 +1,23 @@
+<ion-menu [content]="content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>IPTV</ion-title>
+        <button ion-button menuToggle>
+            <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-content>
+      <ion-list>
+          <ion-item menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+            <ion-icon name="{{p.icon}}" item-start></ion-icon>
+            {{p.title}}
+          </ion-item>
+      </ion-list>
+    </ion-content>
+  
+  </ion-menu>
+  
+  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

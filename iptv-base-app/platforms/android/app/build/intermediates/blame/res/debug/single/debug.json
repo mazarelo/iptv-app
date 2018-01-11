@@ -1,0 +1,330 @@
+[
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_controls_previous.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xxhdpi-v4/exo_controls_previous.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_exo_controls_pause.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-hdpi-v4/exo_controls_pause.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4_exo_controls_pause.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-ldpi-v4/exo_controls_pause.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_controls_play.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xxhdpi-v4/exo_controls_play.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xxhdpi-v4/exo_controls_repeat_off.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_rewind.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-mdpi-v4/exo_controls_rewind.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_fastforward.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-mdpi-v4/exo_controls_fastforward.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_controls_fastforward.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xxhdpi-v4/exo_controls_fastforward.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4_exo_controls_play.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-ldpi-v4/exo_controls_play.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_icon.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/mipmap-xxxhdpi/icon.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_exo_controls_fastforward.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xhdpi-v4/exo_controls_fastforward.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-ldpi-v4/exo_controls_repeat_all.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-port-hdpi_screen.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/drawable-port-hdpi/screen.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_exo_edit_mode_logo.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xxxhdpi-v4/exo_edit_mode_logo.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_exo_edit_mode_logo.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xhdpi-v4/exo_edit_mode_logo.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xxhdpi-v4/exo_controls_repeat_one.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_play.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-mdpi-v4/exo_controls_play.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/mipmap-hdpi_icon.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/mipmap-hdpi/icon.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-hdpi-v4/exo_controls_repeat_all.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_exo_controls_play.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-hdpi-v4/exo_controls_play.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_exo_controls_repeat_all.xml.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-anydpi-v21/exo_controls_repeat_all.xml"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-land-xhdpi_screen.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/drawable-land-xhdpi/screen.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xhdpi-v4/exo_controls_repeat_off.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-land-hdpi_screen.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/drawable-land-hdpi/screen.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-port-xxxhdpi_screen.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/drawable-port-xxxhdpi/screen.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi_icon.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/mipmap-xhdpi/icon.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4_exo_controls_rewind.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-ldpi-v4/exo_controls_rewind.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_edit_mode_logo.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-mdpi-v4/exo_edit_mode_logo.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-mdpi-v4/exo_controls_repeat_one.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_exo_controls_next.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xhdpi-v4/exo_controls_next.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_exo_controls_play.xml.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-anydpi-v21/exo_controls_play.xml"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_pause.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-mdpi-v4/exo_controls_pause.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/mipmap-mdpi_icon.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/mipmap-mdpi/icon.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_exo_controls_rewind.xml.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-anydpi-v21/exo_controls_rewind.xml"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/mipmap-ldpi_icon.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/mipmap-ldpi/icon.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4_exo_controls_previous.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-ldpi-v4/exo_controls_previous.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-hdpi-v4/exo_controls_repeat_off.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xhdpi-v4/exo_controls_repeat_all.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_exo_controls_rewind.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xhdpi-v4/exo_controls_rewind.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_exo_controls_fastforward.xml.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-anydpi-v21/exo_controls_fastforward.xml"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_exo_controls_previous.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-hdpi-v4/exo_controls_previous.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-port-xxhdpi_screen.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/drawable-port-xxhdpi/screen.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-land-xxhdpi_screen.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/drawable-land-xxhdpi/screen.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-hdpi-v4/exo_controls_repeat_one.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_exo_controls_repeat_off.xml.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-anydpi-v21/exo_controls_repeat_off.xml"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-ldpi-v4/exo_controls_repeat_one.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4_exo_edit_mode_logo.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-ldpi-v4/exo_edit_mode_logo.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-ldpi-v4/exo_controls_repeat_off.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_next.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-mdpi-v4/exo_controls_next.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_exo_controls_next.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-hdpi-v4/exo_controls_next.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-land-ldpi_screen.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/drawable-land-ldpi/screen.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-port-ldpi_screen.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/drawable-port-ldpi/screen.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-port-xhdpi_screen.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/drawable-port-xhdpi/screen.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_exo_controls_previous.xml.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-anydpi-v21/exo_controls_previous.xml"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/layout_exo_simple_player_view.xml.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/layout/exo_simple_player_view.xml"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-land-mdpi_screen.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/drawable-land-mdpi/screen.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_icon.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/mipmap-xxhdpi/icon.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4_exo_controls_fastforward.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-ldpi-v4/exo_controls_fastforward.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_exo_edit_mode_logo.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-hdpi-v4/exo_edit_mode_logo.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_exo_controls_rewind.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-hdpi-v4/exo_controls_rewind.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_controls_rewind.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xxhdpi-v4/exo_controls_rewind.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_edit_mode_logo.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xxhdpi-v4/exo_edit_mode_logo.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xxhdpi-v4/exo_controls_repeat_all.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-ldpi-v4_exo_controls_next.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-ldpi-v4/exo_controls_next.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_exo_controls_fastforward.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-hdpi-v4/exo_controls_fastforward.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_exo_controls_previous.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xhdpi-v4/exo_controls_previous.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-port-mdpi_screen.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/drawable-port-mdpi/screen.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/xml_config.xml.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/xml/config.xml"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_previous.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-mdpi-v4/exo_controls_previous.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_repeat_off.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-mdpi-v4/exo_controls_repeat_off.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_exo_controls_pause.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xhdpi-v4/exo_controls_pause.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/layout_exo_playback_control_view.xml.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/layout/exo_playback_control_view.xml"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_exo_controls_repeat_all.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-mdpi-v4/exo_controls_repeat_all.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_exo_controls_repeat_one.xml.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-anydpi-v21/exo_controls_repeat_one.xml"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_exo_controls_repeat_one.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xhdpi-v4/exo_controls_repeat_one.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_controls_pause.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xxhdpi-v4/exo_controls_pause.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-land-xxxhdpi_screen.png.flat",
+        "source": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/src/main/res/drawable-land-xxxhdpi/screen.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_exo_controls_play.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xhdpi-v4/exo_controls_play.png"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_exo_controls_next.xml.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-anydpi-v21/exo_controls_next.xml"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_exo_edit_mode_logo.xml.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-anydpi-v21/exo_edit_mode_logo.xml"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_exo_controls_pause.xml.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-anydpi-v21/exo_controls_pause.xml"
+    },
+    {
+        "merged": "/home/mazarelo/Projects/iptv-app/iptv/platforms/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_exo_controls_next.png.flat",
+        "source": "/home/mazarelo/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-r2.5.1.aar/3035e379f3129f1a731c76c0279adf5f/res/drawable-xxhdpi-v4/exo_controls_next.png"
+    }
+]

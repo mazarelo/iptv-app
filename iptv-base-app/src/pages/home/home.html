@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title >Playlist</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+<ion-content class="card-background-page">
+    <ion-card *ngFor="let playlist of userPlaylists" (click)="goToPlaylist(playlist)">
+        <div class="image-overlay"
+        [style.background]="'url()'" 
+        [style.backgroundSize]="'cover'"
+        [style.backgroundPosition]="'center'"></div>
+      <!--<img src="assets/imgs/flags/{{ item.name | lowercase }}.jpg"/>-->
+      <div class="card-title">{{playlist.name}}</div>
+      <div class="card-subtitle"></div>
+    </ion-card>
+    <!-- add new playlist -->
+    <ion-card (click)="addPlayList()">
+        <div class="image-overlay"
+        [style.background]="'url()'" 
+        [style.backgroundSize]="'cover'"
+        [style.backgroundPosition]="'center'"></div>
+      <!--<img src="assets/imgs/flags/{{ item.name | lowercase }}.jpg"/>-->
+      <div class="card-title">New</div>
+      <div class="card-subtitle">click here to add a new playlist</div>
+    </ion-card>
+</ion-content>
+

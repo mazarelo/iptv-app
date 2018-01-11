@@ -1,0 +1,21 @@
+    .item-md {
+        h2{
+            font-size: 1.4rem
+        }
+        &:hover{
+            ion-thumbnail{
+                opacity: 1;
+            }
+        }
+        ion-thumbnail{
+            min-height:30px;
+            min-width:50px;
+            opacity:1;
+        }
+    }
+    .list-md .item-block .item-inner{
+        border-bottom:1px solid rgba(0,0,0,.3)
+    }
+channels {
+    
+}
