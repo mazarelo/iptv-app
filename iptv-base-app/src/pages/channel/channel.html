@@ -1,0 +1,15 @@
+<video *ngIf="item.url" id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls preload="auto" width="640" height="264">
+        <source [src]="item.url" type="application/x-mpegURL" />
+        <source [src]="item.url" type="video/mp4">
+    </video>
+<ion-content>
+
+    <ion-list>
+        <ion-item *ngFor="let channel of list; let i = index" (click)="playItem(channel)" [style.background]="'url(assets/imgs/fallback.png)'" [style.backgroundSize]="'contain'" [style.backgroundPosition]="'center center'" [style.backgroundRepeat]="'no-repeat'">
+            <ion-thumbnail item-start [style.background]="'url('+ channel.tvLogo +')'" [style.backgroundSize]="'contain'" [style.backgroundPosition]="'center center'" [style.backgroundRepeat]="'no-repeat'">
+            </ion-thumbnail>
+            <h2>{{channel.tvName}}</h2>
+            <!--<button ion-button clear item-end (click)="playChannel(channel.url)">View</button>-->
+        </ion-item>
+    </ion-list>
+</ion-content>

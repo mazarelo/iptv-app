@@ -46,12 +46,14 @@ export class FavoritesPage implements OnInit{
         },*/
         {
           text: "Play",
+          icon: 'arrow-dropright-circle',
           handler: ()=>{
             this.playChannel(this.channels[index].url)
           }
         },
         {
           text: 'Remove from Favorites',
+          icon: 'heart-outline',
           handler: () => {
             this.favorites.remove(this.channels[index]).subscribe(data=>{
               if(!data) {
@@ -65,6 +67,7 @@ export class FavoritesPage implements OnInit{
           }
         },{
           text: 'Cancel',
+          icon: 'cross',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');

@@ -31,6 +31,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { File } from '@ionic-native/file';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { CountriesPage } from '../pages/countries/countries'
+import { ParserProvider } from '../providers/parser/parser'
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { CountriesPage } from '../pages/countries/countries'
     HomePage,
     TabsPage,
     Splash,
-    CountriesPage
+    CountriesPage,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +61,7 @@ import { CountriesPage } from '../pages/countries/countries'
     ChannelsPage,
     Splash,
     TabsPage,
-    CountriesPage
+    CountriesPage,
   ],
   providers: [
     StatusBar,
@@ -79,6 +80,7 @@ import { CountriesPage } from '../pages/countries/countries'
     PlayListProvider,
     AndroidPermissions,
     ScreenOrientation,
+    ParserProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     M3u8Provider
   ]

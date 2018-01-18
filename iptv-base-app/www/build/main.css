@@ -25682,6 +25682,14 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+channel ion-list {
+  margin-top: 56.25% !important;
+}
+
+channel #stream-video {
+  z-index: 9;
+}
+
 .item-md h2 {
   font-size: 1.4rem;
 }

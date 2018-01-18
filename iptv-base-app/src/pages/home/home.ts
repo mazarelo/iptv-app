@@ -1,31 +1,28 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, Slides } from 'ionic-angular';
 //import * as m3u from 'm3u8-reader'
-import { M3u8Provider } from '../../providers/m3u8/m3u8'
-import { ChannelsPage } from '../channels/channels'
-import { FavoritesProvider } from '../../providers/favorites/favorites';
-import { VideoProvider } from '../../providers/video/video';
-import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { PlayListProvider } from '../../providers/playlist/playlist';
 import { CountriesPage } from '../countries/countries'
+import { ActionSheetController } from 'ionic-angular';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {
   @ViewChild(Slides) slides: Slides;
-  private data = null;
   public countries = []
   public favorites = [];
   public userPlaylists: any = []
   constructor(
     public navCtrl: NavController,
-    private m3u8Provider: M3u8Provider,
-    private favoritesProvider: FavoritesProvider,
-    private videoProvider: VideoProvider,
     private playlistProvider: PlayListProvider,
-    private screenOrientation: ScreenOrientation
+    private actionSheetCtrl: ActionSheetController
   ) {
+    this.playlistProvider.list().subscribe(data=>{
+      console.log('NG INIT',data)
+      this.userPlaylists = data
+    })
     /* detect orientation changes
       this.screenOrientation.onChange().subscribe(() => {
           console.log("Orientation Changed");
@@ -33,7 +30,7 @@ export class HomePage implements OnInit {
       });
     */
   }
-  
+
   retrievePlaylists(){
     this.playlistProvider.list().subscribe(response=>{
       let data: any = response
@@ -62,12 +59,46 @@ export class HomePage implements OnInit {
     */
   }
 
+  loadOptions(){
+      let actionSheet = this.actionSheetCtrl.create({
+        title: '',
+        subTitle: '',
+        buttons: [
+          /*{
+            text: 'Hide',
+            role: 'destructive',
+            handler: () => {
+              console.log('Destructive clicked');
+            }
+          },*/
+          {
+            text: "Add Playlist",
+            icon: 'add',
+            handler: () => {
+              this.addPlayList()
+            }
+          },
+          {
+            text: 'Cancel',
+            icon: 'cross',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      });
+      actionSheet.present();
+    }
+
+    deletePlaylist(playlist){
+      this.playlistProvider.remove(playlist).then(data => {
+        this.userPlaylists = this.userPlaylists.filter(el=> el.name !== playlist.name)
+      })
+    }
+   
   ngOnInit(){
     //this.retrieveList()
-    this.playlistProvider.list().subscribe(data=>{
-      console.log('NG INIT',data)
-      this.userPlaylists = data
-    })
   }
 }
 

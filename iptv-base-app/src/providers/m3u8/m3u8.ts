@@ -4,11 +4,9 @@ import { Observable } from 'rxjs/Observable';
 
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
-import { PlayListProvider } from '../playlist/playlist'
 import { AlertController } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { AlertOptions } from 'ionic-angular/components/alert/alert-options';
 
 /*
   Generated class for the M3u8Provider provider.
@@ -16,14 +14,13 @@ import { AlertOptions } from 'ionic-angular/components/alert/alert-options';
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
+
 @Injectable()
 export class M3u8Provider {
   public data;
-  private playlistUrl = null
-
+  private urlStorePrefix = 'url'
   constructor(
     public http: HttpClient,
-    private playlistProvider: PlayListProvider,
     private alertCtrl: AlertController,
     private fileProvider: File,
     private androidPermissions: AndroidPermissions,
@@ -67,8 +64,9 @@ export class M3u8Provider {
       console.log('SO...permission?', res)
       if(res.hasPermission){
         return this.fileProvider.resolveDirectoryUrl(folderPath).then(val =>{
+          console.log("RESOLVIGN PATH:", val)
           return this.fileProvider.getFile(val , fileName,  {create: true, exclusive: false})
-        })
+        }).catch(err=> console.log('ERR resolving dir:', err))
       }
     }) 
   }
@@ -77,7 +75,7 @@ export class M3u8Provider {
   getList(url) : any{
     return new Observable(observer => {
       // Checks if there is any formated playlist stored
-     this.storage.get('playlist-'+url).then((val) => {
+     this.storage.get(this.urlStorePrefix+'-'+url).then((val) => {
         if(val){
           observer.next(JSON.parse(val)) 
         }else{
@@ -114,24 +112,64 @@ export class M3u8Provider {
     return this.data.countries
   }
 
+
+  validateFile(dataArr){
+    if(dataArr.length < 1) return false
+
+    let output:any
+    switch(true){
+      case dataArr[0].indexOf('#EXTM3U') > -1:
+        if(dataArr[1].indexOf('#EXTINF:-1,') > -1, dataArr[1].indexOf('#EXTINF:0,') > -1){
+          output = this.parseM3uSimple(dataArr)
+        }else{
+          output = this.parseM3uWithOptions(dataArr)
+        }
+      break;
+    }
+    return output
+  }
+
   convertM3uToJson(text, url){
-    console.log("CONVERTING", text)
-    let arrDirty = text.split('\n')
+    let dataArr = text.split('\n')
+    let output = this.validateFile(dataArr)
+    this.storage.set(this.urlStorePrefix+'-'+url, JSON.stringify(output));
+    return output
+  }
+  
+  parseM3uWithOptions(data){
     let output:any = {}
     let previous = null
     
-    arrDirty.forEach((el, index) =>{
+    data.forEach((el, index) =>{
       if(index == 0) return false
       if(el.match(/ group-title="([^"]*)"/) == null && el.indexOf("http") > -1){
         let previousCountry =  output[previous]
         output[previous][previousCountry.length -1].url = el.toString().replace("\r", "")
         return false
       }
-      // Build object
+
+      // Build object dynamicly
+      el = el.replace('#EXTINF:-1 ', '').replace('#EXTINF:-0 ', '').split(',')[0]
+      let attrs = el.match(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g)
+      let options = {}
+      
+      if(!attrs) return false
+
+      attrs.forEach(attr=>{
+        let splited = attr.split('=')
+        splited[1] = splited[1].replace(/"/g,'')
+        options[splited[0]] = splited[1] 
+      })
+      
+      console.log(el, options)
+
+      if(!options['tvg-name']) return false
+
+      
       let elObj = {
-         groupName: el.match(/ group-title="([^"]*)"/) ? el.match(/ group-title="([^"]*)"/)[1] : null,
-         tvLogo: el.match(/ tvg-logo="([^"]*)"/)? el.match(/ tvg-logo="([^"]*)"/)[1]: null,
-         tvName: el.match(/ tvg-name="([^"]*)"/) ? el.match(/ tvg-name="([^"]*)"/)[1]: null,
+         groupName: options['group-title'],
+         tvLogo: options['tvg-logo'],
+         tvName: options['tvg-name'],
       }
       
       if(elObj.groupName) {
@@ -161,7 +199,26 @@ export class M3u8Provider {
       el.channels = output[el.name].length
     })
 
-    this.storage.set('playlist-'+url, JSON.stringify(output));
+    return output
+  }
+
+  parseM3uSimple(data: Array<any>){
+    let output:any = {}
+    let previous = null
+
+    data.forEach((el, index) =>{
+      if(index == 0) return false
+      
+      if(el.match(/#EXTINF:-1,/) == null && el.indexOf("http") > -1){
+        let previousEl =  output[previous]
+        output[previousEl.length -1]['url'] = el.toString().replace("\r", "")
+        return false
+      }
+    
+      let name = el.split('#EXTINF:-1,')[1]
+      output.push({tvName: name})
+      previous = index
+    })
     return output
   }
 
@@ -190,7 +247,10 @@ export class M3u8Provider {
           {
             text: 'Ok',
             handler: data => {
-              if(data.url.indexOf('.m3u')){
+              var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+              var regex = new RegExp(expression);
+
+              if(data.url.match(regex)){
                 this.buildPlaylist(data.url).subscribe(result=>{
                   if(result){
                     console.log(result)
@@ -199,6 +259,7 @@ export class M3u8Provider {
                   }
                 })
               }
+              
               observer.next(false)
             }
           }

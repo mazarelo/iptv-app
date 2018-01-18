@@ -5,8 +5,7 @@ import { M3u8Provider } from '../../providers/m3u8/m3u8'
 import { ChannelsPage } from '../channels/channels'
 import { FavoritesProvider } from '../../providers/favorites/favorites';
 import { VideoProvider } from '../../providers/video/video';
-import { ScreenOrientation } from '@ionic-native/screen-orientation';
-import { PlayListProvider } from '../../providers/playlist/playlist';
+import {ToasterProvider} from '../../providers/toaster/toaster'
 
 @Component({
   selector: 'page-countries',
@@ -19,19 +18,19 @@ export class CountriesPage implements OnInit {
   public favorites = [];
   public userPlaylists: any = []
   private playlist: any;
-
+  public title = ''
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private m3u8Provider: M3u8Provider,
     private favoritesProvider: FavoritesProvider,
     private videoProvider: VideoProvider,
-    private playlistProvider: PlayListProvider,
-    private screenOrientation: ScreenOrientation
+    private toasterProvider: ToasterProvider
   ) {
     this.playlist = this.navParams.get('data')
-   // get playlist url
-   this.retrieveList(this.playlist.url)
+    this.title = this.playlist.name
+    // get playlist url
+    this.retrieveList(this.playlist.url)
   }
 
   getFlagUrL(country){
@@ -49,7 +48,7 @@ export class CountriesPage implements OnInit {
     this.m3u8Provider.getList(url).subscribe(data =>{
       console.log('retrieve list method: ', data)
       if(data.err){
-        this.requestListUrlOrFile()
+        this.toasterProvider.presentToast('Couldnt load playlist')
       }else{
         this.data = data
         this.countries = data.countries
@@ -57,22 +56,12 @@ export class CountriesPage implements OnInit {
     })
 
     this.favoritesProvider.list().then(data =>{
-      console.log("FAV DAT:", data)
       if(data){
         this.favorites = data
       }
     })
   }
   
-  requestListUrlOrFile(){
-    this.m3u8Provider.askPlaylistUrlOrFile().subscribe(result => {
-      let playlist = result
-      this.data = result
-      this.countries = this.data.countries
-      return false
-    })
-  }
-
   playChannel(item){
     this.videoProvider.start(item)
   }

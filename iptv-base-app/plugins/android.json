@@ -13,13 +13,28 @@
     "com.moust.cordova.videoplayer": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
     "cordova-plugin-exoplayer": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-filechooser": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
     "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-nativestorage": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-screen-orientation": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
     "cordova-plugin-splashscreen": {
@@ -32,21 +47,6 @@
       "PACKAGE_NAME": "io.ionic.starter"
     },
     "ionic-plugin-keyboard": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-nativestorage": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-filechooser": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-android-permissions": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-screen-orientation": {
       "PACKAGE_NAME": "io.ionic.starter"
     }
   },

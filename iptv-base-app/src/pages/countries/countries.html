@@ -1,38 +1,30 @@
 <ion-header>
-        <ion-navbar>
-          <ion-title >Playlist</ion-title>
-          <button ion-button menuToggle>
+    <ion-navbar>
+        <ion-title>{{title}}</ion-title>
+        <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
           </button>
-        </ion-navbar>
-      </ion-header>
-      <ion-content class="card-background-page">
-        <!--  --> 
-        <ion-slides *ngFor="let item of countries">
-            <ion-slide>
-                <ion-card (click)="goToCountry(item.name)">
-                  <div class="image-overlay"
-                  [style.background]="'url('+ getFlagUrL(item.name) +')'" 
-                  [style.backgroundSize]="'cover'"
-                  [style.backgroundPosition]="'center'"></div>
+    </ion-navbar>
+</ion-header>
+<ion-content class="card-background-page">
+    <!--  -->
+    <ion-slides *ngFor="let item of countries">
+        <ion-slide>
+            <ion-card (click)="goToCountry(item.name)">
+                <div class="image-overlay" [style.background]="'url('+ getFlagUrL(item.name) +')'" [style.backgroundSize]="'cover'" [style.backgroundPosition]="'center'"></div>
                 <!--<img src="assets/imgs/flags/{{ item.name | lowercase }}.jpg"/>-->
                 <div class="card-title">{{ item.name }}</div>
                 <div class="card-subtitle">{{ item.channels }} channels</div>
-              </ion-card>
-            </ion-slide>
-            <ion-slide *ngFor="let fav of favoritesInCountry(item.name)">
-                <ion-card (click)="playChannel(fav)">
-                    <div class="image-overlay"
-                    [style.background]="''" 
-                    [style.backgroundSize]="'cover'"
-                    [style.backgroundPosition]="'center'"></div>
-                  <!--<img src="assets/imgs/flags/{{ item.name | lowercase }}.jpg"/>-->
-                  <div class="card-subtitle"><img class="tv-logo" src="{{fav.tvLogo}}" width="30px"></div>
-                  <div class="card-title">{{ fav.tvName }}</div>
-                </ion-card>
-            </ion-slide>
-          </ion-slides>
+            </ion-card>
+        </ion-slide>
+        <ion-slide *ngFor="let fav of favoritesInCountry(item.name)">
+            <ion-card (click)="playChannel(fav)">
+                <div class="image-overlay" [style.background]="''" [style.backgroundSize]="'cover'" [style.backgroundPosition]="'center'"></div>
+                <!--<img src="assets/imgs/flags/{{ item.name | lowercase }}.jpg"/>-->
+                <div class="card-subtitle"><img class="tv-logo" src="{{fav.tvLogo}}" width="30px"></div>
+                <div class="card-title">{{ fav.tvName }}</div>
+            </ion-card>
+        </ion-slide>
+    </ion-slides>
 
-      </ion-content>
-      
-      
+</ion-content>

@@ -4,6 +4,9 @@ import 'rxjs/add/operator/map';
 import { Platform } from 'ionic-angular';
 import { AndroidExoplayer } from '@ionic-native/android-exoplayer'
 import { StreamingMedia } from '@ionic-native/streaming-media';
+//import { VideoPlayer } from '@ionic-native/video-player';
+import { ChannelPage } from '../../pages/channel/channel'
+import * as muxjs from 'mux.js'
 
 /*
   Generated class for the M3u8Provider provider.
@@ -18,6 +21,7 @@ export class VideoProvider {
     private androidExoPlayer: AndroidExoplayer,
     private platform: Platform,
     private streamingMedia: StreamingMedia,
+    // private videoPlayer: VideoPlayer,
     //private storage: Storage
     ) {}
 
@@ -28,9 +32,7 @@ export class VideoProvider {
             connectTimeout: 1000,
             autoPlay: true,
             controller: { // If this object is not present controller will not be visible
-                streamImage: '',
                 streamTitle: item.tvName,
-                streamDescription: '',
                 hideProgress: true, // Hide entire progress timebar
                 hidePosition: false, // If timebar is visible hide current position from it
                 hideDuration: true, // If timebar is visible Hide stream duration from it
@@ -42,12 +44,12 @@ export class VideoProvider {
     }
 
   start(item){
-      // Push a new View
       this.platform.ready().then(val => {
           if(val){
+            // this.startExoplayer(item)
             this.startNativePlayer(item)
           }
-    })
+      })
   }
 
   showControlls(){
@@ -91,9 +93,9 @@ export class VideoProvider {
         },
         errorCallback: (e) => { 
         },
-        orientation: 'landscape'
+        orientation: 'auto'
       };
 
-    return this.streamingMedia.playVideo(item.url, options);
+     return this.streamingMedia.playVideo(item.url, options);
   }
 }

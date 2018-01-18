@@ -16,9 +16,9 @@
     "#USER",
     "/"
   ],
-  "_resolved": "git+https://github.com/moust/cordova-plugin-videoplayer.git#4e97e063ecddde4c3814605011fc3f0a9d72a35e",
+  "_resolved": "git+https://github.com/moust/cordova-plugin-videoplayer.git#dc159d07f4cfb842208f7c3a457ce776557d29d4",
   "_spec": "https://github.com/moust/cordova-plugin-videoplayer.git",
-  "_where": "/home/mazarelo/Projects/iptv-app/iptv",
+  "_where": "/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app",
   "author": {
     "name": "Quentin Aupetit"
   },

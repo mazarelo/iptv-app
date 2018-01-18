@@ -4,7 +4,6 @@ import { Storage } from '@ionic/storage';
 import { ToasterProvider } from '../../providers/toaster/toaster';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { M3u8Provider } from '../../providers/m3u8/m3u8'
-import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 @Component({
   selector: 'page-settings',
@@ -22,7 +21,6 @@ export class SettingsPage {
     public toastProvider: ToasterProvider,
     private fileChooser: FileChooser,
     private m3u8Provider: M3u8Provider,
-    private androidPermissions: AndroidPermissions
   ) {}
 
   refreshPlaylist(){
@@ -35,25 +33,6 @@ export class SettingsPage {
 
   uploadPlaylist(){
     this.getPlayList()
-    //this.uploadPlaylistToApp()
-    /*
-    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(
-      result => {
-        console.log('Has permission?',result)
-        if(result.hasPermission){
-          
-        }else{
-          console.log('Before request permission')
-          this.androidPermissions.requestPermission( this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE ).then(res =>{
-            console.log('SO...permission?', res)
-            if(res.hasPermission){
-              this.uploadPlaylistToApp()
-            }
-          })
-        }
-      },
-      err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE)
-    );*/
   }
 
   getPlayList(){

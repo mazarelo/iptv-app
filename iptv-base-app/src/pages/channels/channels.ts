@@ -3,8 +3,8 @@ import { NavParams, NavController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
 import { FavoritesProvider } from '../../providers/favorites/favorites'
 import { ToasterProvider } from '../../providers/toaster/toaster'
-import { ChannelPage } from '../channel/channel'
 import { VideoProvider } from '../../providers/video/video'
+import { ChannelPage } from '../channel/channel'
 /**
  * Generated class for the ChannelsComponent component.
  *
@@ -109,7 +109,9 @@ export class ChannelsPage {
 
 
   playChannel(item){
-    this.videoProvider.start(item)
+    // Push a new View
+    this.navCtrl.push( ChannelPage, {channel: item, list: this.data})
+    //this.videoProvider.start(item)
    }
 
   doInfinite(infiniteScroll) {
