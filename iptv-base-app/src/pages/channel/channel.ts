@@ -31,7 +31,7 @@ export class ChannelPage implements OnInit {
 
   playItem(item){
     this.item = item
-    this.player.src({type:'application/x-mpegURL', src: ''})
+    this.player.src('')
 
     this.player.src({type: 'application/x-mpegURL', src: item.url})
     this.player.play();
@@ -44,9 +44,9 @@ export class ChannelPage implements OnInit {
     var playerInitTime = Date.now();
     // setup the player via the unique element ID
     // html5 for html hls
-    this.player = videojs(document.getElementById(el), {html5: {
+    this.player = videojs(document.getElementById(el), { html5: {
       hls: {
-        withCredentials: true
+        withCredentials: false
       }
     }});
 

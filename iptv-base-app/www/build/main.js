@@ -1010,7 +1010,7 @@ var ChannelPage = (function () {
     ChannelPage.prototype.ngOnInit = function () { };
     ChannelPage.prototype.playItem = function (item) {
         this.item = item;
-        this.player.src({ type: 'application/x-mpegURL', src: '' });
+        this.player.src('');
         this.player.src({ type: 'application/x-mpegURL', src: item.url });
         this.player.play();
     };
@@ -1023,7 +1023,7 @@ var ChannelPage = (function () {
         // html5 for html hls
         this.player = videojs(document.getElementById(el), { html5: {
                 hls: {
-                    withCredentials: true
+                    withCredentials: false
                 }
             } });
         this.player.ready(function () {
