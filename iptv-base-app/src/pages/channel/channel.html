@@ -1,4 +1,13 @@
-<video *ngIf="item.url" id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls preload="auto" width="640" height="264"></video>
+<video *ngIf="item.url" 
+    id="stream-video" 
+    class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" 
+    controls 
+    preload="auto" width="640" height="264"
+    autoplay
+    loop>
+    <source [src]="item.url"  type="application/x-mpegURL">
+    <source [src]="item.url" type="video/mp4">
+</video>
 <ion-content>
 
     <ion-list>
