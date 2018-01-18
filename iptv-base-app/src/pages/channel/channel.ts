@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 import { VideoProvider } from '../../providers/video/video'
-import * as mux from 'mux.js'
 /**
  * Generated class for the ChannelComponent component.
  *
@@ -29,26 +28,34 @@ export class ChannelPage implements OnInit {
   }
 
   ngOnInit(){}
-  
+
   playItem(item){
     this.item = item
+    this.player.src({type:'application/x-mpegURL', src: ''})
+
     this.player.src({type: 'application/x-mpegURL', src: item.url})
     this.player.play();
   }
 
   startPlayer(){
+    let self = this
     // ID with which to access the template's video element
     let el = 'stream-video'
     var playerInitTime = Date.now();
     // setup the player via the unique element ID
-    this.player = videojs(document.getElementById(el));
+    // html5 for html hls
+    this.player = videojs(document.getElementById(el), {html5: {
+      hls: {
+        withCredentials: true
+      }
+    }});
 
-    this.player.mux({
-      debug: false,
-      data: { property_key: '7qih6ockfi09d1p0t07dr5bei'}
-    })
-
-    this.player.play()
+    this.player.ready(function() {
+      this.src({
+        src: self.item.url,
+        type: 'application/x-mpegURL',
+      });
+    });
 
   }
 

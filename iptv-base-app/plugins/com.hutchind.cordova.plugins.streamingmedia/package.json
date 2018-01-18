@@ -19,10 +19,10 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-streaming-media/-/cordova-plugin-streaming-media-1.0.2.tgz",
+  "_resolved": "https://repo.dev.gonet/repository/gomedia-npm-group-dev/cordova-plugin-streaming-media/-/cordova-plugin-streaming-media-1.0.2.tgz",
   "_shasum": "d36848015325208a0f997fba4ce98067d92d2ccb",
   "_spec": "cordova-plugin-streaming-media@^1.0.2",
-  "_where": "/home/mazarelo/Projects/iptv-app/iptv",
+  "_where": "/Users/joao/Work/apps/iptv-app/iptv-base-app",
   "author": {
     "name": "Nicholas Hutchind"
   },
