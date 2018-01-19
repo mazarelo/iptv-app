@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 import { VideoProvider } from '../../providers/video/video'
-
 /**
  * Generated class for the ChannelComponent component.
  *
