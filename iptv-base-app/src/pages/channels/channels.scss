@@ -1,21 +1,32 @@
     .item-md {
-        h2{
+        h2 {
             font-size: 1.4rem
         }
-        &:hover{
-            ion-thumbnail{
+        &:hover {
+            ion-thumbnail {
                 opacity: 1;
             }
         }
-        ion-thumbnail{
-            min-height:30px;
-            min-width:50px;
-            opacity:1;
+        ion-thumbnail {
+            min-height: 40px;
+            min-width: 40px;
+            opacity: 1;
+        }
+        p {
+            color: rgba(255, 255, 255, .5);
+            font-size: 70%;
+            text-transform: lowercase;
+            ion-icon {
+                font-size: 1em;
+                margin-right: 2px;
+            }
+        }
+        .timeline {
+            height: 2px;
+            background: white;
         }
     }
-    .list-md .item-block .item-inner{
-        border-bottom:1px solid rgba(0,0,0,.3)
-    }
-channels {
     
-}
+    .list-md .item-block .item-inner {}
+    
+    channels {}

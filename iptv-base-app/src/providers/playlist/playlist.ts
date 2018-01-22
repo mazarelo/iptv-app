@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { M3u8Provider } from '../m3u8/m3u8';
+import { LoadingProvider } from '../loading/loading';
 
 @Injectable()
 export class PlayListProvider {
@@ -16,7 +17,8 @@ export class PlayListProvider {
       private alertCtrl: AlertController,
       private fileChooser: FileChooser,
       private androidPermissions: AndroidPermissions,
-      private m3uProvider: M3u8Provider
+      private m3uProvider: M3u8Provider,
+      private loadingProvider: LoadingProvider,
   ) {}
 
   add(){
@@ -42,22 +44,14 @@ export class PlayListProvider {
           if(!data) return {err: true, message: 'no playlist'}
           let playlists: any = []
           let playlistArr = data.filter(el => el.indexOf(this.playlistPrefix) > -1)
-          data.map( (el, index) => {
+          playlistArr.map( (el, index) => {
               if(el.indexOf(this.playlistPrefix) > -1){
                 this.storage.get(el).then(res=>{
                   playlists.push(JSON.parse(res))
-                  console.log("LIST BF:", playlists)
-                  
-                  // Error here
-                  if(index == playlistArr.length - 1){
-                    console.log("LIST:", playlists)
-                    observer.next(playlists)
-                  }
                 })
               }
           })
-
-          
+          observer.next(playlists)
       }, err =>{
           console.log('Error:', err)
           let error: any = {error: true, message: err}
@@ -102,16 +96,20 @@ export class PlayListProvider {
             {
             text: 'Save',
             handler: data => {
+                let loader = this.loadingProvider.presentLoadingDefault('Generating M3U list')
                 if (data.playlist.length > 0 && data.url.length > 0) {
                   let newPlaylist = { name: data.playlist, url: data.url, order: 0 }
                   this.storage.set(this.playlistPrefix + data.playlist, newPlaylist).then(() =>{
                     observer.next(newPlaylist)
+                    loader.dismiss()
                   }, err=>{
                     console.log('Error Saving:',err)
+                    loader.dismiss()
                   })
                 } else {
                   // invalid data
                   console.log('Invalid data', data)
+                  loader.dismiss()
                   return false;
                 }
               }

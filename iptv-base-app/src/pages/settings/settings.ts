@@ -67,12 +67,21 @@ export class SettingsPage {
       this.toastProvider.presentToast('error removing favorites')
     })
   }
+  
+  wipeAllData(){
+    this.storage.clear().then(data=>{
+      this.toastProvider.presentToast('All Data wiped')
+    })
+  }
 
-  cleanPlaylist(){
-    this.storage.remove('playlist').then(data=>{
-      this.toastProvider.presentToast('Playlist removed')
-    }).catch(err=>{
-      this.toastProvider.presentToast('error removing Playlist')
+  cleanPlaylists(){
+    this.storage.keys().then(keys=>{
+      keys.forEach(item=>{
+        if(item.indexOf('iptv-playlist-')){
+          this.storage.remove('playlist')
+        }
+      })
+      this.toastProvider.presentToast('Playlists removed')
     })
   }
 

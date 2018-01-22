@@ -6,6 +6,7 @@ import { ChannelsPage } from '../channels/channels'
 import { FavoritesProvider } from '../../providers/favorites/favorites';
 import { VideoProvider } from '../../providers/video/video';
 import {ToasterProvider} from '../../providers/toaster/toaster'
+import { LoadingProvider } from '../../providers/loading/loading';
 
 @Component({
   selector: 'page-countries',
@@ -25,7 +26,8 @@ export class CountriesPage implements OnInit {
     private m3u8Provider: M3u8Provider,
     private favoritesProvider: FavoritesProvider,
     private videoProvider: VideoProvider,
-    private toasterProvider: ToasterProvider
+    private toasterProvider: ToasterProvider,
+    private loadingProvider: LoadingProvider
   ) {
     this.playlist = this.navParams.get('data')
     this.title = this.playlist.name
@@ -45,13 +47,16 @@ export class CountriesPage implements OnInit {
   }
   
   retrieveList(url){
+    let loader = this.loadingProvider.presentLoadingDefault('Generating M3U list')
     this.m3u8Provider.getList(url).subscribe(data =>{
       console.log('retrieve list method: ', data)
       if(data.err){
         this.toasterProvider.presentToast('Couldnt load playlist')
+        loader.dismiss()
       }else{
         this.data = data
         this.countries = data.countries
+        loader.dismiss()
       }
     })
 

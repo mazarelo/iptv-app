@@ -5,6 +5,7 @@ import { FavoritesProvider } from '../../providers/favorites/favorites'
 import { ToasterProvider } from '../../providers/toaster/toaster'
 import { VideoProvider } from '../../providers/video/video'
 import { ChannelPage } from '../channel/channel'
+import { EpgProvider } from '../../providers/epg/epg';
 /**
  * Generated class for the ChannelsComponent component.
  *
@@ -16,10 +17,10 @@ import { ChannelPage } from '../channel/channel'
   templateUrl: 'channels.html'
 })
 export class ChannelsPage {
-
   public title: string;
   public channels = []
   private data;
+  private current = new Date().getTime()
   //private options: StreamingVideoOptions
 
   constructor(
@@ -29,11 +30,13 @@ export class ChannelsPage {
     public actionSheetCtrl: ActionSheetController,
     private favorites: FavoritesProvider,
     public toastProvider: ToasterProvider,
-    private videoProvider: VideoProvider
+    private videoProvider: VideoProvider,
+    private epgProvider: EpgProvider
   ) {
     this.data = this.navParams.get('channels')
     this.title = this.navParams.get('title')
     this.channels = this.data.slice(0,30)
+    this.getCountryEpgList()
   }
 
   initializeItems(){
@@ -51,6 +54,14 @@ export class ChannelsPage {
         return (item.tvName.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
+  }
+
+  getCurrentEPGTimeBar(programme){
+    let stop = new Date(programme._stop).getTime()
+    let start = new Date(programme._start).getTime()
+
+    let output = Math.floor(( (this.current - start) * 100 / (stop - start) )).toString() + "%"
+    return output
   }
 
   presentActionSheet(index) {
@@ -110,9 +121,28 @@ export class ChannelsPage {
 
   playChannel(item){
     // Push a new View
-    this.navCtrl.push( ChannelPage, {channel: item, list: this.data})
+    this.navCtrl.push( ChannelPage, {channel: item, list: this.data} )
     //this.videoProvider.start(item)
    }
+
+  getCountryEpgList(){
+    this.epgProvider.getCountryEPG(this.title).subscribe(data=>{
+      if(data){
+        let epgList: any = data
+        this.data.map((el, index)=>{
+          let channelEpg = epgList.channel.filter(epg => epg._id == el.id )
+          
+          if(channelEpg){
+            let programme = epgList.programme.filter( prog => prog._channel == el.id && this.epgProvider.isEpdDateValid(prog) )
+            this.data[index].epg = programme
+          }
+        })
+        console.log('CHANNELS:', this.channels)
+      }else{
+        this.toastProvider.presentToast('Error fetching EPG list')
+      }
+    })
+  }
 
   doInfinite(infiniteScroll) {
     let count = this.channels.length

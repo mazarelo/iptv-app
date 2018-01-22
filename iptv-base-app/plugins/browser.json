@@ -25,34 +25,9 @@
     "cordova-plugin-file": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
-    "cordova-plugin-filechooser": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-ionic-webview": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-nativestorage": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-screen-orientation": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "ionic-plugin-keyboard": {
+    "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "io.ionic.starter"
     }
   },
-  "dependent_plugins": {
-    "es6-promise-plugin": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    }
-  }
+  "dependent_plugins": {}
 }

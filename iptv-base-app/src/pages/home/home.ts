@@ -4,6 +4,7 @@ import { NavController, Slides } from 'ionic-angular';
 import { PlayListProvider } from '../../providers/playlist/playlist';
 import { CountriesPage } from '../countries/countries'
 import { ActionSheetController } from 'ionic-angular';
+import { EpgProvider } from '../../providers/epg/epg';
 
 @Component({
   selector: 'page-home',
@@ -17,12 +18,14 @@ export class HomePage implements OnInit {
   constructor(
     public navCtrl: NavController,
     private playlistProvider: PlayListProvider,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private epgProvider: EpgProvider
   ) {
     this.playlistProvider.list().subscribe(data=>{
       console.log('NG INIT',data)
       this.userPlaylists = data
     })
+
     /* detect orientation changes
       this.screenOrientation.onChange().subscribe(() => {
           console.log("Orientation Changed");

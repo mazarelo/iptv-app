@@ -33,7 +33,8 @@
                 <!--<ion-avatar item-start>
                     <img src="img/slimer.png">
                 </ion-avatar>-->
-                <h2>{{playlist.name}}</h2>
+                <h2>
+                    <ion-icon name="list-box"></ion-icon> {{playlist.name}}</h2>
             </ion-item>
             <ion-item-options side="right">
                 <button ion-button color="danger" (click)="deletePlaylist(playlist)">Delete</button>

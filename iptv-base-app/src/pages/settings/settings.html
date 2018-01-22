@@ -1,45 +1,50 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Settings
-    </ion-title>
-    <button ion-button menuToggle>
+    <ion-navbar>
+        <ion-title>
+            Settings
+        </ion-title>
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-  </ion-navbar>
+    </ion-navbar>
 </ion-header>
 
-<ion-content >
+<ion-content>
 
     <ion-list>
         <ion-item>
-          <ion-label>Offline use</ion-label>
-          <ion-toggle [(ngModel)]="offlineData" checked="false"></ion-toggle>
+            <ion-label>Offline use</ion-label>
+            <ion-toggle [(ngModel)]="offlineData" checked="false"></ion-toggle>
         </ion-item>
-      </ion-list>
+    </ion-list>
 
-      <ion-list>
-       
+    <ion-list>
+
         <ion-item>
             Playlist
-            <button ion-button outline item-end  (click)="refreshPlaylist()">Refresh</button>
+            <button ion-button outline item-end (click)="refreshPlaylist()">Refresh</button>
         </ion-item>
         <ion-item>
             m3u8 Url
             <button ion-button outline item-end (click)="uploadPlaylist()">Upload</button>
         </ion-item>
-      </ion-list>
+    </ion-list>
 
-      <ion-list>
+    <ion-list>
         <ion-item>
-           Favorites
-          <button color="danger" ion-button outline item-end  (click)="cleanFavorites()">Delete</button>
+            Favorites
+            <button color="danger" ion-button outline item-end (click)="cleanFavorites()">Delete</button>
         </ion-item>
 
         <ion-item>
-             Cache
-            <button color="danger" ion-button outline item-end  (click)="cleanPlaylist()">Delete</button>
+            Cache
+            <button color="danger" ion-button outline item-end (click)="cleanPlaylists()">Delete</button>
         </ion-item>
-        
-      </ion-list>
+
+        <ion-item>
+            Wipe data
+            <button color="danger" ion-button outline item-end (click)="wipeAllData()">wipe</button>
+        </ion-item>
+
+    </ion-list>
 </ion-content>

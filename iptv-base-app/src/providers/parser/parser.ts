@@ -23,7 +23,6 @@ export class ParserProvider {
     let arrDirty = text.split('\n')
     let output:any = {}
     let previous = null
-    console.log(arrDirty)
     arrDirty.forEach((el, index) =>{
       if(index == 0 || el.length < 1) return false
 
@@ -43,13 +42,14 @@ export class ParserProvider {
         splited[1] = splited[1].replace(/"/g,'')
         options[splited[0]] = splited[1] 
       })
-      
+
       let elObj = {
-         groupName: options['group-title'],
-         tvLogo: options['tvg-logo'],
-         tvName: options['tvg-name'],
+        tvId: options['tvg-id'],
+        groupName: options['group-title'],
+        tvLogo: options['tvg-logo'],
+        tvName: options['tvg-name'],
       }
-      
+
       if(elObj.groupName) {
         let groupName: string = elObj.groupName
         previous = groupName

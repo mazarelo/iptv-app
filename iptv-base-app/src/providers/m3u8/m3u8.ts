@@ -161,15 +161,13 @@ export class M3u8Provider {
         options[splited[0]] = splited[1] 
       })
       
-      console.log(el, options)
-
       if(!options['tvg-name']) return false
 
-      
       let elObj = {
-         groupName: options['group-title'],
-         tvLogo: options['tvg-logo'],
-         tvName: options['tvg-name'],
+        id: options['tvg-id'],
+        groupName: options['group-title'],
+        tvLogo: options['tvg-logo'],
+        tvName: options['tvg-name'],
       }
       
       if(elObj.groupName) {
@@ -230,7 +228,6 @@ export class M3u8Provider {
           { name: 'url', placeholder: 'Url' }
         ],
         buttons: [
- 
           /* {
             text: 'Local File',
             handler: data => {
