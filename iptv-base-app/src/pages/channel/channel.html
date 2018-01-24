@@ -1,7 +1,9 @@
+
+<video id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls autoplay loop></video>
 <!--<video *ngIf="item.url" id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls preload="auto" width="640" height="264" autoplay loop>
 </video>-->
 <ion-content>
-
+      <!--<video id="stream-video" width="640" height="264" controls autoplay loop></video>-->
     <ion-list>
         <ion-item *ngFor="let channel of list; let i = index" (click)="playItem(channel)" [style.background]="'url(assets/imgs/fallback.png)'" [style.backgroundSize]="'contain'" [style.backgroundPosition]="'center center'" [style.backgroundRepeat]="'no-repeat'">
             <ion-thumbnail item-start [style.background]="'url('+ channel.tvLogo +')'" [style.backgroundSize]="'contain'" [style.backgroundPosition]="'center center'" [style.backgroundRepeat]="'no-repeat'">

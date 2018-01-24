@@ -25708,11 +25708,16 @@ ion-navbar.toolbar {
 }
 
 channel ion-list {
-  margin-top: 56.25% !important;
+  margin-top: 220px !important;
 }
 
 channel #stream-video {
   z-index: 9;
+  padding-top: 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  height: 200px;
 }
 
 .item-md h2 {

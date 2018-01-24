@@ -1299,6 +1299,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+/**
+ * Generated class for the ChannelComponent component.
+ *
+ * See https://angular.io/api/core/Component for more info on Angular
+ * Components.
+ */
 var ChannelPage = (function () {
     function ChannelPage(videoProvider, navParams, plt) {
         this.videoProvider = videoProvider;
@@ -1306,61 +1312,33 @@ var ChannelPage = (function () {
         this.plt = plt;
         this.item = this.navParams.get('channel');
         this.list = this.navParams.get('list');
-        // this.videoProvider.start(this.item)
     }
     ChannelPage.prototype.ngOnInit = function () { };
     ChannelPage.prototype.playItem = function (item) {
-        /*
-        this.item = item
-        this.player.src('')
-        this.player.src({type: 'application/x-mpegURL', src: item.url})
-        this.player.play();
-        */
+        this.item = item;
+        this.videoProvider.playVideoJsHLS(this.item);
     };
     ChannelPage.prototype.startPlayer = function () {
         var _this = this;
         this.plt.ready().then(function (data) {
             if (_this.plt.is('ios')) {
-                _this.startVideoJsPlayer();
+                _this.videoProvider.playVideoJsHLS(_this.item);
             }
             else if (_this.plt.is('android')) {
                 _this.videoProvider.startExoplayer(_this.item);
             }
             else {
-                _this.startVideoJsPlayer();
+                _this.videoProvider.playVideoJsHLS(_this.item);
             }
-        });
-    };
-    ChannelPage.prototype.startVideoJsPlayer = function () {
-        var self = this;
-        // ID with which to access the template's video element
-        var el = 'stream-video';
-        var playerInitTime = Date.now();
-        // setup the player via the unique element ID
-        // html5 for html hls
-        this.player = videojs(document.getElementById(el), {
-            html5: {
-                nativeAudioTracks: false,
-                nativeVideoTracks: false,
-                hls: {
-                    withCredentials: false,
-                    overrideNative: true,
-                }
-            }
-        });
-        this.player.ready(function () {
-            this.src({
-                src: 'http://clientportal.link:8080/live/C0HCVMO3025/JcFT4I6502/3227.m3u8',
-                type: 'application/x-mpegURL',
-            });
         });
     };
     ChannelPage.prototype.ngAfterViewInit = function () {
-        this.startPlayer();
+        //this.startPlayer()
+        this.videoProvider.playVideoJsHLS(this.item);
     };
     ChannelPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'channel',template:/*ion-inline-start:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channel/channel.html"*/'<!--<video *ngIf="item.url" id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls preload="auto" width="640" height="264" autoplay loop>\n</video>-->\n<ion-content>\n\n    <ion-list>\n        <ion-item *ngFor="let channel of list; let i = index" (click)="playItem(channel)" [style.background]="\'url(assets/imgs/fallback.png)\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundRepeat]="\'no-repeat\'">\n            <ion-thumbnail item-start [style.background]="\'url(\'+ channel.tvLogo +\')\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundRepeat]="\'no-repeat\'">\n            </ion-thumbnail>\n            <h2>{{channel.tvName}}</h2>\n            <!--<button ion-button clear item-end (click)="playChannel(channel.url)">View</button>-->\n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channel/channel.html"*/
+            selector: 'channel',template:/*ion-inline-start:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channel/channel.html"*/'\n<video id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls autoplay loop></video>\n<!--<video *ngIf="item.url" id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls preload="auto" width="640" height="264" autoplay loop>\n</video>-->\n<ion-content>\n      <!--<video id="stream-video" width="640" height="264" controls autoplay loop></video>-->\n    <ion-list>\n        <ion-item *ngFor="let channel of list; let i = index" (click)="playItem(channel)" [style.background]="\'url(assets/imgs/fallback.png)\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundRepeat]="\'no-repeat\'">\n            <ion-thumbnail item-start [style.background]="\'url(\'+ channel.tvLogo +\')\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundRepeat]="\'no-repeat\'">\n            </ion-thumbnail>\n            <h2>{{channel.tvName}}</h2>\n            <!--<button ion-button clear item-end (click)="playChannel(channel.url)">View</button>-->\n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channel/channel.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_video_video__["a" /* VideoProvider */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
@@ -2393,6 +2371,42 @@ var VideoProvider = (function () {
     VideoProvider.prototype.close = function () {
         return this.androidExoPlayer.close();
     };
+    VideoProvider.prototype.playVideoJsHLS = function (item) {
+        // https://github.com/streamroot/videojs5-hlsjs-source-handler
+        var self = this;
+        var options = {
+            html5: {
+                hlsjsConfig: {
+                    debug: true
+                }
+            }
+        };
+        var player = videojs('stream-video', options);
+        player.qualityPickerPlugin();
+        player.ready(function () {
+            this.src({
+                src: item.url,
+                type: "application/x-mpegURL",
+            });
+        });
+    };
+    VideoProvider.prototype.startUsingHlsNative = function () {
+        if (Hls.isSupported()) {
+            var video = document.getElementById('stream-video');
+            var hls = new Hls();
+            hls.loadSource('http://clientportal.link:8080/live/zk5DrRr958/w9MaPr386/3214.m3u8');
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                video.play();
+            });
+        }
+        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = 'http://clientportal.link:8080/live/zk5DrRr958/w9MaPr386/3214.m3u8';
+            video.addEventListener('canplay', function () {
+                video.play();
+            });
+        }
+    };
     VideoProvider.prototype.startExoplayer = function (item) {
         var options = this.buildPlayerOptions(item);
         var successCallback = function (json) {
@@ -2402,29 +2416,6 @@ var VideoProvider = (function () {
             console.log("PLAYER ERRORS:", error);
         };
         window.ExoPlayer.show(options, successCallback, errorCallback);
-        /*
-         this.androidExoPlayer.show( options )
-         .subscribe(res=>{
-             if(res){
-                 switch(res.eventKeycode){
-                     case "KEYCODE_BACK":
-                     this.close().then( ()=>{
-                         //Navigate back
-                     })
-                     break;
-                 }
-         
-                 switch(res.eventType){
-                     case "TOUCH_EVENT":
-                     this.showControlls().then(()=>{
-                         // Controlls visible
-                     })
-                     break;
-                 }
-             }
-             console.log(res)
-         });
-         */
     };
     VideoProvider.prototype.startNativePlayer = function (item) {
         var options = {
