@@ -1299,12 +1299,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the ChannelComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 var ChannelPage = (function () {
     function ChannelPage(videoProvider, navParams, plt) {
         this.videoProvider = videoProvider;
@@ -1316,7 +1310,27 @@ var ChannelPage = (function () {
     ChannelPage.prototype.ngOnInit = function () { };
     ChannelPage.prototype.playItem = function (item) {
         this.item = item;
-        this.videoProvider.playVideoJsHLS(this.item);
+        this.playVideoJsHLS();
+        // this.videoProvider.playVideoJsHLS(this.item)
+    };
+    ChannelPage.prototype.playVideoJsHLS = function () {
+        // https://github.com/streamroot/videojs5-hlsjs-source-handler
+        var self = this;
+        var options = {
+            html5: {
+                hlsjsConfig: {
+                    debug: true
+                }
+            }
+        };
+        this.player = videojs('stream-video', options);
+        this.player.qualityPickerPlugin();
+        this.player.ready(function () {
+            this.src({
+                src: self.item.url,
+                type: "application/x-mpegURL",
+            });
+        });
     };
     ChannelPage.prototype.startPlayer = function () {
         var _this = this;
@@ -1333,12 +1347,12 @@ var ChannelPage = (function () {
         });
     };
     ChannelPage.prototype.ngAfterViewInit = function () {
-        //this.startPlayer()
-        this.videoProvider.playVideoJsHLS(this.item);
+        this.playVideoJsHLS();
+        // this.videoProvider.playVideoJsHLS(this.item)
     };
     ChannelPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'channel',template:/*ion-inline-start:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channel/channel.html"*/'\n<video id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls autoplay loop></video>\n<!--<video *ngIf="item.url" id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls preload="auto" width="640" height="264" autoplay loop>\n</video>-->\n<ion-content>\n      <!--<video id="stream-video" width="640" height="264" controls autoplay loop></video>-->\n    <ion-list>\n        <ion-item *ngFor="let channel of list; let i = index" (click)="playItem(channel)" [style.background]="\'url(assets/imgs/fallback.png)\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundRepeat]="\'no-repeat\'">\n            <ion-thumbnail item-start [style.background]="\'url(\'+ channel.tvLogo +\')\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundRepeat]="\'no-repeat\'">\n            </ion-thumbnail>\n            <h2>{{channel.tvName}}</h2>\n            <!--<button ion-button clear item-end (click)="playChannel(channel.url)">View</button>-->\n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channel/channel.html"*/
+            selector: 'channel',template:/*ion-inline-start:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channel/channel.html"*/'\n<video id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls loop></video>\n<!--<video *ngIf="item.url" id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls preload="auto" width="640" height="264" autoplay loop>\n</video>-->\n<ion-content>\n      <!--<video id="stream-video" width="640" height="264" controls autoplay loop></video>-->\n    <ion-list>\n        <ion-item *ngFor="let channel of list; let i = index" (click)="playItem(channel)" [style.background]="\'url(assets/imgs/fallback.png)\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundRepeat]="\'no-repeat\'">\n            <ion-thumbnail item-start [style.background]="\'url(\'+ channel.tvLogo +\')\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundRepeat]="\'no-repeat\'">\n            </ion-thumbnail>\n            <h2>{{channel.tvName}}</h2>\n            <!--<button ion-button clear item-end (click)="playChannel(channel.url)">View</button>-->\n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channel/channel.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_video_video__["a" /* VideoProvider */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
