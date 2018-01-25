@@ -76,7 +76,11 @@ export class M3u8Provider {
       // Checks if there is any formated playlist stored
      this.storage.get(this.urlStorePrefix+'-'+url).then((val) => {
         if(val){
-          observer.next(JSON.parse(val)) 
+          try{
+            observer.next(JSON.parse(val))
+          }catch(err){
+            observer.next({err: true, message: 'Error parsing json'})
+          }
         }else{
           this.buildPlaylist(url).subscribe(data=>{
             if(data){
@@ -134,11 +138,11 @@ export class M3u8Provider {
     this.storage.set(this.urlStorePrefix+'-'+url, JSON.stringify(output));
     return output
   }
-  
+
   parseM3uWithOptions(data){
     let output:any = {}
     let previous = null
-    
+
     data.forEach((el, index) =>{
       if(index == 0) return false
       if(el.match(/ group-title="([^"]*)"/) == null && el.indexOf("http") > -1){

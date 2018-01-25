@@ -49,18 +49,18 @@ export class CountriesPage implements OnInit {
       title: country
     });
   }
-  
+
   retrieveList(url){
-    let loader = this.loadingProvider.presentLoadingDefault('Generating M3U list')
+    //let loader = this.loadingProvider.presentLoadingDefault('Generating M3U list')
     this.m3u8Provider.getList(url).subscribe(data =>{
       console.log('retrieve list method: ', data)
       if(data.err){
         this.toasterProvider.presentToast('Couldnt load playlist')
-        loader.dismiss()
+        //loader.dismiss()
       }else{
         this.data = data
         this.countries = data.countries
-        loader.dismiss()
+        //loader.dismiss()
       }
     })
 
@@ -95,7 +95,7 @@ export class CountriesPage implements OnInit {
     });
     actionSheet.present();
   }
-  
+
   playChannel(item){
     this.videoProvider.start(item)
   }
