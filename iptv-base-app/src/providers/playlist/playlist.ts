@@ -7,6 +7,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { M3u8Provider } from '../m3u8/m3u8';
 import { LoadingProvider } from '../loading/loading';
+import { ToasterProvider } from '../toaster/toaster';
 
 @Injectable()
 export class PlayListProvider {
@@ -19,6 +20,8 @@ export class PlayListProvider {
       private androidPermissions: AndroidPermissions,
       private m3uProvider: M3u8Provider,
       private loadingProvider: LoadingProvider,
+      private m3u8Provider: M3u8Provider,
+      private toasterProvider: ToasterProvider,
   ) {}
 
   add(){
@@ -96,20 +99,28 @@ export class PlayListProvider {
             {
             text: 'Save',
             handler: data => {
-                let loader = this.loadingProvider.presentLoadingDefault('Generating M3U list')
+                //let loader = this.loadingProvider.presentLoadingDefault('Downloading M3U list')
                 if (data.playlist.length > 0 && data.url.length > 0) {
-                  let newPlaylist = { name: data.playlist, url: data.url, order: 0 }
-                  this.storage.set(this.playlistPrefix + data.playlist, newPlaylist).then(() =>{
+                  // Defines playlist structure
+                  let newPlaylist = { name: data.playlist, url: data.url, order: 0, type: null, data: null }
+                  console.log("PRE-RETRIEVE:", newPlaylist)
+                  this.retrieveList(data.url).then(response => {
+                    // Stores json response to playlist obj
+                    newPlaylist.data = response
+                    console.log("RETRIEVE DATA:", newPlaylist)
+                    return this.storage.set(this.playlistPrefix + data.playlist, newPlaylist)
+                  }).then( (data) =>{
+                    console.log("SAVED IN STORAGE:", data)
+                    //loader.dismiss()
                     observer.next(newPlaylist)
-                    loader.dismiss()
-                  }, err=>{
-                    console.log('Error Saving:',err)
-                    loader.dismiss()
+                  }).catch(err=>{
+                    //loader.dismiss()
+                    console.log('Err getting playlist',err)
                   })
                 } else {
                   // invalid data
                   console.log('Invalid data', data)
-                  loader.dismiss()
+                  //loader.dismiss()
                   return false;
                 }
               }
@@ -118,6 +129,31 @@ export class PlayListProvider {
         });
         alert.present();
     })
+  }
+
+  retrieveList(url){
+    return new Promise((resolve,reject)=>{
+      //let loader = this.loadingProvider.presentLoadingDefault('Generating M3U list')
+      this.m3u8Provider.getList(url).subscribe(data =>{
+        console.log('retrieve list method: ', data)
+        if(data.err){
+          this.toasterProvider.presentToast('Couldnt load playlist')
+          //loader.dismiss()
+          resolve(null)
+        }else{
+          this.toasterProvider.presentToast('Playlist saved')
+          //loader.dismiss()
+          resolve(data)
+        }
+      })
+  /*
+      this.favoritesProvider.list().then(data =>{
+        if(data){
+          this.favorites = data
+        }
+      })
+  */
+  })
   }
 
   remove(playlist){
@@ -173,7 +209,7 @@ export class PlayListProvider {
       err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE)
       */
     });
-    
+
   }
 
   openFilePicker(){
