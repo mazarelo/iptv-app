@@ -1,6 +1,6 @@
 channel {
     ion-list {
-        margin-top: 220px!important;
+        margin-top: 150px!important;
     }
     #stream-video {
       z-index: 9;
@@ -9,5 +9,14 @@ channel {
       max-width: 100%;
       min-width: 100%;
       height: 200px;
+    }
+
+    ion-header{
+      &:after{
+        display: none;
+      }
+    }
+    .button-clear-md{
+      color:white;
     }
 }

@@ -1,16 +1,28 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>{{title}}</ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-toolbar>
+      <button ion-button menuToggle start>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      <ion-buttons>
+          <ion-title>{{title}}</ion-title>
+      </ion-buttons>
+      <ion-buttons end>
+          <button ion-button icon-only (tap)="groupOptions()">
+            <ion-icon name="more"></ion-icon>
+          </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
 </ion-header>
 <ion-content>
     <ion-searchbar (ionInput)="onInput($event)"></ion-searchbar>
     <ion-list>
-        <ion-item *ngFor="let channel of channels; let i = index" (click)="presentActionSheet(i)" [style.background]="'url(assets/imgs/fallback.png)'" [style.backgroundSize]="'contain'" [style.backgroundPosition]="'center center'" [style.backgroundRepeat]="'no-repeat'">
-            <ion-thumbnail item-start [style.background]="'url('+ channel.tvLogo +')'" [style.backgroundSize]="'contain'" [style.backgroundPosition]="'center center'" [style.backgroundColor]="'rgba(0,0,0,.5)'" [style.backgroundRepeat]="'no-repeat'">
+        <ion-item *ngFor="let channel of channels; let i = index" [style.background]="'url(assets/imgs/fallback.png)'" [style.backgroundSize]="'contain'" [style.backgroundPosition]="'center center'" [style.backgroundRepeat]="'no-repeat'">
+            <ion-thumbnail (click)="playChannel(channel)"  item-start [style.background]="'url('+ channel.tvLogo +')'" [style.backgroundSize]="'contain'" [style.backgroundPosition]="'center center'" [style.backgroundColor]="'rgba(0,0,0,.5)'" [style.backgroundRepeat]="'no-repeat'">
             </ion-thumbnail>
-            <h2>{{channel.tvName}}</h2>
-            <div *ngIf="channel.epg">
+            <h2 (click)="playChannel(channel)" >{{channel.tvName}}</h2>
+            <div *ngIf="channel.epg" (click)="playChannel(channel)" >
                 <div *ngFor="let programme of channel.epg">
                     <p>
                         <ion-icon name="information-circle"></ion-icon> {{programme.title.__text}}
@@ -18,7 +30,9 @@
                     <div class="timeline" [style.width]="getCurrentEPGTimeBar(programme)"></div>
                 </div>
             </div>
-            <!--<button ion-button clear item-end (click)="playChannel(channel.url)">View</button>-->
+            <button ion-button clear icon-only item-end (tap)="itemOptions(i)">
+              <ion-icon name="more"></ion-icon>
+            </button>
         </ion-item>
     </ion-list>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

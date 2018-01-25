@@ -25708,7 +25708,7 @@ ion-navbar.toolbar {
 }
 
 channel ion-list {
-  margin-top: 220px !important;
+  margin-top: 150px !important;
 }
 
 channel #stream-video {
@@ -25718,6 +25718,14 @@ channel #stream-video {
   max-width: 100%;
   min-width: 100%;
   height: 200px;
+}
+
+channel ion-header:after {
+  display: none;
+}
+
+channel .button-clear-md {
+  color: white;
 }
 
 .item-md h2 {
@@ -25748,6 +25756,10 @@ channel #stream-video {
 .item-md .timeline {
   height: 2px;
   background: white;
+}
+
+.item-md .button-clear-md {
+  color: white;
 }
 
 page-countries .toolbar-title-md {
@@ -25833,6 +25845,10 @@ ion-slides ion-slide {
 .item-md .timeline {
   height: 2px;
   background: white;
+}
+
+.item-md .button-clear-md {
+  color: white;
 }
 
 page-home .toolbar-title-md {

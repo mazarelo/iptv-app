@@ -32,7 +32,6 @@ export class M3u8Provider {
       alert("URL NOT FOUND")
     }
     if(url.indexOf('content://') == -1){
-      console.log("HTTP GET", url)
       return this.http.get(url, { responseType: 'text' }).map(data => this.convertM3uToJson(data, url))
     }
 

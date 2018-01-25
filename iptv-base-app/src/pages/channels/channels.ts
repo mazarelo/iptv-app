@@ -64,7 +64,45 @@ export class ChannelsPage {
     return output
   }
 
-  presentActionSheet(index) {
+  groupOptions(){
+     let actionSheet = this.actionSheetCtrl.create({
+      title: 'Group options',
+      subTitle: '',
+      buttons: [
+        {
+          text: 'Add EPG',
+          icon: 'add',
+          handler: () =>{
+            this.epgProvider.promptForEPGFileUrl(this.title).subscribe(data=>{
+              this.getCountryEpgList()
+            })
+          }
+        },{
+          text: "Clear EPG",
+          icon: 'trash',
+          handler: ()=>{
+            this.epgProvider.remove(this.title).then((data) => {
+              // Remove EPG from list
+              this.channels.map(el=>{
+                delete el.epg
+              })
+            })
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'cross',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+      });
+     actionSheet.present()
+  }
+
+  itemOptions(index) {
     let item = this.channels[index]
     let actionSheet = this.actionSheetCtrl.create({
       title: item.tvName,
@@ -97,6 +135,7 @@ export class ChannelsPage {
             })
           }
         },
+        /*
         {
           text: "Hide",
           icon: 'eye-off',
@@ -105,6 +144,7 @@ export class ChannelsPage {
             this.toastProvider.presentToast('Feature not enabled')
           }
         },
+        */
         {
           text: 'Cancel',
           icon: 'cross',

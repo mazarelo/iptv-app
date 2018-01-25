@@ -7,6 +7,8 @@ import { FavoritesProvider } from '../../providers/favorites/favorites';
 import { VideoProvider } from '../../providers/video/video';
 import {ToasterProvider} from '../../providers/toaster/toaster'
 import { LoadingProvider } from '../../providers/loading/loading';
+import { ActionSheetController } from 'ionic-angular';
+import { EpgProvider } from '../../providers/epg/epg';
 
 @Component({
   selector: 'page-countries',
@@ -27,7 +29,9 @@ export class CountriesPage implements OnInit {
     private favoritesProvider: FavoritesProvider,
     private videoProvider: VideoProvider,
     private toasterProvider: ToasterProvider,
-    private loadingProvider: LoadingProvider
+    private loadingProvider: LoadingProvider,
+    private actionSheetCtrl: ActionSheetController,
+    private epgProvider: EpgProvider,
   ) {
     this.playlist = this.navParams.get('data')
     this.title = this.playlist.name
@@ -65,6 +69,31 @@ export class CountriesPage implements OnInit {
         this.favorites = data
       }
     })
+  }
+
+  loadOptions(){
+    let actionSheet = this.actionSheetCtrl.create({
+      title: '',
+      subTitle: '',
+      buttons: [
+        {
+          text: "Clear EPG data",
+          icon: 'trash',
+          handler: () => {
+            this.epgProvider.clear()
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'cross',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
   
   playChannel(item){

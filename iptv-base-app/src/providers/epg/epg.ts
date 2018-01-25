@@ -8,6 +8,7 @@ import {Zip} from '@ionic-native/zip';
 import {File} from '@ionic-native/file';
 import {AlertController} from 'ionic-angular/components/alert/alert-controller';
 import {LoadingProvider} from '../loading/loading';
+import 'rxjs/add/operator/map';
 /*
   Generated class for the ParserProvider provider.
 
@@ -18,6 +19,7 @@ declare var X2JS : any;
 
 @Injectable()
 export class EpgProvider {
+  private epgPrefix : string = 'epg-list-'
   constructor(public http : HttpClient, private storage : StorageProvider, private downloadProvider : DownloadProvider, private zip : Zip, private file : File, private alertCtrl : AlertController, private loadingProvider : LoadingProvider,) {}
 
   /*
@@ -139,13 +141,23 @@ export class EpgProvider {
             }
           ],
           buttons: [
-            /* {
-            text: 'Local File',
-            handler: data => {
-              observer.next(false)
-            }
-          }, */
             {
+              text: 'Choose from list',
+              handler: data => {
+                this.getRemoteEPGList().subscribe(res => {
+                  let data: any = res
+                  data = data.filter(el=> el !== 'list.json')
+
+                  this.chooseFromRemoteEPGList(data).subscribe( response=>{
+                    let url:string = 'https://mazarelo.com/iptv/epg/'+ response
+                    
+                    this.getEPG(url, country).subscribe(data=>{
+                      observer.next(data)
+                    })
+                  })
+                })
+              }
+            }, {
               text: 'Cancel',
               role: 'cancel',
               handler: data => {
@@ -154,32 +166,9 @@ export class EpgProvider {
             }, {
               text: 'Ok',
               handler: data => {
-                let loader = this.loadingProvider.presentLoadingDefault('Generating EPG')
-                var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
-                var regex = new RegExp(expression);
-
-                if (data.url.match(regex)) {
-                  this.downloadEPGFile(data.url)
-                    .subscribe((res) => {
-                      console.log("EPG HTTP RESPONSE", res)
-                      if(res){
-                      let output = this.convertXmlToJson(res)
-                      this.storage.set('epg-list-' + country.toLowerCase(), output)
-                        .then(() => {
-                          observer.next(output)
-                          loader.dismiss()
-                        }).catch(err=>{
-                          observer.next(false)
-                          loader.dismiss()
-                        })
-                      }else{
-                        loader.dismiss()
-                      }
-                    })
-                }else{
-                  loader.dismiss()
-                  observer.next(false)
-                }
+                this.getEPG(data.url, country).subscribe(data=>{
+                  observer.next(data)
+                })
               }
             }
           ]
@@ -188,33 +177,141 @@ export class EpgProvider {
     })
   }
 
-  getCountryEPG(country) {
-    console.log('#######################', country)
-    return new Observable((observer) => {
-      this
-        .storage
-        .get('epg-list-' + country.toLowerCase())
-        .then(data => {
-          let epg = JSON.parse(data)
-          if (epg) {
-            console.log('From store:', epg)
-            return observer.next(epg)
-          } else {
-            this
-              .promptForEPGFileUrl(country)
-              .subscribe(data => {
-                if (data) {
-                  observer.next(data)
-                } else {
+  clear() {
+    this
+      .storage
+      .listAll()
+      .then(data => {
+        if (data) {
+          data.map(el => {
+            if (el.indexOf(this.epgPrefix) > -1) {
+              this.storage.remove(el)
+            }
+          })
+        }
+      })
+  }
+
+  getEPG(url: string, country){
+    return new Observable(observer=>{
+      let loader = this.loadingProvider.presentLoadingDefault('Generating EPG')
+      var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+      var regex = new RegExp(expression);
+
+      if (url.match(regex)) {
+        this
+          .downloadEPGFile(url)
+          .subscribe((res) => {
+            if (res) {
+              let output = this.convertXmlToJson(res)
+              this
+                .storage
+                .set(this.epgPrefix + country.toLowerCase(), output)
+                .then(() => {
+                  observer.next(output)
+                  loader.dismiss()
+                })
+                .catch(err => {
                   observer.next(false)
-                }
-              })
-          }
-        })
-        .catch(err => {
-          observer.next(false)
-        })
+                  loader.dismiss()
+                })
+            } else {
+              loader.dismiss()
+            }
+          })
+      } else {
+        loader.dismiss()
+        observer.next(false)
+      }
     })
   }
+
+  chooseFromRemoteEPGList(data) {
+    return new Observable(observer =>{
+      let alert = this.alertCtrl.create()
+      alert.setTitle('Select Site')
+
+      data.forEach(el => {
+        alert.addInput({
+          type: 'radio', 
+          label: el.replace('.xml', ''), 
+          value: el
+        });
+      })
+
+      alert.addButton('Cancel');
+      alert.addButton({
+        text: 'OK',
+        handler: data => {
+          alert.dismiss();
+          observer.next(data)
+          return false;
+        }
+      });
+      alert.present();
+    })
+  }
+
+remove(name) {
+  return new Promise((resolve, reject) => {
+    if (!name) 
+      resolve({error: true, message: 'Invalid name provided'})
+    let reference = name.toLowerCase()
+
+    this
+      .storage
+      .listAll()
+      .then(data => {
+        if (data) {
+          console.log(data)
+          let toBeRemoved = data.map(el => {
+            if (el == this.epgPrefix + reference) {
+              this
+                .storage
+                .remove(el)
+              resolve(true)
+            }
+          })
+        } else {
+          resolve({error: true, message: 'Error accessing store'})
+        }
+      })
+  })
+}
+
+getRemoteEPGList() {
+  return this
+    .http
+    .get('https://mazarelo.com/iptv/epg/list.json')
+}
+
+getCountryEPG(country) {
+  console.log('#######################', country)
+  return new Observable((observer) => {
+    this
+      .storage
+      .get(this.epgPrefix + country.toLowerCase())
+      .then(data => {
+        let epg = JSON.parse(data)
+        if (epg) {
+          console.log('From store:', epg)
+          return observer.next(epg)
+        } else {
+          this
+            .promptForEPGFileUrl(country)
+            .subscribe(data => {
+              if (data) {
+                observer.next(data)
+              } else {
+                observer.next(false)
+              }
+            })
+        }
+      })
+      .catch(err => {
+        observer.next(false)
+      })
+  })
+}
 
 }

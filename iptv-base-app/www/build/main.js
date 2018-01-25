@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 114:
+/***/ 115:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9,7 +9,7 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_playlist_playlist__ = __webpack_require__(215);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__countries_countries__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_epg_epg__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_epg_epg__ = __webpack_require__(60);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -135,13 +135,13 @@ var HomePage = (function () {
 
 /***/ }),
 
-/***/ 115:
+/***/ 116:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StorageProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_storage__ = __webpack_require__(44);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -188,250 +188,6 @@ var StorageProvider = (function () {
 
 /***/ }),
 
-/***/ 119:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EpgProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__storage_storage__ = __webpack_require__(115);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__download_download__ = __webpack_require__(220);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_zip__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_file__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ionic_angular_components_alert_alert_controller__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__loading_loading__ = __webpack_require__(57);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-
-var EpgProvider = (function () {
-    function EpgProvider(http, storage, downloadProvider, zip, file, alertCtrl, loadingProvider) {
-        this.http = http;
-        this.storage = storage;
-        this.downloadProvider = downloadProvider;
-        this.zip = zip;
-        this.file = file;
-        this.alertCtrl = alertCtrl;
-        this.loadingProvider = loadingProvider;
-    }
-    /*
-    unzipFile(url){
-      return this.zip.unzip(url, this.file.dataDirectory, (progress) => {
-        console.log('Unzipping, ' + Math.round((progress.loaded / progress.total) * 100) + '%')
-      })
-    }
-  
-    // Doesnt work inside a provider
-    getEPG() {
-      this.downloadProvider.download('http://epg.iptvservice.iptv.uno/portugal.xml.gz')
-      .subscribe(data=>{
-        let path: any = data
-  
-        console.log("DOWNLOAD FINISHED:", path)
-        let downloadDir = path.fullPath
-  
-        this.file.listDir('', this.file.dataDirectory).then( data =>{
-          console.log("Directory list:", data)
-        }).catch(err=>{
-          console.log("Err", err)
-        })
-  
-        this.unzipFile(path.fullPath).then((result) => {
-          if(result === 0) console.log('SUCCESS');
-          if(result === -1) console.log('FAILED');
-        });
-  
-      })
-    }
-    */
-    EpgProvider.prototype.convertXmlToJson = function (data) {
-        var _this = this;
-        var jsonData = this.x2jsParser(data);
-        if (jsonData) {
-            if (jsonData.hasOwnProperty('tv')) {
-                jsonData = jsonData.tv;
-            }
-            // Normalize start and finish times before saving in memory
-            jsonData
-                .programme
-                .map(function (programme) {
-                programme._start = _this.convertEPGDateToReadable(programme._start);
-                programme._stop = _this.convertEPGDateToReadable(programme._stop);
-            });
-            jsonData.lastUpdated = new Date();
-            console.log(jsonData);
-            return jsonData;
-        }
-    };
-    EpgProvider.prototype.isEpdDateValid = function (epg) {
-        var current = new Date();
-        var targetEnd = new Date(epg._stop).getTime();
-        var targetStart = new Date(epg._start).getTime();
-        var currentTimestamp = current.getTime();
-        return currentTimestamp < targetEnd && currentTimestamp > targetStart;
-    };
-    EpgProvider.prototype.convertEPGDateToReadable = function (data) {
-        var output = {
-            year: data
-                .toString()
-                .slice(0, 4),
-            month: data
-                .toString()
-                .slice(4, 6),
-            day: data
-                .toString()
-                .slice(6, 8),
-            hour: data
-                .toString()
-                .slice(8, 10),
-            min: data
-                .toString()
-                .slice(10, 12)
-        };
-        var formatedData = new Date(output.year + "-" + output.month + "-" + output.day + " " + output.hour + ":" + output.min);
-        return formatedData;
-    };
-    EpgProvider.prototype.x2jsParser = function (data) {
-        var xml = data;
-        // let addXmlHeder = '<?xml version="1.0" encoding="UTF-8"?>' xml = addXmlHeder
-        // + xml xml = xml.replace(/&/g, "&amp;")
-        var x2js = new X2JS();
-        //console.log( this.stringToXML(xml) )
-        var jsonObj = x2js.xml_str2json(xml);
-        return jsonObj;
-    };
-    EpgProvider.prototype.downloadEPGFile = function (url) {
-        // let url =
-        // 'https://mazarelo.ddns.net:8443/index.php/s/x9FNZby4dH4PPne/download'
-        return this
-            .http
-            .get(url, { responseType: 'text' });
-    };
-    EpgProvider.prototype.promptForEPGFileUrl = function (country) {
-        var _this = this;
-        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) {
-            var alert = _this
-                .alertCtrl
-                .create({
-                title: 'Do you have a EPG url',
-                inputs: [
-                    {
-                        name: 'url',
-                        placeholder: 'Url'
-                    }
-                ],
-                buttons: [
-                    /* {
-                    text: 'Local File',
-                    handler: data => {
-                      observer.next(false)
-                    }
-                  }, */
-                    {
-                        text: 'Cancel',
-                        role: 'cancel',
-                        handler: function (data) {
-                            console.log(data);
-                        }
-                    }, {
-                        text: 'Ok',
-                        handler: function (data) {
-                            var loader = _this.loadingProvider.presentLoadingDefault('Generating EPG');
-                            var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
-                            var regex = new RegExp(expression);
-                            if (data.url.match(regex)) {
-                                _this.downloadEPGFile(data.url)
-                                    .subscribe(function (res) {
-                                    console.log("EPG HTTP RESPONSE", res);
-                                    if (res) {
-                                        var output_1 = _this.convertXmlToJson(res);
-                                        _this.storage.set('epg-list-' + country.toLowerCase(), output_1)
-                                            .then(function () {
-                                            observer.next(output_1);
-                                            loader.dismiss();
-                                        }).catch(function (err) {
-                                            observer.next(false);
-                                            loader.dismiss();
-                                        });
-                                    }
-                                    else {
-                                        loader.dismiss();
-                                    }
-                                });
-                            }
-                            else {
-                                loader.dismiss();
-                                observer.next(false);
-                            }
-                        }
-                    }
-                ]
-            });
-            alert.present();
-        });
-    };
-    EpgProvider.prototype.getCountryEPG = function (country) {
-        var _this = this;
-        console.log('#######################', country);
-        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) {
-            _this
-                .storage
-                .get('epg-list-' + country.toLowerCase())
-                .then(function (data) {
-                var epg = JSON.parse(data);
-                if (epg) {
-                    console.log('From store:', epg);
-                    return observer.next(epg);
-                }
-                else {
-                    _this
-                        .promptForEPGFileUrl(country)
-                        .subscribe(function (data) {
-                        if (data) {
-                            observer.next(data);
-                        }
-                        else {
-                            observer.next(false);
-                        }
-                    });
-                }
-            })
-                .catch(function (err) {
-                observer.next(false);
-            });
-        });
-    };
-    EpgProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4__storage_storage__["a" /* StorageProvider */], __WEBPACK_IMPORTED_MODULE_5__download_download__["a" /* DownloadProvider */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_zip__["a" /* Zip */], __WEBPACK_IMPORTED_MODULE_7__ionic_native_file__["a" /* File */], __WEBPACK_IMPORTED_MODULE_8_ionic_angular_components_alert_alert_controller__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_9__loading_loading__["a" /* LoadingProvider */]])
-    ], EpgProvider);
-    return EpgProvider;
-}());
-
-//# sourceMappingURL=epg.js.map
-
-/***/ }),
-
 /***/ 120:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -439,9 +195,9 @@ var EpgProvider = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_toaster_toaster__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_chooser__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_toaster_toaster__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_file_chooser__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_m3u8_m3u8__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -555,8 +311,8 @@ var SettingsPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_favorites_favorites__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_streaming_media__ = __webpack_require__(118);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_toaster_toaster__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_streaming_media__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_toaster_toaster__ = __webpack_require__(34);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -729,7 +485,7 @@ webpackEmptyAsyncContext.id = 172;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Splash; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(114);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -774,11 +530,11 @@ var Splash = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PlayListProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__storage_storage__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__storage_storage__ = __webpack_require__(116);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_android_permissions__ = __webpack_require__(116);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file_chooser__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_android_permissions__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_file_chooser__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__m3u8_m3u8__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__loading_loading__ = __webpack_require__(57);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -865,15 +621,15 @@ var PlayListProvider = (function () {
                     }
                 ],
                 buttons: [
-                    {
-                        text: 'Import File',
-                        handler: function (data) {
-                            _this.uploadFile().then(function (data) {
-                                console.log("RETURNED DATA FROM FILE", data);
-                            });
-                            console.log('file clicked');
-                        }
-                    },
+                    /*{
+                      text: 'Import File',
+                      handler: data => {
+                        this.uploadFile().then(data=>{
+                          console.log("RETURNED DATA FROM FILE", data)
+                        })
+                        console.log('file clicked');
+                      }
+                    },*/
                     {
                         text: 'Cancel',
                         role: 'cancel',
@@ -993,8 +749,9 @@ var PlayListProvider = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__channels_channels__ = __webpack_require__(217);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_favorites_favorites__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_video_video__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_toaster_toaster__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_toaster_toaster__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_loading_loading__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_epg_epg__ = __webpack_require__(60);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1013,8 +770,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var CountriesPage = (function () {
-    function CountriesPage(navCtrl, navParams, m3u8Provider, favoritesProvider, videoProvider, toasterProvider, loadingProvider) {
+    function CountriesPage(navCtrl, navParams, m3u8Provider, favoritesProvider, videoProvider, toasterProvider, loadingProvider, actionSheetCtrl, epgProvider) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.m3u8Provider = m3u8Provider;
@@ -1022,6 +781,8 @@ var CountriesPage = (function () {
         this.videoProvider = videoProvider;
         this.toasterProvider = toasterProvider;
         this.loadingProvider = loadingProvider;
+        this.actionSheetCtrl = actionSheetCtrl;
+        this.epgProvider = epgProvider;
         this.data = null;
         this.countries = [];
         this.favorites = [];
@@ -1062,6 +823,31 @@ var CountriesPage = (function () {
             }
         });
     };
+    CountriesPage.prototype.loadOptions = function () {
+        var _this = this;
+        var actionSheet = this.actionSheetCtrl.create({
+            title: '',
+            subTitle: '',
+            buttons: [
+                {
+                    text: "Clear EPG data",
+                    icon: 'trash',
+                    handler: function () {
+                        _this.epgProvider.clear();
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    icon: 'cross',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
+    };
     CountriesPage.prototype.playChannel = function (item) {
         this.videoProvider.start(item);
     };
@@ -1076,7 +862,7 @@ var CountriesPage = (function () {
     ], CountriesPage.prototype, "slides", void 0);
     CountriesPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-countries',template:/*ion-inline-start:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/countries/countries.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>{{title}}</ion-title>\n        <button ion-button menuToggle>\n            <ion-icon name="menu"></ion-icon>\n          </button>\n    </ion-navbar>\n</ion-header>\n<ion-content class="card-background-page">\n    <!--  -->\n    <ion-slides *ngFor="let item of countries">\n        <ion-slide>\n            <ion-card (click)="goToCountry(item.name)">\n                <div class="image-overlay" [style.background]="\'url(\'+ getFlagUrL(item.name) +\')\'" [style.backgroundSize]="\'cover\'" [style.backgroundPosition]="\'center\'"></div>\n                <!--<img src="assets/imgs/flags/{{ item.name | lowercase }}.jpg"/>-->\n                <div class="card-title">{{ item.name }}</div>\n                <div class="card-subtitle">{{ item.channels }} channels</div>\n            </ion-card>\n        </ion-slide>\n        <ion-slide *ngFor="let fav of favoritesInCountry(item.name)">\n            <ion-card (click)="playChannel(fav)">\n                <div class="image-overlay" [style.background]="\'\'" [style.backgroundSize]="\'cover\'" [style.backgroundPosition]="\'center\'"></div>\n                <!--<img src="assets/imgs/flags/{{ item.name | lowercase }}.jpg"/>-->\n                <div class="card-subtitle"><img class="tv-logo" src="{{fav.tvLogo}}" width="30px"></div>\n                <div class="card-title">{{ fav.tvName }}</div>\n            </ion-card>\n        </ion-slide>\n    </ion-slides>\n\n</ion-content>'/*ion-inline-end:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/countries/countries.html"*/
+            selector: 'page-countries',template:/*ion-inline-start:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/countries/countries.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-toolbar>\n      <button ion-button menuToggle start>\n          <ion-icon name="menu"></ion-icon>\n        </button>\n      <ion-buttons>\n          <ion-title>{{title}}</ion-title>\n      </ion-buttons>\n      <ion-buttons end>\n          <button ion-button icon-only (tap)="loadOptions()">\n            <ion-icon name="more"></ion-icon>\n          </button>\n      </ion-buttons>\n    </ion-toolbar>\n  </ion-navbar>\n</ion-header>\n<ion-content class="card-background-page">\n    <!--  -->\n    <ion-slides *ngFor="let item of countries">\n        <ion-slide>\n            <ion-card (click)="goToCountry(item.name)">\n                <div class="image-overlay" [style.background]="\'url(\'+ getFlagUrL(item.name) +\')\'" [style.backgroundSize]="\'cover\'" [style.backgroundPosition]="\'center\'"></div>\n                <!--<img src="assets/imgs/flags/{{ item.name | lowercase }}.jpg"/>-->\n                <div class="card-title">{{ item.name }}</div>\n                <div class="card-subtitle">{{ item.channels }} channels</div>\n            </ion-card>\n        </ion-slide>\n        <ion-slide *ngFor="let fav of favoritesInCountry(item.name)">\n            <ion-card (click)="playChannel(fav)">\n                <div class="image-overlay" [style.background]="\'\'" [style.backgroundSize]="\'cover\'" [style.backgroundPosition]="\'center\'"></div>\n                <!--<img src="assets/imgs/flags/{{ item.name | lowercase }}.jpg"/>-->\n                <div class="card-subtitle"><img class="tv-logo" src="{{fav.tvLogo}}" width="30px"></div>\n                <div class="card-title">{{ fav.tvName }}</div>\n            </ion-card>\n        </ion-slide>\n    </ion-slides>\n\n</ion-content>'/*ion-inline-end:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/countries/countries.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
@@ -1084,7 +870,9 @@ var CountriesPage = (function () {
             __WEBPACK_IMPORTED_MODULE_4__providers_favorites_favorites__["a" /* FavoritesProvider */],
             __WEBPACK_IMPORTED_MODULE_5__providers_video_video__["a" /* VideoProvider */],
             __WEBPACK_IMPORTED_MODULE_6__providers_toaster_toaster__["a" /* ToasterProvider */],
-            __WEBPACK_IMPORTED_MODULE_7__providers_loading_loading__["a" /* LoadingProvider */]])
+            __WEBPACK_IMPORTED_MODULE_7__providers_loading_loading__["a" /* LoadingProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */],
+            __WEBPACK_IMPORTED_MODULE_8__providers_epg_epg__["a" /* EpgProvider */]])
     ], CountriesPage);
     return CountriesPage;
 }());
@@ -1101,10 +889,10 @@ var CountriesPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_favorites_favorites__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_toaster_toaster__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_toaster_toaster__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_video_video__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__channel_channel__ = __webpack_require__(219);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_epg_epg__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_epg_epg__ = __webpack_require__(60);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1168,7 +956,45 @@ var ChannelsPage = (function () {
         var output = Math.floor(((this.current - start) * 100 / (stop - start))).toString() + "%";
         return output;
     };
-    ChannelsPage.prototype.presentActionSheet = function (index) {
+    ChannelsPage.prototype.groupOptions = function () {
+        var _this = this;
+        var actionSheet = this.actionSheetCtrl.create({
+            title: 'Group options',
+            subTitle: '',
+            buttons: [
+                {
+                    text: 'Add EPG',
+                    icon: 'add',
+                    handler: function () {
+                        _this.epgProvider.promptForEPGFileUrl(_this.title).subscribe(function (data) {
+                            _this.getCountryEpgList();
+                        });
+                    }
+                }, {
+                    text: "Clear EPG",
+                    icon: 'trash',
+                    handler: function () {
+                        _this.epgProvider.remove(_this.title).then(function (data) {
+                            // Remove EPG from list
+                            _this.channels.map(function (el) {
+                                delete el.epg;
+                            });
+                        });
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    icon: 'cross',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
+    };
+    ChannelsPage.prototype.itemOptions = function (index) {
         var _this = this;
         var item = this.channels[index];
         var actionSheet = this.actionSheetCtrl.create({
@@ -1202,14 +1028,16 @@ var ChannelsPage = (function () {
                         });
                     }
                 },
+                /*
                 {
-                    text: "Hide",
-                    icon: 'eye-off',
-                    handler: function () {
-                        // Hide object
-                        _this.toastProvider.presentToast('Feature not enabled');
-                    }
+                  text: "Hide",
+                  icon: 'eye-off',
+                  handler: () =>{
+                    // Hide object
+                    this.toastProvider.presentToast('Feature not enabled')
+                  }
                 },
+                */
                 {
                     text: 'Cancel',
                     icon: 'cross',
@@ -1260,7 +1088,7 @@ var ChannelsPage = (function () {
     };
     ChannelsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'channels',template:/*ion-inline-start:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channels/channels.html"*/'<ion-header>\n    <ion-navbar>\n        <ion-title>{{title}}</ion-title>\n    </ion-navbar>\n</ion-header>\n<ion-content>\n    <ion-searchbar (ionInput)="onInput($event)"></ion-searchbar>\n    <ion-list>\n        <ion-item *ngFor="let channel of channels; let i = index" (click)="presentActionSheet(i)" [style.background]="\'url(assets/imgs/fallback.png)\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundRepeat]="\'no-repeat\'">\n            <ion-thumbnail item-start [style.background]="\'url(\'+ channel.tvLogo +\')\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundColor]="\'rgba(0,0,0,.5)\'" [style.backgroundRepeat]="\'no-repeat\'">\n            </ion-thumbnail>\n            <h2>{{channel.tvName}}</h2>\n            <div *ngIf="channel.epg">\n                <div *ngFor="let programme of channel.epg">\n                    <p>\n                        <ion-icon name="information-circle"></ion-icon> {{programme.title.__text}}\n                    </p>\n                    <div class="timeline" [style.width]="getCurrentEPGTimeBar(programme)"></div>\n                </div>\n            </div>\n            <!--<button ion-button clear item-end (click)="playChannel(channel.url)">View</button>-->\n        </ion-item>\n    </ion-list>\n    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n        <ion-infinite-scroll-content></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n</ion-content>'/*ion-inline-end:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channels/channels.html"*/
+            selector: 'channels',template:/*ion-inline-start:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channels/channels.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-toolbar>\n      <button ion-button menuToggle start>\n          <ion-icon name="menu"></ion-icon>\n        </button>\n      <ion-buttons>\n          <ion-title>{{title}}</ion-title>\n      </ion-buttons>\n      <ion-buttons end>\n          <button ion-button icon-only (tap)="groupOptions()">\n            <ion-icon name="more"></ion-icon>\n          </button>\n      </ion-buttons>\n    </ion-toolbar>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n    <ion-searchbar (ionInput)="onInput($event)"></ion-searchbar>\n    <ion-list>\n        <ion-item *ngFor="let channel of channels; let i = index" [style.background]="\'url(assets/imgs/fallback.png)\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundRepeat]="\'no-repeat\'">\n            <ion-thumbnail (click)="playChannel(channel)"  item-start [style.background]="\'url(\'+ channel.tvLogo +\')\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundColor]="\'rgba(0,0,0,.5)\'" [style.backgroundRepeat]="\'no-repeat\'">\n            </ion-thumbnail>\n            <h2 (click)="playChannel(channel)" >{{channel.tvName}}</h2>\n            <div *ngIf="channel.epg" (click)="playChannel(channel)" >\n                <div *ngFor="let programme of channel.epg">\n                    <p>\n                        <ion-icon name="information-circle"></ion-icon> {{programme.title.__text}}\n                    </p>\n                    <div class="timeline" [style.width]="getCurrentEPGTimeBar(programme)"></div>\n                </div>\n            </div>\n            <button ion-button clear icon-only item-end (tap)="itemOptions(i)">\n              <ion-icon name="more"></ion-icon>\n            </button>\n        </ion-item>\n    </ion-list>\n    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">\n        <ion-infinite-scroll-content></ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n</ion-content>'/*ion-inline-end:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channels/channels.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
@@ -1286,6 +1114,7 @@ var ChannelsPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_video_video__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular_platform_platform__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_screen_orientation__ = __webpack_require__(220);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1299,19 +1128,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ChannelPage = (function () {
-    function ChannelPage(videoProvider, navParams, plt) {
+    function ChannelPage(videoProvider, navParams, plt, screenOrientation) {
         this.videoProvider = videoProvider;
         this.navParams = navParams;
         this.plt = plt;
+        this.screenOrientation = screenOrientation;
+        this.current = new Date().getTime();
         this.item = this.navParams.get('channel');
         this.list = this.navParams.get('list');
+        this.activateOrientationDetection();
     }
+    ChannelPage.prototype.activateOrientationDetection = function () {
+        var _this = this;
+        // Detect orientation changes
+        this.screenOrientation.onChange().subscribe(function (data) {
+            if (_this.screenOrientation.type.indexOf('landscape') > -1) {
+                // Not working
+                _this.player.enterFullWindow();
+                _this.player.height('100%');
+            }
+            else {
+                // Not working
+                _this.player.exitFullWindow();
+                _this.player.height('200px');
+            }
+        });
+    };
     ChannelPage.prototype.ngOnInit = function () { };
     ChannelPage.prototype.playItem = function (item) {
         this.item = item;
-        this.playVideoJsHLS();
-        // this.videoProvider.playVideoJsHLS(this.item)
+        this.player.pause();
+        this.player.src('');
+        this.player.src({
+            src: this.item.url,
+            type: "application/x-mpegURL",
+        });
+        this.player.play();
     };
     ChannelPage.prototype.playVideoJsHLS = function () {
         // https://github.com/streamroot/videojs5-hlsjs-source-handler
@@ -1319,7 +1173,7 @@ var ChannelPage = (function () {
         var options = {
             html5: {
                 hlsjsConfig: {
-                    debug: true
+                    debug: false
                 }
             }
         };
@@ -1330,7 +1184,14 @@ var ChannelPage = (function () {
                 src: self.item.url,
                 type: "application/x-mpegURL",
             });
+            this.play();
         });
+    };
+    ChannelPage.prototype.getCurrentEPGTimeBar = function (programme) {
+        var stop = new Date(programme._stop).getTime();
+        var start = new Date(programme._start).getTime();
+        var output = Math.floor(((this.current - start) * 100 / (stop - start))).toString() + "%";
+        return output;
     };
     ChannelPage.prototype.startPlayer = function () {
         var _this = this;
@@ -1346,17 +1207,21 @@ var ChannelPage = (function () {
             }
         });
     };
+    ChannelPage.prototype.ionViewWillLeave = function () {
+        this.player.dispose();
+    };
     ChannelPage.prototype.ngAfterViewInit = function () {
         this.playVideoJsHLS();
         // this.videoProvider.playVideoJsHLS(this.item)
     };
     ChannelPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'channel',template:/*ion-inline-start:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channel/channel.html"*/'\n<video id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls loop></video>\n<!--<video *ngIf="item.url" id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls preload="auto" width="640" height="264" autoplay loop>\n</video>-->\n<ion-content>\n      <!--<video id="stream-video" width="640" height="264" controls autoplay loop></video>-->\n    <ion-list>\n        <ion-item *ngFor="let channel of list; let i = index" (click)="playItem(channel)" [style.background]="\'url(assets/imgs/fallback.png)\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundRepeat]="\'no-repeat\'">\n            <ion-thumbnail item-start [style.background]="\'url(\'+ channel.tvLogo +\')\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundRepeat]="\'no-repeat\'">\n            </ion-thumbnail>\n            <h2>{{channel.tvName}}</h2>\n            <!--<button ion-button clear item-end (click)="playChannel(channel.url)">View</button>-->\n        </ion-item>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channel/channel.html"*/
+            selector: 'channel',template:/*ion-inline-start:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channel/channel.html"*/'\n<ion-header>\n    <ion-navbar>\n        <ion-title>{{title}}</ion-title>\n    </ion-navbar>\n</ion-header>\n<video id="stream-video" poster="myPoster.jpg" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls ></video>\n<!--<video *ngIf="item.url" id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls preload="auto" width="640" height="264" autoplay loop>\n</video>-->\n<ion-content>\n    <ion-list>\n        <ion-item *ngFor="let channel of list; let i = index"  [style.background]="\'url(assets/imgs/fallback.png)\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundRepeat]="\'no-repeat\'">\n            <ion-thumbnail (click)="playItem(channel)"  item-start [style.background]="\'url(\'+ channel.tvLogo +\')\'" [style.backgroundSize]="\'contain\'" [style.backgroundPosition]="\'center center\'" [style.backgroundColor]="\'rgba(0,0,0,.5)\'" [style.backgroundRepeat]="\'no-repeat\'">\n            </ion-thumbnail>\n            <h2 (click)="playItem(channel)" >{{channel.tvName}}</h2>\n            <div *ngIf="channel.epg">\n                <div *ngFor="let programme of channel.epg" (click)="playItem(channel)" >\n                    <p>\n                        <ion-icon name="information-circle"></ion-icon> {{programme.title.__text}}\n                    </p>\n                    <div class="timeline" [style.width]="getCurrentEPGTimeBar(programme)"></div>\n                </div>\n            </div>\n            <button ion-button clear icon-only item-end (tap)="presentActionSheet(i)">\n              <ion-icon name="more"></ion-icon>\n            </button>\n        </ion-item>\n    </ion-list>\n\n</ion-content>'/*ion-inline-end:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/pages/channel/channel.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__providers_video_video__["a" /* VideoProvider */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular_platform_platform__["a" /* Platform */]])
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular_platform_platform__["a" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_4__ionic_native_screen_orientation__["a" /* ScreenOrientation */]])
     ], ChannelPage);
     return ChannelPage;
 }());
@@ -1365,17 +1230,17 @@ var ChannelPage = (function () {
 
 /***/ }),
 
-/***/ 220:
+/***/ 221:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DownloadProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_file_transfer__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ionic_native_file_transfer__ = __webpack_require__(222);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_file__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__toaster_toaster__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__toaster_toaster__ = __webpack_require__(34);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1426,13 +1291,13 @@ var DownloadProvider = (function () {
 
 /***/ }),
 
-/***/ 223:
+/***/ 224:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(224);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(245);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(246);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1440,7 +1305,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 245:
+/***/ 246:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1448,38 +1313,38 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(287);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(288);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_settings_settings__ = __webpack_require__(120);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_favorites_favorites__ = __webpack_require__(121);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(115);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_channel_channel__ = __webpack_require__(219);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_channels_channels__ = __webpack_require__(217);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_tabs_tabs__ = __webpack_require__(304);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_tabs_tabs__ = __webpack_require__(305);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_status_bar__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_splash_screen__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_splash_screen__ = __webpack_require__(114);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__angular_common_http__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_streaming_media__ = __webpack_require__(118);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_video_player__ = __webpack_require__(305);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_streaming_media__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_video_player__ = __webpack_require__(306);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_m3u8_m3u8__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_toaster_toaster__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_toaster_toaster__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_favorites_favorites__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_storage__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_storage__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_android_exoplayer__ = __webpack_require__(218);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_video_video__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_storage_storage__ = __webpack_require__(115);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_storage_storage__ = __webpack_require__(116);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_playlist_playlist__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ionic_native_native_storage__ = __webpack_require__(306);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_file_chooser__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ionic_native_native_storage__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_file_chooser__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_splash_splash__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__ionic_native_android_permissions__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__ionic_native_android_permissions__ = __webpack_require__(117);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_file__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_screen_orientation__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_screen_orientation__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_countries_countries__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__providers_parser_parser__ = __webpack_require__(308);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__providers_epg_epg__ = __webpack_require__(119);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__providers_download_download__ = __webpack_require__(220);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__ionic_native_file_transfer__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__ionic_native_zip__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__providers_epg_epg__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__providers_download_download__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__ionic_native_file_transfer__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__ionic_native_zip__ = __webpack_require__(223);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__providers_loading_loading__ = __webpack_require__(57);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1594,7 +1459,7 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 287:
+/***/ 288:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1602,9 +1467,9 @@ var AppModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(114);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_splash_splash__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(115);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_settings_settings__ = __webpack_require__(120);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_favorites_favorites__ = __webpack_require__(121);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1673,7 +1538,7 @@ var MyApp = (function () {
 
 /***/ }),
 
-/***/ 304:
+/***/ 305:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1681,7 +1546,7 @@ var MyApp = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__settings_settings__ = __webpack_require__(120);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__favorites_favorites__ = __webpack_require__(121);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(115);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1719,7 +1584,7 @@ var TabsPage = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ParserProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1806,7 +1671,7 @@ var ParserProvider = (function () {
 
 /***/ }),
 
-/***/ 33:
+/***/ 34:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1856,12 +1721,12 @@ var ToasterProvider = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_android_permissions__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_android_permissions__ = __webpack_require__(117);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1900,7 +1765,6 @@ var M3u8Provider = (function () {
             alert("URL NOT FOUND");
         }
         if (url.indexOf('content://') == -1) {
-            console.log("HTTP GET", url);
             return this.http.get(url, { responseType: 'text' }).map(function (data) { return _this.convertM3uToJson(data, url); });
         }
         return new __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"](function (observer) {
@@ -2138,7 +2002,7 @@ var M3u8Provider = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoadingProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular_components_loading_loading_controller__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular_components_loading_loading_controller__ = __webpack_require__(88);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2191,8 +2055,8 @@ var LoadingProvider = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_storage__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2292,11 +2156,11 @@ var FavoritesProvider = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VideoProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_android_exoplayer__ = __webpack_require__(218);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_streaming_media__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_streaming_media__ = __webpack_require__(119);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2453,7 +2317,343 @@ var VideoProvider = (function () {
 
 //# sourceMappingURL=video.js.map
 
+/***/ }),
+
+/***/ 60:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EpgProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__storage_storage__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__download_download__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_zip__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_file__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ionic_angular_components_alert_alert_controller__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__loading_loading__ = __webpack_require__(57);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+
+var EpgProvider = (function () {
+    function EpgProvider(http, storage, downloadProvider, zip, file, alertCtrl, loadingProvider) {
+        this.http = http;
+        this.storage = storage;
+        this.downloadProvider = downloadProvider;
+        this.zip = zip;
+        this.file = file;
+        this.alertCtrl = alertCtrl;
+        this.loadingProvider = loadingProvider;
+        this.epgPrefix = 'epg-list-';
+    }
+    /*
+    unzipFile(url){
+      return this.zip.unzip(url, this.file.dataDirectory, (progress) => {
+        console.log('Unzipping, ' + Math.round((progress.loaded / progress.total) * 100) + '%')
+      })
+    }
+  
+    // Doesnt work inside a provider
+    getEPG() {
+      this.downloadProvider.download('http://epg.iptvservice.iptv.uno/portugal.xml.gz')
+      .subscribe(data=>{
+        let path: any = data
+  
+        console.log("DOWNLOAD FINISHED:", path)
+        let downloadDir = path.fullPath
+  
+        this.file.listDir('', this.file.dataDirectory).then( data =>{
+          console.log("Directory list:", data)
+        }).catch(err=>{
+          console.log("Err", err)
+        })
+  
+        this.unzipFile(path.fullPath).then((result) => {
+          if(result === 0) console.log('SUCCESS');
+          if(result === -1) console.log('FAILED');
+        });
+  
+      })
+    }
+    */
+    EpgProvider.prototype.convertXmlToJson = function (data) {
+        var _this = this;
+        var jsonData = this.x2jsParser(data);
+        if (jsonData) {
+            if (jsonData.hasOwnProperty('tv')) {
+                jsonData = jsonData.tv;
+            }
+            // Normalize start and finish times before saving in memory
+            jsonData
+                .programme
+                .map(function (programme) {
+                programme._start = _this.convertEPGDateToReadable(programme._start);
+                programme._stop = _this.convertEPGDateToReadable(programme._stop);
+            });
+            jsonData.lastUpdated = new Date();
+            console.log(jsonData);
+            return jsonData;
+        }
+    };
+    EpgProvider.prototype.isEpdDateValid = function (epg) {
+        var current = new Date();
+        var targetEnd = new Date(epg._stop).getTime();
+        var targetStart = new Date(epg._start).getTime();
+        var currentTimestamp = current.getTime();
+        return currentTimestamp < targetEnd && currentTimestamp > targetStart;
+    };
+    EpgProvider.prototype.convertEPGDateToReadable = function (data) {
+        var output = {
+            year: data
+                .toString()
+                .slice(0, 4),
+            month: data
+                .toString()
+                .slice(4, 6),
+            day: data
+                .toString()
+                .slice(6, 8),
+            hour: data
+                .toString()
+                .slice(8, 10),
+            min: data
+                .toString()
+                .slice(10, 12)
+        };
+        var formatedData = new Date(output.year + "-" + output.month + "-" + output.day + " " + output.hour + ":" + output.min);
+        return formatedData;
+    };
+    EpgProvider.prototype.x2jsParser = function (data) {
+        var xml = data;
+        // let addXmlHeder = '<?xml version="1.0" encoding="UTF-8"?>' xml = addXmlHeder
+        // + xml xml = xml.replace(/&/g, "&amp;")
+        var x2js = new X2JS();
+        //console.log( this.stringToXML(xml) )
+        var jsonObj = x2js.xml_str2json(xml);
+        return jsonObj;
+    };
+    EpgProvider.prototype.downloadEPGFile = function (url) {
+        // let url =
+        // 'https://mazarelo.ddns.net:8443/index.php/s/x9FNZby4dH4PPne/download'
+        return this
+            .http
+            .get(url, { responseType: 'text' });
+    };
+    EpgProvider.prototype.promptForEPGFileUrl = function (country) {
+        var _this = this;
+        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) {
+            var alert = _this
+                .alertCtrl
+                .create({
+                title: 'Do you have a EPG url',
+                inputs: [
+                    {
+                        name: 'url',
+                        placeholder: 'Url'
+                    }
+                ],
+                buttons: [
+                    {
+                        text: 'Choose from list',
+                        handler: function (data) {
+                            _this.getRemoteEPGList().subscribe(function (res) {
+                                var data = res;
+                                data = data.filter(function (el) { return el !== 'list.json'; });
+                                _this.chooseFromRemoteEPGList(data).subscribe(function (response) {
+                                    var url = 'https://mazarelo.com/iptv/epg/' + response;
+                                    _this.getEPG(url, country).subscribe(function (data) {
+                                        observer.next(data);
+                                    });
+                                });
+                            });
+                        }
+                    }, {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        handler: function (data) {
+                            console.log(data);
+                        }
+                    }, {
+                        text: 'Ok',
+                        handler: function (data) {
+                            _this.getEPG(data.url, country).subscribe(function (data) {
+                                observer.next(data);
+                            });
+                        }
+                    }
+                ]
+            });
+            alert.present();
+        });
+    };
+    EpgProvider.prototype.clear = function () {
+        var _this = this;
+        this
+            .storage
+            .listAll()
+            .then(function (data) {
+            if (data) {
+                data.map(function (el) {
+                    if (el.indexOf(_this.epgPrefix) > -1) {
+                        _this.storage.remove(el);
+                    }
+                });
+            }
+        });
+    };
+    EpgProvider.prototype.getEPG = function (url, country) {
+        var _this = this;
+        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) {
+            var loader = _this.loadingProvider.presentLoadingDefault('Generating EPG');
+            var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+            var regex = new RegExp(expression);
+            if (url.match(regex)) {
+                _this
+                    .downloadEPGFile(url)
+                    .subscribe(function (res) {
+                    if (res) {
+                        var output_1 = _this.convertXmlToJson(res);
+                        _this
+                            .storage
+                            .set(_this.epgPrefix + country.toLowerCase(), output_1)
+                            .then(function () {
+                            observer.next(output_1);
+                            loader.dismiss();
+                        })
+                            .catch(function (err) {
+                            observer.next(false);
+                            loader.dismiss();
+                        });
+                    }
+                    else {
+                        loader.dismiss();
+                    }
+                });
+            }
+            else {
+                loader.dismiss();
+                observer.next(false);
+            }
+        });
+    };
+    EpgProvider.prototype.chooseFromRemoteEPGList = function (data) {
+        var _this = this;
+        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) {
+            var alert = _this.alertCtrl.create();
+            alert.setTitle('Select Site');
+            data.forEach(function (el) {
+                alert.addInput({
+                    type: 'radio',
+                    label: el.replace('.xml', ''),
+                    value: el
+                });
+            });
+            alert.addButton('Cancel');
+            alert.addButton({
+                text: 'OK',
+                handler: function (data) {
+                    alert.dismiss();
+                    observer.next(data);
+                    return false;
+                }
+            });
+            alert.present();
+        });
+    };
+    EpgProvider.prototype.remove = function (name) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (!name)
+                resolve({ error: true, message: 'Invalid name provided' });
+            var reference = name.toLowerCase();
+            _this
+                .storage
+                .listAll()
+                .then(function (data) {
+                if (data) {
+                    console.log(data);
+                    var toBeRemoved = data.map(function (el) {
+                        if (el == _this.epgPrefix + reference) {
+                            _this
+                                .storage
+                                .remove(el);
+                            resolve(true);
+                        }
+                    });
+                }
+                else {
+                    resolve({ error: true, message: 'Error accessing store' });
+                }
+            });
+        });
+    };
+    EpgProvider.prototype.getRemoteEPGList = function () {
+        return this
+            .http
+            .get('https://mazarelo.com/iptv/epg/list.json');
+    };
+    EpgProvider.prototype.getCountryEPG = function (country) {
+        var _this = this;
+        console.log('#######################', country);
+        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) {
+            _this
+                .storage
+                .get(_this.epgPrefix + country.toLowerCase())
+                .then(function (data) {
+                var epg = JSON.parse(data);
+                if (epg) {
+                    console.log('From store:', epg);
+                    return observer.next(epg);
+                }
+                else {
+                    _this
+                        .promptForEPGFileUrl(country)
+                        .subscribe(function (data) {
+                        if (data) {
+                            observer.next(data);
+                        }
+                        else {
+                            observer.next(false);
+                        }
+                    });
+                }
+            })
+                .catch(function (err) {
+                observer.next(false);
+            });
+        });
+    };
+    EpgProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4__storage_storage__["a" /* StorageProvider */], __WEBPACK_IMPORTED_MODULE_5__download_download__["a" /* DownloadProvider */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_zip__["a" /* Zip */], __WEBPACK_IMPORTED_MODULE_7__ionic_native_file__["a" /* File */], __WEBPACK_IMPORTED_MODULE_8_ionic_angular_components_alert_alert_controller__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_9__loading_loading__["a" /* LoadingProvider */]])
+    ], EpgProvider);
+    return EpgProvider;
+}());
+
+//# sourceMappingURL=epg.js.map
+
 /***/ })
 
-},[223]);
+},[224]);
 //# sourceMappingURL=main.js.map

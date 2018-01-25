@@ -77,7 +77,7 @@ export class PlayListProvider {
             }
         ],
         buttons: [
-          {
+          /*{
             text: 'Import File',
             handler: data => {
               this.uploadFile().then(data=>{
@@ -85,7 +85,7 @@ export class PlayListProvider {
               })
               console.log('file clicked');
             }
-          },
+          },*/
           {
               text: 'Cancel',
               role: 'cancel',
