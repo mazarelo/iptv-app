@@ -194,7 +194,7 @@ export class EpgProvider {
 
   getEPG(url: string, country){
     return new Observable(observer=>{
-      let loader = this.loadingProvider.presentLoadingDefault('Generating EPG')
+      //let loader = this.loadingProvider.presentLoadingDefault('Generating EPG')
       var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
       var regex = new RegExp(expression);
 
@@ -209,18 +209,18 @@ export class EpgProvider {
                 .set(this.epgPrefix + country.toLowerCase(), output)
                 .then(() => {
                   observer.next(output)
-                  loader.dismiss()
+                  //loader.dismiss()
                 })
                 .catch(err => {
                   observer.next(false)
-                  loader.dismiss()
+                  //loader.dismiss()
                 })
             } else {
-              loader.dismiss()
+              //loader.dismiss()
             }
           })
       } else {
-        loader.dismiss()
+        //loader.dismiss()
         observer.next(false)
       }
     })
