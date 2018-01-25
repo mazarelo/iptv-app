@@ -280,26 +280,27 @@ remove(name) {
 }
 
 getRemoteEPGList() {
-  return this
-    .http
-    .get('https://mazarelo.com/iptv/epg/list.json')
+  return this.http.get('https://mazarelo.com/iptv/epg/list.json')
 }
 
 getCountryEPG(country) {
   console.log('#######################', country)
   return new Observable((observer) => {
     this
-      .storage
-      .get(this.epgPrefix + country.toLowerCase())
-      .then(data => {
-        let epg = JSON.parse(data)
+      .storage.get(this.epgPrefix + country.toLowerCase()).then(data => {
+        let epg: any;
+        try{
+          epg = JSON.parse(data)
+        }catch(err){
+          console.log('ERROR PARSING JSON')
+          observer.next(false)
+        }
+
         if (epg) {
           console.log('From store:', epg)
           return observer.next(epg)
         } else {
-          this
-            .promptForEPGFileUrl(country)
-            .subscribe(data => {
+          this.promptForEPGFileUrl(country).subscribe(data => {
               if (data) {
                 observer.next(data)
               } else {
@@ -307,8 +308,7 @@ getCountryEPG(country) {
               }
             })
         }
-      })
-      .catch(err => {
+      }).catch(err => {
         observer.next(false)
       })
   })

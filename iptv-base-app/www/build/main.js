@@ -2609,27 +2609,28 @@ var EpgProvider = (function () {
         });
     };
     EpgProvider.prototype.getRemoteEPGList = function () {
-        return this
-            .http
-            .get('https://mazarelo.com/iptv/epg/list.json');
+        return this.http.get('https://mazarelo.com/iptv/epg/list.json');
     };
     EpgProvider.prototype.getCountryEPG = function (country) {
         var _this = this;
         console.log('#######################', country);
         return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) {
             _this
-                .storage
-                .get(_this.epgPrefix + country.toLowerCase())
-                .then(function (data) {
-                var epg = JSON.parse(data);
+                .storage.get(_this.epgPrefix + country.toLowerCase()).then(function (data) {
+                var epg;
+                try {
+                    epg = JSON.parse(data);
+                }
+                catch (err) {
+                    console.log('ERROR PARSING JSON');
+                    observer.next(false);
+                }
                 if (epg) {
                     console.log('From store:', epg);
                     return observer.next(epg);
                 }
                 else {
-                    _this
-                        .promptForEPGFileUrl(country)
-                        .subscribe(function (data) {
+                    _this.promptForEPGFileUrl(country).subscribe(function (data) {
                         if (data) {
                             observer.next(data);
                         }
@@ -2638,8 +2639,7 @@ var EpgProvider = (function () {
                         }
                     });
                 }
-            })
-                .catch(function (err) {
+            }).catch(function (err) {
                 observer.next(false);
             });
         });
