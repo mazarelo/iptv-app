@@ -34,9 +34,8 @@ export class CountriesPage implements OnInit {
     private epgProvider: EpgProvider,
   ) {
     this.playlist = this.navParams.get('data')
-    this.title = this.playlist.name
     // get playlist url
-    this.retrieveList(this.playlist.url)
+    this.getDataFromPlaylist(this.playlist)
   }
 
   getFlagUrL(country){
@@ -45,11 +44,18 @@ export class CountriesPage implements OnInit {
 
   goToCountry(country){
     this.navCtrl.push(ChannelsPage, {
-      channels: this.data[country],
+      channels: this.playlist.data[country],
+      playlist: this.playlist.name,
       title: country
     });
   }
 
+  getDataFromPlaylist(playlist){
+    this.title = playlist.name
+    this.countries = playlist.data.countries
+  }
+
+  /*
   retrieveList(url){
     //let loader = this.loadingProvider.presentLoadingDefault('Generating M3U list')
     this.m3u8Provider.getList(url).subscribe(data =>{
@@ -70,6 +76,7 @@ export class CountriesPage implements OnInit {
       }
     })
   }
+  */
 
   loadOptions(){
     let actionSheet = this.actionSheetCtrl.create({
