@@ -30,6 +30,18 @@ ion-slides {
         background: rgba(0, 0, 0, .4);
         min-height: 200px;
         max-height: 200px;
+        &:focus, &.active{
+          background: rgba(255,255,255,.1)!important;
+        }
+
+        &.editable{
+          animation: WIGGLE 1s infinite;
+        }
+
+        button.btn-reset-styles{
+          width:100%;
+          height:100%;
+        }
     }
     .image-overlay {
         position: absolute;
@@ -43,14 +55,16 @@ ion-slides {
     .card-title {
         position: absolute;
         top: 36%;
-        font-size: 1.8em;
+        font-size: 1.4em;
         width: 100%;
         font-weight: bold;
         color: #fff;
     }
     .card-subtitle {
-        font-size: 1.0em;
+        font-size: .7em;
         position: absolute;
+        padding: 0 10px;
+        opacity:.7;
         top: 52%;
         width: 100%;
         color: #fff;

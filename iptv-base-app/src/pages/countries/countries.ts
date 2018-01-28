@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { NavController,NavParams , Slides } from 'ionic-angular';
 //import * as m3u from 'm3u8-reader'
 import { M3u8Provider } from '../../providers/m3u8/m3u8'
@@ -22,6 +22,8 @@ export class CountriesPage implements OnInit {
   public userPlaylists: any = []
   private playlist: any;
   public title = ''
+  private activeElement: number = 0
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -32,10 +34,54 @@ export class CountriesPage implements OnInit {
     private loadingProvider: LoadingProvider,
     private actionSheetCtrl: ActionSheetController,
     private epgProvider: EpgProvider,
+    private navController: NavController,
   ) {
     this.playlist = this.navParams.get('data')
     // get playlist url
     this.getDataFromPlaylist(this.playlist)
+  }
+
+  keyEvents(event){
+    event.preventDefault();
+    switch(event.keyCode){
+      case 40:
+        this.goDownOnList()
+      break;
+      case 38:
+        this.goUpOnList()
+      break;
+      case 13:
+        // pressed enter
+          this.goToCountry(this.countries[this.activeElement])
+      break;
+      case 27:
+      case 8:
+        // pressed back btn
+        this.navController.pop()
+      break;
+    }
+  }
+  
+  goUpOnList(){
+    if(this.activeElement <= 0) return
+    this.activeElement = this.activeElement - 1
+    console.log('GO UP ON LIST', this.activeElement)
+    
+    let target: any = document.querySelector('.groups-item-'+ this.activeElement)
+    if(target){
+      target.focus()
+    }
+  }
+
+  goDownOnList(){
+    if(this.activeElement == this.userPlaylists.length) return
+    this.activeElement = this.activeElement + 1
+    console.log('GO DOWN ON LIST', this.activeElement)
+    
+    let target: any = document.querySelector('.groups-item-'+ this.activeElement)
+    if(target){
+      target.focus()
+    }
   }
 
   getFlagUrL(country){
@@ -52,7 +98,9 @@ export class CountriesPage implements OnInit {
 
   getDataFromPlaylist(playlist){
     this.title = playlist.name
-    this.countries = playlist.data.countries
+    if(playlist.data.countries){
+      this.countries = playlist.data.countries
+    }
   }
 
   /*
@@ -78,16 +126,35 @@ export class CountriesPage implements OnInit {
   }
   */
 
-  loadOptions(){
+  loadOptions(item){
     let actionSheet = this.actionSheetCtrl.create({
-      title: '',
+      title: item.name+' options',
       subTitle: '',
       buttons: [
+        {
+          text: "Add EPG",
+          icon: 'add',
+          handler: () => {
+            this.epgProvider.addEpg(item.name).subscribe(data=>{
+              if(data){
+                this.toasterProvider.presentToast('EPG added successfully')
+              }else{
+                this.toasterProvider.presentToast('Failed to add EPG')
+              }
+            })
+          }
+        },
         {
           text: "Clear EPG data",
           icon: 'trash',
           handler: () => {
-            this.epgProvider.clear()
+            this.epgProvider.remove(item.name).then(data=>{
+              if(data){
+                this.toasterProvider.presentToast('EPG removed successfully')
+              }else{
+                this.toasterProvider.presentToast('Failed to remove EPG')
+              }
+            })
           }
         },
         {
@@ -111,8 +178,14 @@ export class CountriesPage implements OnInit {
     return this.favorites.filter(item => item.groupName == country)
   }
 
-  ngOnInit(){
+  ngOnInit(){}
+ 
+  ionViewWillLeave(){
   }
+  
+  ionViewDidLoad(){
+  }
+
 }
 
 

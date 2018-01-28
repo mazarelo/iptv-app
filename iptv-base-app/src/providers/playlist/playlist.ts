@@ -94,6 +94,7 @@ export class PlayListProvider {
               role: 'cancel',
               handler: data => {
                   console.log('Cancel clicked');
+                  observer.next({err: true, message: 'canceled'})
               }
             },
             {

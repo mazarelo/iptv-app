@@ -14,7 +14,7 @@ export class Splash {
     this.splashScreen.hide();
     setTimeout(() => {
       this.viewCtrl.dismiss();
-    }, 3000);
+    }, 1000);
  
   }
  

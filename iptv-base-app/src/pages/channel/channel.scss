@@ -1,22 +1,71 @@
 channel {
-    ion-list {
-        margin-top: 150px!important;
-    }
-    #stream-video {
-      z-index: 9;
-      padding-top: 0;
-      width: 100%;
+  ion-list {}
+  .video-container {
+    height: 100%;
+    width: 100%;
+    background: black;
+    display: table;
+    .video-wrapper {
       max-width: 100%;
-      min-width: 100%;
-      height: 200px;
+      max-height: 100%;
+      height: auto;
+      display: table-cell;
+      vertical-align: middle;
     }
+  }
+  ion-header {
+    &:after {
+      display: none;
+    }
+  }
+  .button-clear-md {
+    color: white;
+  }
 
-    ion-header{
-      &:after{
-        display: none;
+  .menu-inner {
+    background: transparent!important;
+    width: 250px;
+    ion-content {
+      background: rgba(0, 0, 0, .5);
+      feed-item{
+        &.active{
+          ion-item{
+            background: rgba(255,255,255,.2)!important;
+          }
+        }
+        ion-item {
+          font-size: 80%;
+          ion-thumbnail {
+            min-width: 20px;
+            min-height: 20px;
+          }
+        }
       }
     }
-    .button-clear-md{
-      color:white;
+  }
+  .item-md{
+    background: transparent;
+    ion-thumbnail {
+      width:40px;
+      height:40px;
+      img{
+        width:40px;
+        height:40px;
+      }
     }
+  }
 }
+
+// VIDEOJS CUSTOM STYLES
+
+.vjs-icon-custombutton {
+  font-family: VideoJS;
+  font-weight: normal;
+  font-style: normal; }
+  .vjs-icon-custombutton:before {
+    content: "\f11f"; }
+
+// Removes progress bar and time
+.vjs-progress-holder, .vjs-remaining-time-display {
+    display: none!important;
+  }

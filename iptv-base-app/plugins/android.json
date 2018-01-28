@@ -57,6 +57,12 @@
     },
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-insomnia": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "com.telerik.plugins.nativepagetransitions": {
+      "PACKAGE_NAME": "io.ionic.starter"
     }
   },
   "dependent_plugins": {

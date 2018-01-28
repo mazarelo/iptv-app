@@ -17,8 +17,10 @@
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
+    <preference name="SplashScreenDelay" value="2000" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="AutoHideSplashScreen" value="false" />
     <preference name="SplashScreen" value="none" />
-    <preference name="SplashScreenDelay" value="3000" />
     <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,assets,root" />
     <platform name="android">
         <allow-intent href="market:*" />
@@ -100,5 +102,7 @@
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.0" />
     <allow-navigation href="http://192.168.0.37:8100" />
     <allow-navigation href="http://192.168.0.20:8101" />
+    <plugin name="cordova-plugin-insomnia" spec="^4.3.0" />
+    <plugin name="com.telerik.plugins.nativepagetransitions" spec="^0.6.5" />
     <engine name="android" spec="7.0.0" />
 </widget>

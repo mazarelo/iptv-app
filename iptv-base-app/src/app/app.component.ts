@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, ModalController } from 'ionic-angular';
+import { App, Nav, Platform, ModalController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Splash } from '../pages/splash/splash'
@@ -19,7 +19,9 @@ export class MyApp {
     public platform: Platform, 
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController,
+    private app: App,
+    private alertCtrl: AlertController) {
 
     this.initializeApp();
 
@@ -36,10 +38,42 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
+      this.statusBar.backgroundColorByHexString('#43738d')
+      //this.statusBar.show();
       let splash = this.modalCtrl.create(Splash);
       splash.present();
     });
+  }
+
+  backButtonInit(){
+    this.platform.registerBackButtonAction(() => {
+      let nav = this.app.getActiveNavs()[0];
+      let activeView = nav.getActive();                
+
+      if(activeView.name === "FirstPage") {
+          if (nav.canGoBack()){ //Can we go back?
+              nav.pop();
+          } else {
+              const alert = this.alertCtrl.create({
+                  title: 'App termination',
+                  message: 'Do you want to close the app?',
+                  buttons: [{
+                      text: 'Cancel',
+                      role: 'cancel',
+                      handler: () => {
+                          console.log('Application exit prevented!');
+                      }
+                  },{
+                      text: 'Close App',
+                      handler: () => {
+                          this.platform.exitApp(); // Close this application
+                      }
+                  }]
+              });
+              alert.present();
+          }
+      }
+  });
   }
 
   openPage(page) {

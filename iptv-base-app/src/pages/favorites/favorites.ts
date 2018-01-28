@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FavoritesProvider } from '../../providers/favorites/favorites'
-import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
 import { ActionSheetController } from 'ionic-angular';
 import { ToasterProvider } from '../../providers/toaster/toaster';
+import { ChannelPage } from '../channel/channel'
 
 @Component({
   selector: 'page-favorites',
@@ -12,26 +12,13 @@ import { ToasterProvider } from '../../providers/toaster/toaster';
 export class FavoritesPage implements OnInit{
   public channels: any = []
   private data: any = []
-  private options: StreamingVideoOptions
   
   constructor(
     public navCtrl: NavController,
-    private streamingMedia: StreamingMedia,
     public actionSheetCtrl: ActionSheetController,
     private favorites: FavoritesProvider,
     private toastProvider: ToasterProvider
-  ) {
-
-    this.options = {
-      successCallback: () => { 
-        console.log('Video played')
-      },
-      errorCallback: (e) => { 
-        this.toastProvider.presentToast('Error playing Stream')
-      },
-      orientation: 'landscape'
-    };
-  }
+  ) {}
 
   presentActionSheet(index) {
     let actionSheet = this.actionSheetCtrl.create({
@@ -82,9 +69,8 @@ export class FavoritesPage implements OnInit{
     this.channels = this.data
   }
 
-  playChannel(videoUrl){
-    //this.androidExoPlayer.show({url: videoUrl});
-    this.streamingMedia.playVideo(videoUrl, this.options);
+  playChannel(item){
+    this.navCtrl.push( ChannelPage, {channel: item, list: this.data} )
   }
 
   doInfinite(infiniteScroll) {

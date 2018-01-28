@@ -107,6 +107,9 @@ export class M3u8Provider {
           console.log('ERR in GET:', data)
           observer.next(false)
         }
+      }, err=>{
+        console.log("Error from Fetch")
+        observer.next(false)
       })
     });
   }
@@ -259,7 +262,6 @@ export class M3u8Provider {
                   }
                 })
               }
-              
               observer.next(false)
             }
           }

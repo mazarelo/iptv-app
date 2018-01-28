@@ -1,30 +1,31 @@
-
-<ion-header>
-    <ion-navbar>
-        <ion-title>{{title}}</ion-title>
-    </ion-navbar>
-</ion-header>
-<video id="stream-video" poster="myPoster.jpg" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls ></video>
-<!--<video *ngIf="item.url" id="stream-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9" controls preload="auto" width="640" height="264" autoplay loop>
-</video>-->
 <ion-content>
-    <ion-list>
-        <ion-item *ngFor="let channel of list; let i = index"  [style.background]="'url(assets/imgs/fallback.png)'" [style.backgroundSize]="'contain'" [style.backgroundPosition]="'center center'" [style.backgroundRepeat]="'no-repeat'">
-            <ion-thumbnail (click)="playItem(channel)"  item-start [style.background]="'url('+ channel.tvLogo +')'" [style.backgroundSize]="'contain'" [style.backgroundPosition]="'center center'" [style.backgroundColor]="'rgba(0,0,0,.5)'" [style.backgroundRepeat]="'no-repeat'">
-            </ion-thumbnail>
-            <h2 (click)="playItem(channel)" >{{channel.tvName}}</h2>
-            <div *ngIf="channel.epg">
-                <div *ngFor="let programme of channel.epg" (click)="playItem(channel)" >
-                    <p>
-                        <ion-icon name="information-circle"></ion-icon> {{programme.title.__text}}
-                    </p>
-                    <div class="timeline" [style.width]="getCurrentEPGTimeBar(programme)"></div>
-                </div>
-            </div>
-            <button ion-button clear icon-only item-end (tap)="presentActionSheet(i)">
-              <ion-icon name="more"></ion-icon>
-            </button>
-        </ion-item>
-    </ion-list>
-
+  <div class="video-container">
+    <div class="video-wrapper">
+      <video *ngIf="item.url" 
+        id="stream-video" 
+        poster="myPoster.jpg" 
+        class="video-js vjs-big-play-centered" controls ></video>
+    </div>
+  </div>
 </ion-content>
+<!-- Channels menu -->
+<ion-menu side="right" [content]="content">
+  <!--<ion-header>
+    <ion-toolbar>
+      <ion-title>Channels</ion-title>
+    </ion-toolbar>
+  </ion-header>-->
+  <ion-content>
+    <ion-list>
+        <feed-item 
+          *ngFor="let channel of list; let i = index;" 
+          [obj]="channel" [index]="i"
+          (goToPlayChannel)="playItem($event)"
+          [ngClass]="{'active': item.tvName === channel.tvName}"></feed-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-menu>
+<ion-nav #content></ion-nav>

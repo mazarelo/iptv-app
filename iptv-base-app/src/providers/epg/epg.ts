@@ -122,17 +122,12 @@ export class EpgProvider {
   downloadEPGFile(url) {
     // let url =
     // 'https://mazarelo.ddns.net:8443/index.php/s/x9FNZby4dH4PPne/download'
-    return this
-      .http
-      .get(url, {responseType: 'text'})
+    return this.http.get(url, {responseType: 'text'})
   }
 
   promptForEPGFileUrl(country) {
-
     return new Observable(observer => {
-      let alert = this
-        .alertCtrl
-        .create({
+      let alert = this.alertCtrl.create({
           title: 'Do you have a EPG url',
           inputs: [
             {
@@ -155,6 +150,9 @@ export class EpgProvider {
                       observer.next(data)
                     })
                   })
+                }, err =>{
+                  console.log("FAILED TO GET EPG URL")
+                  observer.next(false)
                 })
               }
             }, {
@@ -194,33 +192,32 @@ export class EpgProvider {
 
   getEPG(url: string, country){
     return new Observable(observer=>{
-      //let loader = this.loadingProvider.presentLoadingDefault('Generating EPG')
+      let loader = this.loadingProvider.presentLoadingDefault('Generating EPG')
       var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
       var regex = new RegExp(expression);
 
       if (url.match(regex)) {
-        this
-          .downloadEPGFile(url)
-          .subscribe((res) => {
+        this.downloadEPGFile(url).subscribe((res) => {
             if (res) {
               let output = this.convertXmlToJson(res)
-              this
-                .storage
-                .set(this.epgPrefix + country.toLowerCase(), output)
+              this.storage.set(this.epgPrefix + country.toLowerCase(), output)
                 .then(() => {
                   observer.next(output)
-                  //loader.dismiss()
+                  loader.dismiss()
                 })
                 .catch(err => {
                   observer.next(false)
-                  //loader.dismiss()
+                  loader.dismiss()
                 })
             } else {
-              //loader.dismiss()
+              loader.dismiss()
             }
+          }, err=>{
+            loader.dismiss()
+            observer.next(false)
           })
       } else {
-        //loader.dismiss()
+        loader.dismiss()
         observer.next(false)
       }
     })
@@ -258,17 +255,11 @@ remove(name) {
       resolve({error: true, message: 'Invalid name provided'})
     let reference = name.toLowerCase()
 
-    this
-      .storage
-      .listAll()
-      .then(data => {
+    this.storage.listAll().then(data => {
         if (data) {
-          console.log(data)
           let toBeRemoved = data.map(el => {
             if (el == this.epgPrefix + reference) {
-              this
-                .storage
-                .remove(el)
+              this.storage.remove(el)
               resolve(true)
             }
           })
@@ -283,34 +274,45 @@ getRemoteEPGList() {
   return this.http.get('https://mazarelo.com/iptv/epg/list.json')
 }
 
-getCountryEPG(country) {
-  console.log('#######################', country)
+addEpg(group){
   return new Observable((observer) => {
-    this
-      .storage.get(this.epgPrefix + country.toLowerCase()).then(data => {
-        let epg: any;
-        try{
-          epg = JSON.parse(data)
-        }catch(err){
-          console.log('ERROR PARSING JSON')
-          observer.next(false)
-        }
-
-        if (epg) {
-          console.log('From store:', epg)
-          return observer.next(epg)
-        } else {
-          this.promptForEPGFileUrl(country).subscribe(data => {
-              if (data) {
-                observer.next(data)
-              } else {
-                observer.next(false)
-              }
-            })
-        }
-      }).catch(err => {
+    this.promptForEPGFileUrl(group).subscribe(data => {
+      if (data) {
+        observer.next(data)
+      } else {
         observer.next(false)
-      })
+      }
+    })
+  })
+}
+
+getCountryEPG(country) {
+  return new Observable((observer) => {
+    this.storage.get(this.epgPrefix + country.toLowerCase()).then(data => {
+      let epg: any;
+      try{
+        epg = JSON.parse(data)
+      }catch(err){
+        console.log('ERROR PARSING JSON')
+        observer.next(false)
+      }
+
+      if (epg) {
+        console.log('From store:', epg)
+        return observer.next(epg)
+      } else {
+        return observer.next(false)
+        /*this.promptForEPGFileUrl(country).subscribe(data => {
+          if (data) {
+            observer.next(data)
+          } else {
+            observer.next(false)
+          }
+        })*/
+      }
+    }).catch(err => {
+      observer.next(false)
+    })
   })
 }
 

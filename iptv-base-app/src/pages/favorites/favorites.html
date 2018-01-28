@@ -17,23 +17,10 @@
 
    <!-- <ion-searchbar (ionInput)="onInput($event)"></ion-searchbar> -->
   <ion-list >
-    <ion-item 
-      *ngFor="let channel of channels; let i = index" 
-      (click)="presentActionSheet(i)"
-      [style.background]="'url(assets/imgs/fallback.png)'" 
-      [style.backgroundSize]="'contain'" 
-      [style.backgroundPosition]="'center center'" 
-      [style.backgroundRepeat]="'no-repeat'">
-
-      <ion-thumbnail item-start 
-        [style.background]="'url('+ channel.tvLogo +')'" 
-        [style.backgroundSize]="'contain'" 
-        [style.backgroundPosition]="'center center'" 
-        [style.backgroundRepeat]="'no-repeat'">
-      </ion-thumbnail>
-      <h2>{{channel.tvName}}</h2>
-      <!--<button ion-button clear item-end (click)="playChannel(channel.url)">View</button>-->
-    </ion-item>
+    <feed-item 
+          *ngFor="let channel of channels; let i = index;" 
+          [obj]="channel" [index]="i"
+          (goToPlayChannel)="playItem($event)"></feed-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>

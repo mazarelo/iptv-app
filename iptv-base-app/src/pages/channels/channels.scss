@@ -1,35 +1,19 @@
-    .item-md {
-        h2 {
-            font-size: 1.4rem
-        }
-        &:hover {
-            ion-thumbnail {
-                opacity: 1;
-            }
-        }
-        ion-thumbnail {
-            min-height: 40px;
-            min-width: 40px;
-            opacity: 1;
-        }
-        p {
-            color: rgba(255, 255, 255, .5);
-            font-size: 70%;
-            text-transform: lowercase;
-            ion-icon {
-                font-size: 1em;
-                margin-right: 2px;
-            }
-        }
-        .timeline {
-            height: 2px;
-            background: white;
-        }
-        .button-clear-md{
-          color:white;
-        }
+channels {
+  ion-list {
+    max-width: 800px;
+    @media screen and (min-width: 800px) {
+      margin: 3% auto!important;
+      box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+      background: rgba(0, 0, 0, 0.1)!important;
     }
-    
-    .list-md .item-block .item-inner {}
-    
-    channels {}
+    ion-item {
+      width: 100%;
+      background: rgba(255, 255, 255, 0)!important;
+      outline: 0;
+      &:focus,
+      &.active {
+        background: rgba(255, 255, 255, .1)!important;
+      }
+    }
+  }
+}

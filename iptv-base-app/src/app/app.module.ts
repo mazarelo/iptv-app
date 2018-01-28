@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { ChannelPage } from '../pages/channel/channel';
 import { ChannelsPage } from '../pages/channels/channels';
 import { TabsPage } from '../pages/tabs/tabs';
+import { SearchPage } from '../pages/search/search';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -37,6 +38,11 @@ import { DownloadProvider } from '../providers/download/download';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { Zip } from '@ionic-native/zip';
 import { LoadingProvider } from '../providers/loading/loading';
+import {PressDirective} from '../directives/longpress/longpress'
+import { FeedItemComponent } from '../directives/feed-item/feed-item'
+import { VirtualIonImg } from '../directives/virtual-list-image/virtual-list-image';
+import { Insomnia } from '@ionic-native/insomnia';
+
 
 @NgModule({
   declarations: [
@@ -47,14 +53,18 @@ import { LoadingProvider } from '../providers/loading/loading';
     ChannelsPage,
     HomePage,
     TabsPage,
+    SearchPage,
     Splash,
     CountriesPage,
+    PressDirective,
+    FeedItemComponent,
+    VirtualIonImg,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -67,6 +77,8 @@ import { LoadingProvider } from '../providers/loading/loading';
     Splash,
     TabsPage,
     CountriesPage,
+    SearchPage,
+    FeedItemComponent,
   ],
   providers: [
     StatusBar,
@@ -92,7 +104,8 @@ import { LoadingProvider } from '../providers/loading/loading';
     Zip,
     LoadingProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    M3u8Provider
+    M3u8Provider,
+    Insomnia,
   ]
 })
 export class AppModule {}

@@ -1,0 +1,46 @@
+.item-md,
+.toolbar-title-md {
+    //background: transparent!important;
+    color: #f4f4f4!important;
+}
+
+.list-md .item-block .item-inner {
+    border-bottom: 1px solid rgba(255, 255, 255, 0)!important;
+}
+
+.toolbar-background-md {
+    background: transparent!important;
+}
+
+.bar-button-default-md,
+.bar-button-clear-md-default,
+.bar-button-md-default {
+    color: white!important;
+}
+
+.menu-inner {
+    background: black;
+    ion-content {
+        background: #262626;
+        //background: url('../assets/imgs/background.jpg');
+        //background-size: cover;
+    }
+}
+
+.item-md{
+  background: transparent!important;
+}
+
+ion-item{
+   -webkit-animation: FADE-IN 1s ; /* Safari 4+ */
+  -moz-animation:    FADE-IN 1s ; /* Fx 5+ */
+  -o-animation:      FADE-IN 1s ; /* Opera 12+ */
+  animation:         FADE-IN 1s ; /* IE 10+, Fx 29+ */
+}
+
+*{
+  letter-spacing: .5px;
+text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+text-rendering: optimizeLegibility !important;
+-webkit-font-smoothing: antialiased !important;
+}
