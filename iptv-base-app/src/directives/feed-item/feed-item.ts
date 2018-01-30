@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { NavParams, NavController, ActionSheetController } from 'ionic-angular';
+import { NavParams, NavController, ActionSheetController, ModalController } from 'ionic-angular';
 import { ChannelPage } from '../../pages/channel/channel'
 import { FavoritesProvider } from '../../providers/favorites/favorites'
 import { ToasterProvider } from '../../providers/toaster/toaster'
+import { EpgModalPage } from '../../pages/epg/epg'
 
 @Component({
     selector: 'feed-item',
@@ -19,6 +20,8 @@ export class FeedItemComponent implements OnInit, OnDestroy {
       public actionSheetCtrl: ActionSheetController,
       private favorites: FavoritesProvider,
       public toastProvider: ToasterProvider,
+      public modalCtrl: ModalController,
+
     ) {}
 
   playChannel(item){
@@ -28,9 +31,9 @@ export class FeedItemComponent implements OnInit, OnDestroy {
   getCurrentEPGTimeBar(programme){
       let stop = new Date(programme._stop).getTime()
       let start = new Date(programme._start).getTime()
+      let output = Math.floor(( (this.current - start) * 100 / (stop - start) ))
 
-      let output = Math.floor(( (this.current - start) * 100 / (stop - start) )).toString() + "%"
-      return output
+      return output >= 100 || output <=0 ? "0%" : output.toString() + "%"
   }
 
   itemOptions(index) {
@@ -51,6 +54,14 @@ export class FeedItemComponent implements OnInit, OnDestroy {
           icon: 'arrow-dropright-circle',
           handler: ()=>{
             this.playChannel(item)
+          }
+        },
+        {
+          text: 'Programme list',
+          icon: 'list-box',
+          handler: ()=>{
+            console.log(item)
+            this.presentEpgModal(item)
           }
         },
         {
@@ -88,6 +99,11 @@ export class FeedItemComponent implements OnInit, OnDestroy {
     });
     actionSheet.present();
   }
+
+    presentEpgModal(item) {
+      let profileModal = this.modalCtrl.create(EpgModalPage, { item });
+      profileModal.present();
+    }
 
 
     ngOnInit() {

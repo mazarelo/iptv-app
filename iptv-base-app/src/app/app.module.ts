@@ -42,7 +42,7 @@ import {PressDirective} from '../directives/longpress/longpress'
 import { FeedItemComponent } from '../directives/feed-item/feed-item'
 import { VirtualIonImg } from '../directives/virtual-list-image/virtual-list-image';
 import { Insomnia } from '@ionic-native/insomnia';
-
+import { EpgModalPage } from '../pages/epg/epg'
 
 @NgModule({
   declarations: [
@@ -59,6 +59,7 @@ import { Insomnia } from '@ionic-native/insomnia';
     PressDirective,
     FeedItemComponent,
     VirtualIonImg,
+    EpgModalPage,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +79,7 @@ import { Insomnia } from '@ionic-native/insomnia';
     TabsPage,
     CountriesPage,
     SearchPage,
+    EpgModalPage,
     FeedItemComponent,
   ],
   providers: [
