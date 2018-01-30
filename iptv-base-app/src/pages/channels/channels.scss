@@ -3,7 +3,8 @@ channels {
     max-width: 800px;
     @media screen and (min-width: 800px) {
       margin: 3% auto!important;
-      box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+      //box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+      border: 3px solid rgba(0,0,0,.2);
       background: rgba(0, 0, 0, 0.1)!important;
     }
     ion-item {
@@ -11,7 +12,8 @@ channels {
       background: rgba(255, 255, 255, 0)!important;
       outline: 0;
       &:focus,
-      &.active {
+      &.active,
+      &:hover{
         background: rgba(255, 255, 255, .1)!important;
       }
     }

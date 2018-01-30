@@ -30,7 +30,11 @@ ion-slides {
         background: rgba(0, 0, 0, .4);
         min-height: 200px;
         max-height: 200px;
-        &:focus, &.active{
+        will-change: background;
+        transition: background .3s ease-out;
+        &:focus, 
+        &.active,
+        &:hover{
           background: rgba(255,255,255,.1)!important;
         }
 

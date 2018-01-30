@@ -1,14 +1,12 @@
+import { NavParams, NavController, ActionSheetController, Platform } from 'ionic-angular';
 import { Component, HostListener } from '@angular/core';
-import { NavParams, NavController } from 'ionic-angular';
-import { ActionSheetController } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
 import { FavoritesProvider } from '../../providers/favorites/favorites'
 import { ToasterProvider } from '../../providers/toaster/toaster'
 import { VideoProvider } from '../../providers/video/video'
 import { ChannelPage } from '../channel/channel'
 import { EpgProvider } from '../../providers/epg/epg';
 import { SearchPage } from '../search/search'
-import { Platform } from 'ionic-angular/platform/platform';
-import { StatusBar } from '@ionic-native/status-bar';
 /**
  * Generated class for the ChannelsComponent component.
  *

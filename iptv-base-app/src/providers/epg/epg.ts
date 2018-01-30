@@ -22,37 +22,6 @@ export class EpgProvider {
   private epgPrefix : string = 'epg-list-'
   constructor(public http : HttpClient, private storage : StorageProvider, private downloadProvider : DownloadProvider, private zip : Zip, private file : File, private alertCtrl : AlertController, private loadingProvider : LoadingProvider,) {}
 
-  /*
-  unzipFile(url){
-    return this.zip.unzip(url, this.file.dataDirectory, (progress) => {
-      console.log('Unzipping, ' + Math.round((progress.loaded / progress.total) * 100) + '%')
-    })
-  }
-
-  // Doesnt work inside a provider
-  getEPG() {
-    this.downloadProvider.download('http://epg.iptvservice.iptv.uno/portugal.xml.gz')
-    .subscribe(data=>{
-      let path: any = data
-
-      console.log("DOWNLOAD FINISHED:", path)
-      let downloadDir = path.fullPath
-
-      this.file.listDir('', this.file.dataDirectory).then( data =>{
-        console.log("Directory list:", data)
-      }).catch(err=>{
-        console.log("Err", err)
-      })
-
-      this.unzipFile(path.fullPath).then((result) => {
-        if(result === 0) console.log('SUCCESS');
-        if(result === -1) console.log('FAILED');
-      });
-
-    })
-  }
-  */
-
   convertXmlToJson(data : string) {
     let jsonData = this.x2jsParser(data)
     if (jsonData) {
@@ -61,16 +30,12 @@ export class EpgProvider {
       }
 
       // Normalize start and finish times before saving in memory
-      jsonData
-        .programme
-        .map(programme => {
+      jsonData.programme.map(programme => {
           programme._start = this.convertEPGDateToReadable(programme._start)
           programme._stop = this.convertEPGDateToReadable(programme._stop)
         })
 
       jsonData.lastUpdated = new Date()
-
-      console.log(jsonData)
       return jsonData
     }
   }
@@ -86,21 +51,11 @@ export class EpgProvider {
 
   convertEPGDateToReadable(data : number) {
     let output = {
-      year: data
-        .toString()
-        .slice(0, 4),
-      month: data
-        .toString()
-        .slice(4, 6),
-      day: data
-        .toString()
-        .slice(6, 8),
-      hour: data
-        .toString()
-        .slice(8, 10),
-      min: data
-        .toString()
-        .slice(10, 12)
+      year: data.toString().slice(0, 4),
+      month: data.toString().slice(4, 6),
+      day: data.toString().slice(6, 8),
+      hour: data.toString().slice(8, 10),
+      min: data.toString().slice(10, 12)
     }
 
     let formatedData = new Date(`${output.year}-${output.month}-${output.day} ${output.hour}:${output.min}`)
@@ -109,18 +64,13 @@ export class EpgProvider {
 
   x2jsParser(data) {
     let xml = data
-    // let addXmlHeder = '<?xml version="1.0" encoding="UTF-8"?>' xml = addXmlHeder
-    // + xml xml = xml.replace(/&/g, "&amp;")
-
     var x2js : any = new X2JS();
-    //console.log( this.stringToXML(xml) )
+    console.log( x2js.xml_str2json(xml) )
     var jsonObj = x2js.xml_str2json(xml);
-
     return jsonObj
   }
 
   downloadEPGFile(url) {
-    // let url =
     // 'https://mazarelo.ddns.net:8443/index.php/s/x9FNZby4dH4PPne/download'
     return this.http.get(url, {responseType: 'text'})
   }
@@ -176,10 +126,7 @@ export class EpgProvider {
   }
 
   clear() {
-    this
-      .storage
-      .listAll()
-      .then(data => {
+    this.storage.listAll().then(data => {
         if (data) {
           data.map(el => {
             if (el.indexOf(this.epgPrefix) > -1) {
@@ -249,71 +196,84 @@ export class EpgProvider {
     })
   }
 
-remove(name) {
-  return new Promise((resolve, reject) => {
-    if (!name) 
-      resolve({error: true, message: 'Invalid name provided'})
-    let reference = name.toLowerCase()
+  remove(name) {
+    return new Promise((resolve, reject) => {
+      if (!name) 
+        resolve({error: true, message: 'Invalid name provided'})
+      let reference = name.toLowerCase()
 
-    this.storage.listAll().then(data => {
+      this.storage.listAll().then(data => {
+          if (data) {
+            let toBeRemoved = data.map(el => {
+              if (el == this.epgPrefix + reference) {
+                this.storage.remove(el)
+                resolve(true)
+              }
+            })
+          } else {
+            resolve({error: true, message: 'Error accessing store'})
+          }
+        })
+    })
+  }
+
+  getRemoteEPGList() {
+    return this.http.get('https://mazarelo.com/iptv/epg/list.json')
+  }
+
+  addEpg(group){
+    return new Observable((observer) => {
+      this.promptForEPGFileUrl(group).subscribe(data => {
         if (data) {
-          let toBeRemoved = data.map(el => {
-            if (el == this.epgPrefix + reference) {
-              this.storage.remove(el)
-              resolve(true)
-            }
-          })
+          observer.next(data)
         } else {
-          resolve({error: true, message: 'Error accessing store'})
+          observer.next(false)
         }
       })
-  })
-}
-
-getRemoteEPGList() {
-  return this.http.get('https://mazarelo.com/iptv/epg/list.json')
-}
-
-addEpg(group){
-  return new Observable((observer) => {
-    this.promptForEPGFileUrl(group).subscribe(data => {
-      if (data) {
-        observer.next(data)
-      } else {
-        observer.next(false)
-      }
     })
-  })
-}
+  }
 
-getCountryEPG(country) {
-  return new Observable((observer) => {
-    this.storage.get(this.epgPrefix + country.toLowerCase()).then(data => {
-      let epg: any;
-      try{
-        epg = JSON.parse(data)
-      }catch(err){
-        console.log('ERROR PARSING JSON')
+  getCountryEPG(country) {
+    return new Observable((observer) => {
+      this.storage.get(this.epgPrefix + country.toLowerCase()).then(data => {
+        let epg: any;
+        try{
+          epg = JSON.parse(data)
+        }catch(err){
+          console.log('ERROR PARSING JSON')
+          observer.next(false)
+        }
+
+        if (epg) {
+          console.log('From store:', epg)
+          return observer.next(epg)
+        } else {
+          return observer.next(false)
+          /*this.promptForEPGFileUrl(country).subscribe(data => {
+            if (data) {
+              observer.next(data)
+            } else {
+              observer.next(false)
+            }
+          })*/
+        }
+      }).catch(err => {
         observer.next(false)
-      }
-
-      if (epg) {
-        console.log('From store:', epg)
-        return observer.next(epg)
-      } else {
-        return observer.next(false)
-        /*this.promptForEPGFileUrl(country).subscribe(data => {
-          if (data) {
-            observer.next(data)
-          } else {
-            observer.next(false)
-          }
-        })*/
-      }
-    }).catch(err => {
-      observer.next(false)
+      })
     })
-  })
-}
+  }
+
+  refreshEPG(url){
+    
+  }
+
+  getChannelEPG(channelId, country){
+    return new Observable(observer => {
+      this.getCountryEPG(country).subscribe(data=>{
+        let epgData: any = data
+        observer.next( epgData.programme.filter(epg => epg._channel == channelId) )
+      })
+    })
+  }
 
 }
