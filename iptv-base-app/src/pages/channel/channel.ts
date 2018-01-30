@@ -44,9 +44,9 @@ export class ChannelPage implements OnInit {
     this.list = this.data.splice(0,30)
     this.platform.ready().then(data=>{
       this.statusBar.hide()
+      this.insomnia.keepAwake().then( () => console.log('success'), () => console.log('error'));
+      //this.activateOrientationDetection()
     })
-    this.insomnia.keepAwake().then( () => console.log('success'), () => console.log('error'));
-    this.activateOrientationDetection()
   }
 
   activateOrientationDetection(){
@@ -109,6 +109,9 @@ export class ChannelPage implements OnInit {
       };
       // Adds custom buttons
       // this.registerPlayerButtons()
+      try{
+
+      
       this.player = videojs('stream-video', options);
       this.player.qualityPickerPlugin();
       //this.player.requestFullscreen();
@@ -119,6 +122,9 @@ export class ChannelPage implements OnInit {
         })
         this.play()
       })
+      }catch(err){
+        console.log("ERR VIDEOJS")
+      }
       //Registring new custom button
       // this.player.getChild('controlBar').addChild('myButton', {});
       
@@ -138,8 +144,10 @@ export class ChannelPage implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.playVideoJsHLS()
+    this.platform.ready().then(data=>{
+      this.playVideoJsHLS()
     // this.videoProvider.playVideoJsHLS(this.item)
+    })
   }
 
   doInfinite(infiniteScroll) {
