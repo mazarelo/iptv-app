@@ -11,6 +11,10 @@ channel {
       height: auto;
       display: table-cell;
       vertical-align: middle;
+
+      .video-js .vjs-tech{
+        max-height:100vh;
+      }
     }
   }
   ion-header {
