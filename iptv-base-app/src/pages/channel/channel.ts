@@ -24,10 +24,10 @@ declare let Hls: any;
 })
 export class ChannelPage implements OnInit {
   item
-  data
   player
   list
   current = new Date().getTime()
+  amount = 30
   constructor(
     private videoProvider: VideoProvider,
     public navParams: NavParams,
@@ -40,8 +40,8 @@ export class ChannelPage implements OnInit {
     private insomnia: Insomnia,
   ) {
     this.item = this.navParams.get('channel')
-    this.data = this.navParams.get('list')
-    this.list = this.data.splice(0,30)
+    this.list = this.navParams.get('list')
+    
     this.platform.ready().then(data=>{
       this.statusBar.hide()
       this.insomnia.keepAwake().then( () => console.log('success'), () => console.log('error'));
@@ -152,13 +152,7 @@ export class ChannelPage implements OnInit {
 
   doInfinite(infiniteScroll) {
     let count = this.list.length
-    for (let i = this.list.length; i < (count+30); i++) {
-      if(this.data[i]){
-        this.list.push( this.data[i] );
-      }else{
-        return infiniteScroll.complete();
-      }
-    }
+    this.amount = this.amount + 30
     infiniteScroll.complete();
   }
 }

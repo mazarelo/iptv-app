@@ -46,6 +46,7 @@ export class ChannelsPage {
   public title: string;
   public channels = []
   private data;
+  public amount = 30
   private current = new Date().getTime()
   //private options: StreamingVideoOptions
 
@@ -64,8 +65,11 @@ export class ChannelsPage {
   ) {
     this.data = this.navParams.get('channels')
     this.title = this.navParams.get('title')
-    this.channels = this.data.slice(0,30)
+    this.channels = this.data
     this.getCountryEpgList()
+  }
+
+  ionViewDidEnter(){
   }
 
   goUpOnList(){
@@ -103,7 +107,6 @@ export class ChannelsPage {
             this.data[index].epg = programme
           }
         })
-        console.log('CHANNELS:', this.channels)
       }else{
         this.toastProvider.presentToast('Error fetching EPG list')
       }
@@ -112,13 +115,7 @@ export class ChannelsPage {
 
   doInfinite(infiniteScroll) {
     let count = this.channels.length
-    for (let i = this.channels.length; i < (count+30); i++) {
-      if(this.data[i]){
-        this.channels.push( this.data[i] );
-      }else{
-        return infiniteScroll.complete();
-      }
-    }
+    this.amount = this.amount + 30
     infiniteScroll.complete();
   }
 
@@ -126,7 +123,4 @@ export class ChannelsPage {
     this.navCtrl.push( SearchPage, {channels: this.data} )
   }
 
-  ionViewDidEnter(){
-    // this.focusFirstElement()
-  }
 }

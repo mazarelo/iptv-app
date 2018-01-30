@@ -18,11 +18,13 @@
 </ion-header>
 <ion-content>
     <ion-list *ngIf="channels">
-        <feed-item 
-          *ngFor="let channel of channels; let i = index;" 
-          [obj]="channel" [index]="i"
-          (goToPlayChannel)="playChannel($event)"
-          ></feed-item>
+      <div *ngFor="let channel of channels; let i = index;">
+          <feed-item 
+            *ngIf="i < amount"
+            [obj]="channel" [index]="i"
+            (goToPlayChannel)="playChannel($event)"
+            ></feed-item>
+            </div>
     </ion-list>
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
