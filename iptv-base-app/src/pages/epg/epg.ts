@@ -75,9 +75,10 @@ export class EpgModalPage implements OnInit {
 
   sendNotification(channel: string, epg, delay: number){
     let minToMiliseconds = delay * 60 * 1000
+    
+    if( new Date(epg._start).getTime() - minToMiliseconds >= new Date().getTime()){
     let showOnDate =  new Date(new Date(epg._start).getTime() - minToMiliseconds)
-    showOnDate = new Date(new Date().getTime())
-    if(new Date(epg._start).getTime() + minToMiliseconds >= new Date().getTime()){
+      
       this.localNotifications.schedule({
         id: 0,
         text: `"${epg.title.__text}" starts in ${delay.toString()}min`,
@@ -85,7 +86,7 @@ export class EpgModalPage implements OnInit {
         led: 'FF0000',
         sound: null,
         badge: 1,
-        data: { channel: this.item }
+        data: { channel: this.item, epg }
       });
     }
   }
