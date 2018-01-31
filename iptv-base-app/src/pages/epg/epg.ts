@@ -3,7 +3,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 import { EpgProvider } from '../../providers/epg/epg';
-// import * as moment from 'moment'
+import * as moment from 'moment'
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { Platform } from 'ionic-angular/platform/platform';
 
 @Component({
   selector: 'modal-epg',
@@ -19,9 +21,13 @@ export class EpgModalPage implements OnInit {
     private epgProvider: EpgProvider,
     private navParams: NavParams,
     public viewCtrl: ViewController,
+    private localNotifications: LocalNotifications,
+    private plt: Platform
   ) {
     this.item = this.navParams.get('item')
     this.title = this.item.tvName
+    this.plt.ready().then(data=>{
+    })
   }
   
   dismiss() {
@@ -35,6 +41,16 @@ export class EpgModalPage implements OnInit {
 
   convertToPercentage(number){
     return number.toString() + '%'
+  }
+
+  epgTargetAlertNotification(){
+    // Schedule delayed notification
+    this.localNotifications.schedule({
+      text: 'Delayed ILocalNotification',
+      at: new Date(new Date().getTime() + 1000),
+      led: 'FF0000',
+      sound: null
+    });
   }
 
   ngOnInit(){

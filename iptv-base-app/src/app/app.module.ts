@@ -41,6 +41,7 @@ import { FeedItemComponent } from '../directives/feed-item/feed-item'
 import { VirtualIonImg } from '../directives/virtual-list-image/virtual-list-image';
 import { Insomnia } from '@ionic-native/insomnia';
 import { EpgModalPage } from '../pages/epg/epg'
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 @NgModule({
   declarations: [
@@ -104,6 +105,7 @@ import { EpgModalPage } from '../pages/epg/epg'
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     M3u8Provider,
     Insomnia,
+    LocalNotifications,
   ]
 })
 export class AppModule {}
