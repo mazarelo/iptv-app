@@ -60,8 +60,11 @@ export class FeedItemComponent implements OnInit, OnDestroy {
           text: 'Programme list',
           icon: 'list-box',
           handler: ()=>{
-            console.log(item)
-            this.presentEpgModal(item)
+            if(item.epg){
+              this.presentEpgModal(item)
+            }else{
+              this.toastProvider.presentToast('No EPG available')
+            }
           }
         },
         {
