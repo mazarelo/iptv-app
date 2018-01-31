@@ -42,7 +42,7 @@ import { VirtualIonImg } from '../directives/virtual-list-image/virtual-list-ima
 import { Insomnia } from '@ionic-native/insomnia';
 import { EpgModalPage } from '../pages/epg/epg'
 import { LocalNotifications } from '@ionic-native/local-notifications';
-
+import { AlarmsPage } from '../pages/alarms/alarms'
 @NgModule({
   declarations: [
     MyApp,
@@ -59,6 +59,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     FeedItemComponent,
     VirtualIonImg,
     EpgModalPage,
+    AlarmsPage,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +81,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
     SearchPage,
     EpgModalPage,
     FeedItemComponent,
+    AlarmsPage,
   ],
   providers: [
     StatusBar,

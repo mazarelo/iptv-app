@@ -80,7 +80,7 @@ export class EpgModalPage implements OnInit {
     let showOnDate =  new Date(new Date(epg._start).getTime() - minToMiliseconds)
       
       this.localNotifications.schedule({
-        id: 0,
+        id: new Date().getTime(),
         text: `"${epg.title.__text}" starts in ${delay.toString()}min`,
         at: showOnDate,
         led: 'FF0000',

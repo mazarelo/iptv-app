@@ -6,6 +6,7 @@ import { Splash } from '../pages/splash/splash'
 import { HomePage } from '../pages/home/home'
 import { SettingsPage } from '../pages/settings/settings'
 import { FavoritesPage } from '../pages/favorites/favorites'
+import { AlarmsPage } from '../pages/alarms/alarms'
 
 @Component({
   templateUrl: 'app.html'
@@ -29,7 +30,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage, icon: 'list' },
       { title: 'Favorites', component: FavoritesPage, icon: 'heart-outline' },
-      { title: 'Settings', component: SettingsPage, icon: 'settings' }
+      { title: 'Settings', component: SettingsPage, icon: 'settings' },
+      { title: 'Alarms', component: AlarmsPage, icon: 'alarm' }
     ];
 
   }
