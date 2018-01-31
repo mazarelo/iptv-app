@@ -33,7 +33,17 @@
     },
     "com.telerik.plugins.nativepagetransitions": {
       "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-local-notification": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.ionic.starter"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-plugin-badge": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    }
+  }
 }

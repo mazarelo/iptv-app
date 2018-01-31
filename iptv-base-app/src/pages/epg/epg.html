@@ -16,7 +16,7 @@
 <ion-content>
   <ion-list>
       <div *ngFor="let epg of epgData" class="epg-item-wrapper">
-          <ion-item *ngIf="epg.status !=='ENDED'" [ngClass]="{'innactive': epg.status == 'UP COMMING'}">
+          <ion-item *ngIf="epg.status !=='ENDED'" [ngClass]="{'innactive': epg.status == 'UP COMMING'}" (tap)="epgOptions(epg)">
             <h2>{{epg.title.__text}}</h2>
             <p>
               <ion-icon name="information-circle" *ngIf="epg.desc"> {{epg.desc.__text}}</ion-icon> 
