@@ -1,0 +1,37 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{title}} - Programme
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+      <div *ngFor="let epg of epgData" class="epg-item-wrapper">
+          <ion-item *ngIf="epg.status !=='ENDED'" [ngClass]="{'innactive': epg.status == 'UP COMMING'}">
+            <h2>{{epg.title.__text}}</h2>
+            <p>
+              <ion-icon name="information-circle" *ngIf="epg.desc"> {{epg.desc.__text}}</ion-icon> 
+            </p>
+            <div *ngIf="epg.current" class="timeline">
+              <div class="progress" [style.width]="convertToPercentage(epg.status)"></div>
+            </div>
+              
+            <div class="epg-status" *ngIf="!epg.current">{{epg.status}}</div>
+            <p class="epg-hours">
+              <span>{{epg._start  | date : 'shortTime'}}</span>
+              -
+              <span>{{epg._stop  | date : 'shortTime'}}</span>
+            </p>
+        </ion-item>
+      </div>
+  </ion-list>
+</ion-content>

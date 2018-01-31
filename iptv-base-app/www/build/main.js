@@ -1416,51 +1416,38 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_channel_channel__ = __webpack_require__(219);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_channels_channels__ = __webpack_require__(217);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_tabs_tabs__ = __webpack_require__(305);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_search_search__ = __webpack_require__(309);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_search_search___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__pages_search_search__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_status_bar__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_splash_screen__ = __webpack_require__(114);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_common_http__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_streaming_media__ = __webpack_require__(119);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_video_player__ = __webpack_require__(306);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_m3u8_m3u8__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_toaster_toaster__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_favorites_favorites__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_storage__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_android_exoplayer__ = __webpack_require__(218);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_video_video__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_storage_storage__ = __webpack_require__(116);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_playlist_playlist__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_native_storage__ = __webpack_require__(307);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_file_chooser__ = __webpack_require__(118);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_splash_splash__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_android_permissions__ = __webpack_require__(117);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_file__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__ionic_native_screen_orientation__ = __webpack_require__(220);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_countries_countries__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__providers_parser_parser__ = __webpack_require__(308);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__providers_epg_epg__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__providers_download_download__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__ionic_native_file_transfer__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__ionic_native_zip__ = __webpack_require__(223);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__providers_loading_loading__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__directives_longpress_longpress__ = __webpack_require__(310);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__directives_longpress_longpress___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_37__directives_longpress_longpress__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__directives_feed_item_feed_item__ = __webpack_require__(313);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__directives_virtual_list_image_virtual_list_image__ = __webpack_require__(314);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__directives_virtual_list_image_virtual_list_image___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_39__directives_virtual_list_image_virtual_list_image__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__ionic_native_insomnia__ = __webpack_require__(315);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_status_bar__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_splash_screen__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__angular_common_http__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_streaming_media__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_video_player__ = __webpack_require__(306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_m3u8_m3u8__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_toaster_toaster__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_favorites_favorites__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_storage__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_android_exoplayer__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_video_video__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_storage_storage__ = __webpack_require__(116);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_playlist_playlist__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ionic_native_native_storage__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_file_chooser__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_splash_splash__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__ionic_native_android_permissions__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__ionic_native_file__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_screen_orientation__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_countries_countries__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__providers_parser_parser__ = __webpack_require__(308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__providers_epg_epg__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__providers_download_download__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__ionic_native_file_transfer__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__ionic_native_zip__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__providers_loading_loading__ = __webpack_require__(57);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
-
-
-
-
 
 
 
@@ -1510,20 +1497,16 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_8__pages_channels_channels__["a" /* ChannelsPage */],
                 __WEBPACK_IMPORTED_MODULE_6__pages_home_home__["a" /* HomePage */],
                 __WEBPACK_IMPORTED_MODULE_9__pages_tabs_tabs__["a" /* TabsPage */],
-                __WEBPACK_IMPORTED_MODULE_10__pages_search_search__["SearchPage"],
-                __WEBPACK_IMPORTED_MODULE_26__pages_splash_splash__["a" /* Splash */],
-                __WEBPACK_IMPORTED_MODULE_30__pages_countries_countries__["a" /* CountriesPage */],
-                __WEBPACK_IMPORTED_MODULE_37__directives_longpress_longpress__["PressDirective"],
-                __WEBPACK_IMPORTED_MODULE_38__directives_feed_item_feed_item__["a" /* FeedItemComponent */],
-                __WEBPACK_IMPORTED_MODULE_39__directives_virtual_list_image_virtual_list_image__["VirtualIonImg"],
+                __WEBPACK_IMPORTED_MODULE_25__pages_splash_splash__["a" /* Splash */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_countries_countries__["a" /* CountriesPage */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_13__angular_common_http__["b" /* HttpClientModule */],
+                __WEBPACK_IMPORTED_MODULE_12__angular_common_http__["b" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: []
                 }),
-                __WEBPACK_IMPORTED_MODULE_19__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_18__ionic_storage__["a" /* IonicStorageModule */].forRoot()
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicApp */]],
             entryComponents: [
@@ -1533,38 +1516,35 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_6__pages_home_home__["a" /* HomePage */],
                 __WEBPACK_IMPORTED_MODULE_7__pages_channel_channel__["a" /* ChannelPage */],
                 __WEBPACK_IMPORTED_MODULE_8__pages_channels_channels__["a" /* ChannelsPage */],
-                __WEBPACK_IMPORTED_MODULE_26__pages_splash_splash__["a" /* Splash */],
+                __WEBPACK_IMPORTED_MODULE_25__pages_splash_splash__["a" /* Splash */],
                 __WEBPACK_IMPORTED_MODULE_9__pages_tabs_tabs__["a" /* TabsPage */],
-                __WEBPACK_IMPORTED_MODULE_30__pages_countries_countries__["a" /* CountriesPage */],
-                __WEBPACK_IMPORTED_MODULE_10__pages_search_search__["SearchPage"],
-                __WEBPACK_IMPORTED_MODULE_38__directives_feed_item_feed_item__["a" /* FeedItemComponent */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_countries_countries__["a" /* CountriesPage */],
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_11__ionic_native_status_bar__["a" /* StatusBar */],
-                __WEBPACK_IMPORTED_MODULE_12__ionic_native_splash_screen__["a" /* SplashScreen */],
-                __WEBPACK_IMPORTED_MODULE_14__ionic_native_streaming_media__["a" /* StreamingMedia */],
-                __WEBPACK_IMPORTED_MODULE_18__providers_favorites_favorites__["a" /* FavoritesProvider */],
-                __WEBPACK_IMPORTED_MODULE_17__providers_toaster_toaster__["a" /* ToasterProvider */],
-                __WEBPACK_IMPORTED_MODULE_15__ionic_native_video_player__["a" /* VideoPlayer */],
-                __WEBPACK_IMPORTED_MODULE_13__angular_common_http__["b" /* HttpClientModule */],
-                __WEBPACK_IMPORTED_MODULE_20__ionic_native_android_exoplayer__["a" /* AndroidExoplayer */],
-                __WEBPACK_IMPORTED_MODULE_21__providers_video_video__["a" /* VideoProvider */],
-                __WEBPACK_IMPORTED_MODULE_22__providers_storage_storage__["a" /* StorageProvider */],
-                __WEBPACK_IMPORTED_MODULE_24__ionic_native_native_storage__["a" /* NativeStorage */],
-                __WEBPACK_IMPORTED_MODULE_25__ionic_native_file_chooser__["a" /* FileChooser */],
-                __WEBPACK_IMPORTED_MODULE_28__ionic_native_file__["a" /* File */],
-                __WEBPACK_IMPORTED_MODULE_23__providers_playlist_playlist__["a" /* PlayListProvider */],
-                __WEBPACK_IMPORTED_MODULE_27__ionic_native_android_permissions__["a" /* AndroidPermissions */],
-                __WEBPACK_IMPORTED_MODULE_29__ionic_native_screen_orientation__["a" /* ScreenOrientation */],
-                __WEBPACK_IMPORTED_MODULE_31__providers_parser_parser__["a" /* ParserProvider */],
-                __WEBPACK_IMPORTED_MODULE_32__providers_epg_epg__["a" /* EpgProvider */],
-                __WEBPACK_IMPORTED_MODULE_33__providers_download_download__["a" /* DownloadProvider */],
-                __WEBPACK_IMPORTED_MODULE_34__ionic_native_file_transfer__["a" /* FileTransfer */],
-                __WEBPACK_IMPORTED_MODULE_35__ionic_native_zip__["a" /* Zip */],
-                __WEBPACK_IMPORTED_MODULE_36__providers_loading_loading__["a" /* LoadingProvider */],
+                __WEBPACK_IMPORTED_MODULE_10__ionic_native_status_bar__["a" /* StatusBar */],
+                __WEBPACK_IMPORTED_MODULE_11__ionic_native_splash_screen__["a" /* SplashScreen */],
+                __WEBPACK_IMPORTED_MODULE_13__ionic_native_streaming_media__["a" /* StreamingMedia */],
+                __WEBPACK_IMPORTED_MODULE_17__providers_favorites_favorites__["a" /* FavoritesProvider */],
+                __WEBPACK_IMPORTED_MODULE_16__providers_toaster_toaster__["a" /* ToasterProvider */],
+                __WEBPACK_IMPORTED_MODULE_14__ionic_native_video_player__["a" /* VideoPlayer */],
+                __WEBPACK_IMPORTED_MODULE_12__angular_common_http__["b" /* HttpClientModule */],
+                __WEBPACK_IMPORTED_MODULE_19__ionic_native_android_exoplayer__["a" /* AndroidExoplayer */],
+                __WEBPACK_IMPORTED_MODULE_20__providers_video_video__["a" /* VideoProvider */],
+                __WEBPACK_IMPORTED_MODULE_21__providers_storage_storage__["a" /* StorageProvider */],
+                __WEBPACK_IMPORTED_MODULE_23__ionic_native_native_storage__["a" /* NativeStorage */],
+                __WEBPACK_IMPORTED_MODULE_24__ionic_native_file_chooser__["a" /* FileChooser */],
+                __WEBPACK_IMPORTED_MODULE_27__ionic_native_file__["a" /* File */],
+                __WEBPACK_IMPORTED_MODULE_22__providers_playlist_playlist__["a" /* PlayListProvider */],
+                __WEBPACK_IMPORTED_MODULE_26__ionic_native_android_permissions__["a" /* AndroidPermissions */],
+                __WEBPACK_IMPORTED_MODULE_28__ionic_native_screen_orientation__["a" /* ScreenOrientation */],
+                __WEBPACK_IMPORTED_MODULE_30__providers_parser_parser__["a" /* ParserProvider */],
+                __WEBPACK_IMPORTED_MODULE_31__providers_epg_epg__["a" /* EpgProvider */],
+                __WEBPACK_IMPORTED_MODULE_32__providers_download_download__["a" /* DownloadProvider */],
+                __WEBPACK_IMPORTED_MODULE_33__ionic_native_file_transfer__["a" /* FileTransfer */],
+                __WEBPACK_IMPORTED_MODULE_34__ionic_native_zip__["a" /* Zip */],
+                __WEBPACK_IMPORTED_MODULE_35__providers_loading_loading__["a" /* LoadingProvider */],
                 { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicErrorHandler */] },
-                __WEBPACK_IMPORTED_MODULE_16__providers_m3u8_m3u8__["a" /* M3u8Provider */],
-                __WEBPACK_IMPORTED_MODULE_40__ionic_native_insomnia__["a" /* Insomnia */],
+                __WEBPACK_IMPORTED_MODULE_15__providers_m3u8_m3u8__["a" /* M3u8Provider */]
             ]
         })
     ], AppModule);
@@ -1825,155 +1805,6 @@ var ParserProvider = (function () {
 }());
 
 //# sourceMappingURL=parser.js.map
-
-/***/ }),
-
-/***/ 309:
-/***/ (function(module, exports) {
-
-//# sourceMappingURL=search.js.map
-
-/***/ }),
-
-/***/ 310:
-/***/ (function(module, exports) {
-
-//# sourceMappingURL=longpress.js.map
-
-/***/ }),
-
-/***/ 313:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FeedItemComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_favorites_favorites__ = __webpack_require__(58);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_toaster_toaster__ = __webpack_require__(30);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var FeedItemComponent = (function () {
-    function FeedItemComponent(navCtrl, actionSheetCtrl, favorites, toastProvider) {
-        this.navCtrl = navCtrl;
-        this.actionSheetCtrl = actionSheetCtrl;
-        this.favorites = favorites;
-        this.toastProvider = toastProvider;
-        this.goToPlayChannel = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
-        this.current = new Date().getTime();
-    }
-    FeedItemComponent.prototype.playChannel = function (item) {
-        this.goToPlayChannel.emit(this.channel);
-    };
-    FeedItemComponent.prototype.getCurrentEPGTimeBar = function (programme) {
-        var stop = new Date(programme._stop).getTime();
-        var start = new Date(programme._start).getTime();
-        var output = Math.floor(((this.current - start) * 100 / (stop - start))).toString() + "%";
-        return output;
-    };
-    FeedItemComponent.prototype.itemOptions = function (index) {
-        var _this = this;
-        var item = this.channel;
-        var actionSheet = this.actionSheetCtrl.create({
-            title: item.tvName,
-            subTitle: item.tvGroup,
-            buttons: [
-                /*{
-                  text: 'Hide',
-                  role: 'destructive',
-                  handler: () => {
-                    console.log('Destructive clicked');
-                  }
-                },*/
-                {
-                    text: "Play",
-                    icon: 'arrow-dropright-circle',
-                    handler: function () {
-                        _this.playChannel(item);
-                    }
-                },
-                {
-                    text: 'Add to Favorites',
-                    icon: 'heart-outline',
-                    handler: function () {
-                        _this.favorites.add(item).subscribe(function (data) {
-                            if (!data) {
-                                _this.toastProvider.presentToast('Could not add to Favorites');
-                                return false;
-                            }
-                            _this.toastProvider.presentToast('Added to Favorites');
-                        });
-                    }
-                },
-                /*
-                {
-                  text: "Hide",
-                  icon: 'eye-off',
-                  handler: () =>{
-                    // Hide object
-                    this.toastProvider.presentToast('Feature not enabled')
-                  }
-                },
-                */
-                {
-                    text: 'Cancel',
-                    icon: 'cross',
-                    role: 'cancel',
-                    handler: function () {
-                        console.log('Cancel clicked');
-                    }
-                }
-            ]
-        });
-        actionSheet.present();
-    };
-    FeedItemComponent.prototype.ngOnInit = function () {
-        this.channel = this.obj;
-        console.log('FROM ITEM', this.channel, this.index);
-    };
-    FeedItemComponent.prototype.ngOnDestroy = function () {
-    };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
-        __metadata("design:type", Object)
-    ], FeedItemComponent.prototype, "obj", void 0);
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
-        __metadata("design:type", Number)
-    ], FeedItemComponent.prototype, "index", void 0);
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* Output */])(),
-        __metadata("design:type", Object)
-    ], FeedItemComponent.prototype, "goToPlayChannel", void 0);
-    FeedItemComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'feed-item',template:/*ion-inline-start:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/directives/feed-item/feed-item.html"*/'<ion-item *ngIf="channel"\n  tappable\n  [ngClass]="{\'active\': channel.active}"\n  aria-checked="true" tabindex="{{index}}"\n  class="items-template item-{{index}}"\n  (press)="itemOptions(i)"\n  (tap)="playChannel(channel)">\n      <ion-thumbnail item-start >\n        <virtual-ion-img  *ngIf="channel.tvLogo" [src]="channel.tvLogo" [cache]="true" ></virtual-ion-img>\n        <!--<ion-img *ngIf="channel.tvLogo" [src]="channel.tvLogo" [cache]="true" ></ion-img>-->\n      </ion-thumbnail>\n      <h2>{{channel.tvName}}</h2>\n      <div *ngIf="channel.epg" class="epg" >\n          <div *ngFor="let programme of channel.epg">\n            <p>\n              <ion-icon name="information-circle"></ion-icon> {{programme.title.__text}}\n            </p>\n            <div class="timeline" [style.width]="getCurrentEPGTimeBar(programme)"></div>\n            <p class="epg-hours">\n                <span>{{programme._start  | date : \'shortTime\'}}</span>\n                -\n                <span>{{programme._stop  | date : \'shortTime\'}}</span>\n              </p>\n          </div>\n      </div>\n</ion-item>'/*ion-inline-end:"/Users/joaomazarelo/Work/mobile/iptv-app/iptv-base-app/src/directives/feed-item/feed-item.html"*/
-        }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_favorites_favorites__["a" /* FavoritesProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_favorites_favorites__["a" /* FavoritesProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__providers_toaster_toaster__["a" /* ToasterProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_toaster_toaster__["a" /* ToasterProvider */]) === "function" && _d || Object])
-    ], FeedItemComponent);
-    return FeedItemComponent;
-    var _a, _b, _c, _d;
-}());
-
-//# sourceMappingURL=feed-item.js.map
-
-/***/ }),
-
-/***/ 314:
-/***/ (function(module, exports) {
-
-//# sourceMappingURL=virtual-list-image.js.map
 
 /***/ }),
 
@@ -2637,6 +2468,36 @@ var EpgProvider = (function () {
         this.loadingProvider = loadingProvider;
         this.epgPrefix = 'epg-list-';
     }
+    /*
+    unzipFile(url){
+      return this.zip.unzip(url, this.file.dataDirectory, (progress) => {
+        console.log('Unzipping, ' + Math.round((progress.loaded / progress.total) * 100) + '%')
+      })
+    }
+  
+    // Doesnt work inside a provider
+    getEPG() {
+      this.downloadProvider.download('http://epg.iptvservice.iptv.uno/portugal.xml.gz')
+      .subscribe(data=>{
+        let path: any = data
+  
+        console.log("DOWNLOAD FINISHED:", path)
+        let downloadDir = path.fullPath
+  
+        this.file.listDir('', this.file.dataDirectory).then( data =>{
+          console.log("Directory list:", data)
+        }).catch(err=>{
+          console.log("Err", err)
+        })
+  
+        this.unzipFile(path.fullPath).then((result) => {
+          if(result === 0) console.log('SUCCESS');
+          if(result === -1) console.log('FAILED');
+        });
+  
+      })
+    }
+    */
     EpgProvider.prototype.convertXmlToJson = function (data) {
         var _this = this;
         var jsonData = this.x2jsParser(data);
@@ -2645,11 +2506,14 @@ var EpgProvider = (function () {
                 jsonData = jsonData.tv;
             }
             // Normalize start and finish times before saving in memory
-            jsonData.programme.map(function (programme) {
+            jsonData
+                .programme
+                .map(function (programme) {
                 programme._start = _this.convertEPGDateToReadable(programme._start);
                 programme._stop = _this.convertEPGDateToReadable(programme._stop);
             });
             jsonData.lastUpdated = new Date();
+            console.log(jsonData);
             return jsonData;
         }
     };
@@ -2662,30 +2526,47 @@ var EpgProvider = (function () {
     };
     EpgProvider.prototype.convertEPGDateToReadable = function (data) {
         var output = {
-            year: data.toString().slice(0, 4),
-            month: data.toString().slice(4, 6),
-            day: data.toString().slice(6, 8),
-            hour: data.toString().slice(8, 10),
-            min: data.toString().slice(10, 12)
+            year: data
+                .toString()
+                .slice(0, 4),
+            month: data
+                .toString()
+                .slice(4, 6),
+            day: data
+                .toString()
+                .slice(6, 8),
+            hour: data
+                .toString()
+                .slice(8, 10),
+            min: data
+                .toString()
+                .slice(10, 12)
         };
         var formatedData = new Date(output.year + "-" + output.month + "-" + output.day + " " + output.hour + ":" + output.min);
         return formatedData;
     };
     EpgProvider.prototype.x2jsParser = function (data) {
         var xml = data;
+        // let addXmlHeder = '<?xml version="1.0" encoding="UTF-8"?>' xml = addXmlHeder
+        // + xml xml = xml.replace(/&/g, "&amp;")
         var x2js = new X2JS();
-        console.log(x2js.xml_str2json(xml));
+        //console.log( this.stringToXML(xml) )
         var jsonObj = x2js.xml_str2json(xml);
         return jsonObj;
     };
     EpgProvider.prototype.downloadEPGFile = function (url) {
+        // let url =
         // 'https://mazarelo.ddns.net:8443/index.php/s/x9FNZby4dH4PPne/download'
-        return this.http.get(url, { responseType: 'text' });
+        return this
+            .http
+            .get(url, { responseType: 'text' });
     };
     EpgProvider.prototype.promptForEPGFileUrl = function (country) {
         var _this = this;
         return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) {
-            var alert = _this.alertCtrl.create({
+            var alert = _this
+                .alertCtrl
+                .create({
                 title: 'Do you have a EPG url',
                 inputs: [
                     {
@@ -2706,9 +2587,6 @@ var EpgProvider = (function () {
                                         observer.next(data);
                                     });
                                 });
-                            }, function (err) {
-                                console.log("FAILED TO GET EPG URL");
-                                observer.next(false);
                             });
                         }
                     }, {
@@ -2732,7 +2610,10 @@ var EpgProvider = (function () {
     };
     EpgProvider.prototype.clear = function () {
         var _this = this;
-        this.storage.listAll().then(function (data) {
+        this
+            .storage
+            .listAll()
+            .then(function (data) {
             if (data) {
                 data.map(function (el) {
                     if (el.indexOf(_this.epgPrefix) > -1) {
@@ -2745,33 +2626,34 @@ var EpgProvider = (function () {
     EpgProvider.prototype.getEPG = function (url, country) {
         var _this = this;
         return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) {
-            var loader = _this.loadingProvider.presentLoadingDefault('Generating EPG');
+            //let loader = this.loadingProvider.presentLoadingDefault('Generating EPG')
             var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
             var regex = new RegExp(expression);
             if (url.match(regex)) {
-                _this.downloadEPGFile(url).subscribe(function (res) {
+                _this
+                    .downloadEPGFile(url)
+                    .subscribe(function (res) {
                     if (res) {
                         var output_1 = _this.convertXmlToJson(res);
-                        _this.storage.set(_this.epgPrefix + country.toLowerCase(), output_1)
+                        _this
+                            .storage
+                            .set(_this.epgPrefix + country.toLowerCase(), output_1)
                             .then(function () {
                             observer.next(output_1);
-                            loader.dismiss();
+                            //loader.dismiss()
                         })
                             .catch(function (err) {
                             observer.next(false);
-                            loader.dismiss();
+                            //loader.dismiss()
                         });
                     }
                     else {
-                        loader.dismiss();
+                        //loader.dismiss()
                     }
-                }, function (err) {
-                    loader.dismiss();
-                    observer.next(false);
                 });
             }
             else {
-                loader.dismiss();
+                //loader.dismiss()
                 observer.next(false);
             }
         });
@@ -2806,11 +2688,17 @@ var EpgProvider = (function () {
             if (!name)
                 resolve({ error: true, message: 'Invalid name provided' });
             var reference = name.toLowerCase();
-            _this.storage.listAll().then(function (data) {
+            _this
+                .storage
+                .listAll()
+                .then(function (data) {
                 if (data) {
+                    console.log(data);
                     var toBeRemoved = data.map(function (el) {
                         if (el == _this.epgPrefix + reference) {
-                            _this.storage.remove(el);
+                            _this
+                                .storage
+                                .remove(el);
                             resolve(true);
                         }
                     });
@@ -2824,23 +2712,12 @@ var EpgProvider = (function () {
     EpgProvider.prototype.getRemoteEPGList = function () {
         return this.http.get('https://mazarelo.com/iptv/epg/list.json');
     };
-    EpgProvider.prototype.addEpg = function (group) {
-        var _this = this;
-        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) {
-            _this.promptForEPGFileUrl(group).subscribe(function (data) {
-                if (data) {
-                    observer.next(data);
-                }
-                else {
-                    observer.next(false);
-                }
-            });
-        });
-    };
     EpgProvider.prototype.getCountryEPG = function (country) {
         var _this = this;
+        console.log('#######################', country);
         return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) {
-            _this.storage.get(_this.epgPrefix + country.toLowerCase()).then(function (data) {
+            _this
+                .storage.get(_this.epgPrefix + country.toLowerCase()).then(function (data) {
                 var epg;
                 try {
                     epg = JSON.parse(data);
@@ -2854,37 +2731,25 @@ var EpgProvider = (function () {
                     return observer.next(epg);
                 }
                 else {
-                    return observer.next(false);
-                    /*this.promptForEPGFileUrl(country).subscribe(data => {
-                      if (data) {
-                        observer.next(data)
-                      } else {
-                        observer.next(false)
-                      }
-                    })*/
+                    _this.promptForEPGFileUrl(country).subscribe(function (data) {
+                        if (data) {
+                            observer.next(data);
+                        }
+                        else {
+                            observer.next(false);
+                        }
+                    });
                 }
             }).catch(function (err) {
                 observer.next(false);
             });
         });
     };
-    EpgProvider.prototype.refreshEPG = function (url) {
-    };
-    EpgProvider.prototype.getChannelEPG = function (channelId, country) {
-        var _this = this;
-        return new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) {
-            _this.getCountryEPG(country).subscribe(function (data) {
-                var epgData = data;
-                observer.next(epgData.programme.filter(function (epg) { return epg._channel == channelId; }));
-            });
-        });
-    };
     EpgProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__storage_storage__["a" /* StorageProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__storage_storage__["a" /* StorageProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__download_download__["a" /* DownloadProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__download_download__["a" /* DownloadProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6__ionic_native_zip__["a" /* Zip */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__ionic_native_zip__["a" /* Zip */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_7__ionic_native_file__["a" /* File */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ionic_native_file__["a" /* File */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_8_ionic_angular_components_alert_alert_controller__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8_ionic_angular_components_alert_alert_controller__["a" /* AlertController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_9__loading_loading__["a" /* LoadingProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__loading_loading__["a" /* LoadingProvider */]) === "function" && _g || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_4__storage_storage__["a" /* StorageProvider */], __WEBPACK_IMPORTED_MODULE_5__download_download__["a" /* DownloadProvider */], __WEBPACK_IMPORTED_MODULE_6__ionic_native_zip__["a" /* Zip */], __WEBPACK_IMPORTED_MODULE_7__ionic_native_file__["a" /* File */], __WEBPACK_IMPORTED_MODULE_8_ionic_angular_components_alert_alert_controller__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_9__loading_loading__["a" /* LoadingProvider */]])
     ], EpgProvider);
     return EpgProvider;
-    var _a, _b, _c, _d, _e, _f, _g;
 }());
 
 //# sourceMappingURL=epg.js.map
