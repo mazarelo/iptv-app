@@ -104,5 +104,4 @@
     <allow-navigation href="http://192.168.0.20:8101" />
     <plugin name="cordova-plugin-insomnia" spec="^4.3.0" />
     <plugin name="com.telerik.plugins.nativepagetransitions" spec="^0.6.5" />
-    <engine name="android" spec="7.0.0" />
 </widget>
