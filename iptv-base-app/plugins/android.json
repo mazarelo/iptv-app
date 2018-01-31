@@ -13,6 +13,9 @@
     "com.moust.cordova.videoplayer": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
+    "com.telerik.plugins.nativepagetransitions": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
     "cordova-plugin-android-permissions": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
@@ -25,10 +28,19 @@
     "cordova-plugin-file": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
     "cordova-plugin-filechooser": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
+    "cordova-plugin-insomnia": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
     "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-local-notification": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
     "cordova-plugin-nativestorage": {
@@ -40,7 +52,13 @@
     "cordova-plugin-splashscreen": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
     "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-zip": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
     "cordova-sqlite-storage": {
@@ -48,31 +66,13 @@
     },
     "ionic-plugin-keyboard": {
       "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-zip": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-file-transfer": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-insomnia": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "com.telerik.plugins.nativepagetransitions": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-local-notification": {
-      "PACKAGE_NAME": "io.ionic.starter"
     }
   },
   "dependent_plugins": {
-    "es6-promise-plugin": {
+    "cordova-plugin-badge": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
-    "cordova-plugin-badge": {
+    "es6-promise-plugin": {
       "PACKAGE_NAME": "io.ionic.starter"
     }
   }
