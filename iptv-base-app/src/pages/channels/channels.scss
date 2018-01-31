@@ -18,4 +18,10 @@ channels {
       }
     }
   }
+
+  .item-wrapper{
+    &:nth-child(odd){
+      background: rgba(255,255,255,.05)!important;
+    }
+  }
 }

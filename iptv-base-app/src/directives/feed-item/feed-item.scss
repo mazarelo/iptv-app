@@ -35,13 +35,29 @@ $thumbnail-size: 50px;
       font-size: 60%;
     }
   }
+
   .timeline {
-    height: 2px;
-    background: white;
     will-change: width;
     margin: 5px 0;
-    transition: .3s ease-out;
+    position:relative;
+    
+    .progress{
+      height: 2px;
+      transition: .3s ease-out;
+      background: white;
+    }
+
+    &::before{
+      content:"";
+      position: absolute;
+      top:0;
+      left:0;
+      height:2px;
+      background:rgba(255,255,255,.3);
+      width:100%;
+    }
   }
+
   .button-clear-md {
     color: white;
   }

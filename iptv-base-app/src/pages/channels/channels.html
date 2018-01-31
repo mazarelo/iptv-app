@@ -18,7 +18,7 @@
 </ion-header>
 <ion-content>
     <ion-list *ngIf="channels">
-      <div *ngFor="let channel of channels; let i = index;">
+      <div *ngFor="let channel of channels; let i = index;" class="item-wrapper">
           <feed-item 
             *ngIf="i < amount"
             [obj]="channel" [index]="i"

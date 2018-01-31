@@ -11,15 +11,17 @@
       </ion-thumbnail>
       <h2>{{channel.tvName}}</h2>
       <div *ngIf="channel.epg" class="epg" >
-          <div *ngFor="let programme of channel.epg">
+          <div *ngFor="let epg of channel.epg">
             <p>
-              <ion-icon name="information-circle"></ion-icon> {{programme.title.__text}}
+              <ion-icon name="information-circle"></ion-icon> {{epg.title.__text}}
             </p>
-            <div class="timeline" [style.width]="getCurrentEPGTimeBar(programme)"></div>
+            <div class="timeline">
+              <div class="progress" [style.width]="getCurrentEPGTimeBar(epg)"></div>
+            </div>
             <p class="epg-hours">
-                <span>{{programme._start  | date : 'shortTime'}}</span>
+                <span>{{epg._start  | date : 'shortTime'}}</span>
                 -
-                <span>{{programme._stop  | date : 'shortTime'}}</span>
+                <span>{{epg._stop  | date : 'shortTime'}}</span>
               </p>
           </div>
       </div>
