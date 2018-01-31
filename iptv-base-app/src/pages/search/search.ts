@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController } from 'ionic-angular';
-import { ActionSheetController } from 'ionic-angular';
-import { FavoritesProvider } from '../../providers/favorites/favorites'
-import { ToasterProvider } from '../../providers/toaster/toaster'
-import { VideoProvider } from '../../providers/video/video'
 import { ChannelPage } from '../channel/channel'
-import { EpgProvider } from '../../providers/epg/epg';
-import { Platform } from 'ionic-angular/platform/platform';
-import { StatusBar } from '@ionic-native/status-bar';
 /**
  * Generated class for the ChannelsComponent component.
  *
@@ -29,11 +22,6 @@ export class SearchPage {
     //private streamingMedia: StreamingMedia,
     public navParams: NavParams,
     public navCtrl: NavController,
-    private favorites: FavoritesProvider,
-    private epgProvider: EpgProvider,
-    private toastProvider: ToasterProvider,
-    private platform: Platform,
-    private statusBar: StatusBar,
   ) {
     this.data = this.navParams.get('channels')
     this.channels = this.data.slice(0,30)

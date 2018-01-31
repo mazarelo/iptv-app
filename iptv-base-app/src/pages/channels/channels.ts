@@ -1,9 +1,6 @@
-import { NavParams, NavController, ActionSheetController, Platform } from 'ionic-angular';
+import { NavParams, NavController, ActionSheetController } from 'ionic-angular';
 import { Component, HostListener } from '@angular/core';
-import { StatusBar } from '@ionic-native/status-bar';
-import { FavoritesProvider } from '../../providers/favorites/favorites'
 import { ToasterProvider } from '../../providers/toaster/toaster'
-import { VideoProvider } from '../../providers/video/video'
 import { ChannelPage } from '../channel/channel'
 import { EpgProvider } from '../../providers/epg/epg';
 import { SearchPage } from '../search/search'
@@ -45,7 +42,6 @@ export class ChannelsPage {
   public channels = []
   private data;
   public amount = 30
-  private current = new Date().getTime()
   //private options: StreamingVideoOptions
 
   constructor(
@@ -53,13 +49,9 @@ export class ChannelsPage {
     public navParams: NavParams,
     public navCtrl: NavController,
     public actionSheetCtrl: ActionSheetController,
-    private favorites: FavoritesProvider,
     public toastProvider: ToasterProvider,
-    private videoProvider: VideoProvider,
     private epgProvider: EpgProvider,
     private navController: NavController,
-    private platform: Platform,
-    private statusBar: StatusBar,
   ) {
     this.data = this.navParams.get('channels')
     this.title = this.navParams.get('title')
@@ -112,7 +104,6 @@ export class ChannelsPage {
   }
 
   doInfinite(infiniteScroll) {
-    let count = this.channels.length
     this.amount = this.amount + 30
     infiniteScroll.complete();
   }

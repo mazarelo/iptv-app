@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { NavParams, NavController, ActionSheetController, ModalController } from 'ionic-angular';
-import { ChannelPage } from '../../pages/channel/channel'
+import { NavController, ActionSheetController, ModalController } from 'ionic-angular';
 import { FavoritesProvider } from '../../providers/favorites/favorites'
 import { ToasterProvider } from '../../providers/toaster/toaster'
 import { EpgModalPage } from '../../pages/epg/epg'

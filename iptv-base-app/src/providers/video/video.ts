@@ -32,7 +32,6 @@ export class VideoProvider {
 
   playVideoJsHLS(item){
     // https://github.com/streamroot/videojs5-hlsjs-source-handler
-    var self = this
     var options = {
       html5: {
         hlsjsConfig: {

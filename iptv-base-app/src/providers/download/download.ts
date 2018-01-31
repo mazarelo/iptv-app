@@ -1,15 +1,15 @@
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { ToasterProvider } from '../toaster/toaster';
+// import { ToasterProvider } from '../toaster/toaster';
 
 @Injectable()
 export class DownloadProvider {
   constructor(
     private transfer: FileTransfer, 
     private file: File,
-    private toasterProvider: ToasterProvider
+    // private toasterProvider: ToasterProvider
   ) { }
 
   download(url) {

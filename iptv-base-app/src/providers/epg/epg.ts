@@ -3,9 +3,6 @@ import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import {StorageProvider} from '../storage/storage';
-import {DownloadProvider} from '../download/download';
-import {Zip} from '@ionic-native/zip';
-import {File} from '@ionic-native/file';
 import {AlertController} from 'ionic-angular/components/alert/alert-controller';
 import {LoadingProvider} from '../loading/loading';
 import 'rxjs/add/operator/map';
@@ -20,7 +17,7 @@ declare var X2JS : any;
 @Injectable()
 export class EpgProvider {
   private epgPrefix : string = 'epg-list-'
-  constructor(public http : HttpClient, private storage : StorageProvider, private downloadProvider : DownloadProvider, private zip : Zip, private file : File, private alertCtrl : AlertController, private loadingProvider : LoadingProvider,) {}
+  constructor(public http : HttpClient, private storage : StorageProvider, private alertCtrl : AlertController, private loadingProvider : LoadingProvider,) {}
 
   convertXmlToJson(data : string) {
     let jsonData = this.x2jsParser(data)
@@ -204,7 +201,7 @@ export class EpgProvider {
 
       this.storage.listAll().then(data => {
           if (data) {
-            let toBeRemoved = data.map(el => {
+            data.map(el => {
               if (el == this.epgPrefix + reference) {
                 this.storage.remove(el)
                 resolve(true)

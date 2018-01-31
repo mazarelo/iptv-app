@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { M3u8Provider } from '../m3u8/m3u8';
-import { LoadingProvider } from '../loading/loading';
+// import { LoadingProvider } from '../loading/loading';
 import { ToasterProvider } from '../toaster/toaster';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class PlayListProvider {
       private fileChooser: FileChooser,
       private androidPermissions: AndroidPermissions,
       private m3uProvider: M3u8Provider,
-      private loadingProvider: LoadingProvider,
+     // private loadingProvider: LoadingProvider,
       private m3u8Provider: M3u8Provider,
       private toasterProvider: ToasterProvider,
   ) {}

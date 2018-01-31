@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, NavController } from 'ionic-angular';
-import { VideoProvider } from '../../providers/video/video'
 import { Platform } from 'ionic-angular/platform/platform';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
-import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+// import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Insomnia } from '@ionic-native/insomnia';
 
@@ -16,7 +15,7 @@ import '../../assets/js/videojs5-hlsjs-source-handler.min.js'
  * Components.
  */
 declare let videojs: any;
-declare let Hls: any;
+// declare let Hls: any;
 
 @Component({
   selector: 'channel',
@@ -29,11 +28,10 @@ export class ChannelPage implements OnInit {
   current = new Date().getTime()
   amount = 30
   constructor(
-    private videoProvider: VideoProvider,
     public navParams: NavParams,
     public plt: Platform,
     private screenOrientation: ScreenOrientation,
-    private alertController: AlertController,
+   // private alertController: AlertController,
     private navController: NavController,
     private statusBar: StatusBar,
     private platform: Platform,
@@ -151,7 +149,6 @@ export class ChannelPage implements OnInit {
   }
 
   doInfinite(infiniteScroll) {
-    let count = this.list.length
     this.amount = this.amount + 30
     infiniteScroll.complete();
   }

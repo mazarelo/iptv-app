@@ -35,8 +35,6 @@ import { CountriesPage } from '../pages/countries/countries'
 import { ParserProvider } from '../providers/parser/parser'
 import { EpgProvider } from '../providers/epg/epg'
 import { DownloadProvider } from '../providers/download/download';
-import { FileTransfer } from '@ionic-native/file-transfer';
-import { Zip } from '@ionic-native/zip';
 import { LoadingProvider } from '../providers/loading/loading';
 import {PressDirective} from '../directives/longpress/longpress'
 import { FeedItemComponent } from '../directives/feed-item/feed-item'
@@ -102,8 +100,6 @@ import { EpgModalPage } from '../pages/epg/epg'
     ParserProvider,
     EpgProvider,
     DownloadProvider,
-    FileTransfer,
-    Zip,
     LoadingProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     M3u8Provider,

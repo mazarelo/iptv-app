@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { NavController, Slides, ActionSheetController, AlertController } from 'ionic-angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NavController, ActionSheetController, AlertController } from 'ionic-angular';
 //import * as m3u from 'm3u8-reader'
 import { PlayListProvider } from '../../providers/playlist/playlist';
 import { CountriesPage } from '../countries/countries'
-import { EpgProvider } from '../../providers/epg/epg';
-import {Gesture} from 'ionic-angular/gestures/gesture';
+//import { EpgProvider } from '../../providers/epg/epg';
 
 @Component({
   selector: 'page-home',
@@ -18,13 +17,12 @@ export class HomePage implements OnInit {
   public countries = []
   public favorites = [];
   public userPlaylists: any = []
-  private eventListener
   public editMode: boolean = false
   constructor(
     public navController: NavController,
     private playlistProvider: PlayListProvider,
     private actionSheetCtrl: ActionSheetController,
-    private epgProvider: EpgProvider,
+    //private epgProvider: EpgProvider,
     private alertCtrl: AlertController,
   ) {
     this.playlistProvider.list().subscribe(data=>{

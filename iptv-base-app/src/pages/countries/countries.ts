@@ -1,12 +1,11 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController,NavParams , Slides } from 'ionic-angular';
-//import * as m3u from 'm3u8-reader'
-import { M3u8Provider } from '../../providers/m3u8/m3u8'
+// import * as m3u from 'm3u8-reader'
+// import { M3u8Provider } from '../../providers/m3u8/m3u8'
 import { ChannelsPage } from '../channels/channels'
-import { FavoritesProvider } from '../../providers/favorites/favorites';
 import { VideoProvider } from '../../providers/video/video';
 import {ToasterProvider} from '../../providers/toaster/toaster'
-import { LoadingProvider } from '../../providers/loading/loading';
+// import { LoadingProvider } from '../../providers/loading/loading';
 import { ActionSheetController } from 'ionic-angular';
 import { EpgProvider } from '../../providers/epg/epg';
 
@@ -16,7 +15,6 @@ import { EpgProvider } from '../../providers/epg/epg';
 })
 export class CountriesPage implements OnInit {
   @ViewChild(Slides) slides: Slides;
-  private data = null;
   public countries = []
   public favorites = [];
   public userPlaylists: any = []
@@ -27,11 +25,10 @@ export class CountriesPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private m3u8Provider: M3u8Provider,
-    private favoritesProvider: FavoritesProvider,
+  //  private m3u8Provider: M3u8Provider,
     private videoProvider: VideoProvider,
     private toasterProvider: ToasterProvider,
-    private loadingProvider: LoadingProvider,
+  //  private loadingProvider: LoadingProvider,
     private actionSheetCtrl: ActionSheetController,
     private epgProvider: EpgProvider,
     private navController: NavController,

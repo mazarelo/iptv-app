@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {LoadingController} from 'ionic-angular/components/loading/loading-controller';
-import {Observable} from 'rxjs/Observable';
+// import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class LoadingProvider {

@@ -1,9 +1,9 @@
 
 
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { NavParams, ViewController } from 'ionic-angular';
 import { EpgProvider } from '../../providers/epg/epg';
-import * as moment from 'moment'
+// import * as moment from 'moment'
 
 @Component({
   selector: 'modal-epg',
