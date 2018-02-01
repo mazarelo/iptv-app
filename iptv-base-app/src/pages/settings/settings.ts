@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { ToasterProvider } from '../../providers/toaster/toaster';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { M3u8Provider } from '../../providers/m3u8/m3u8'
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 @Component({
   selector: 'page-settings',
@@ -21,6 +22,7 @@ export class SettingsPage {
     public toastProvider: ToasterProvider,
     private fileChooser: FileChooser,
     private m3u8Provider: M3u8Provider,
+    private localNotifications: LocalNotifications
   ) {}
 
   refreshPlaylist(){
@@ -69,9 +71,15 @@ export class SettingsPage {
   }
   
   wipeAllData(){
-    this.storage.clear().then(data=>{
+    return this.storage.clear().then(data=>{
+      return this.cleanAllAlarms()
+    }).then(data=>{
       this.toastProvider.presentToast('All Data wiped')
     })
+  }
+
+  cleanAllAlarms(){
+    return this.localNotifications.clearAll()
   }
 
   cleanPlaylists(){
