@@ -2,3 +2,14 @@ iptv-base-app/node_modules
 iptv-base-app/platforms
 iptv-base-app/www
 iptv-base-app/resources
+iptv-base-app/node_modules
+iptv-base-app/.tmp
+iptv-base-app/.sass-cache
+iptv-base-app/**/bower_components or sometimes it is lib/**
+iptv-base-app/platforms
+iptv-base-app/plugins
+iptv-base-app/*.swp
+iptv-base-app/*.swo
+iptv-base-app/*.log
+iptv-base-app/*.DS_Store
+
