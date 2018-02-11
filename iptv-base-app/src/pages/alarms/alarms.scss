@@ -1,0 +1,14 @@
+page-alarms{
+  ion-thumbnail{
+    border-radius:50%;
+    background: transparent!important;
+    text-align: center;
+    ion-icon{
+      margin: 10px auto 5px auto;
+    }
+    .alert-timer{
+      display: block;
+      font-size:60%;
+    }
+  }
+}
