@@ -79,7 +79,16 @@ export class SettingsPage {
   }
 
   cleanAllAlarms(){
-    return this.localNotifications.clearAll()
+    console.log("PRE CLEANING")
+    return this.localNotifications.cancelAll().then(data=>{
+      console.log('FROM CANCEL',data)
+      return this.localNotifications.clearAll()
+    }).then(response=>{
+      console.log('FROM CLEAR',response)
+      return Promise.resolve(response)
+    }).catch(err=>{
+      console.log("ERR", err)
+    })
   }
 
   cleanPlaylists(){

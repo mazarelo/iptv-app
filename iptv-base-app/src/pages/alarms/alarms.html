@@ -2,29 +2,28 @@
   <ion-navbar>
     <ion-toolbar>
       <button ion-button menuToggle start>
-          <ion-icon name="menu"></ion-icon>
-        </button>
+        <ion-icon name="menu"></ion-icon>
+      </button>
       <ion-buttons>
-          <ion-title>{{title}}</ion-title>
+        <ion-title>{{title}}</ion-title>
       </ion-buttons>
     </ion-toolbar>
   </ion-navbar>
 </ion-header>
 <ion-content>
-    <ion-list *ngIf="alarms">
-      <ion-item *ngFor="let alarm of alarms; let i = index;" 
-        class="item-wrapper"
-        (tap)="playChannel(alarm.data.channel)">
-        <ion-thumbnail item-start>
-          <!--<ion-icon item-start  name="alarm"></ion-icon>-->
-          {{alarm.timeLeft}}
-        </ion-thumbnail>
-        <h2>{{alarm.data.epg.title.__text}}</h2>
-        <p><img [src]="alarm.data.channel.tvLogo" width="15"/> {{alarm.data.channel.tvName}}</p>
-      </ion-item>
-    </ion-list>
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-   
+  <ion-list *ngIf="alarms">
+    <ion-item *ngFor="let alarm of alarms; let i = index;" class="item-wrapper" (tap)="playChannel(alarm.data.channel)">
+      <ion-thumbnail item-start>
+        <ion-icon name="alarm"></ion-icon>
+        <span class="alert-timer">{{alarm.timeLeft}}</span>
+      </ion-thumbnail>
+      <h2>{{alarm.data.epg.title.__text}}</h2>
+      <p>
+        <img [src]="alarm.data.channel.tvLogo" width="15" /> {{alarm.data.channel.tvName}}</p>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>

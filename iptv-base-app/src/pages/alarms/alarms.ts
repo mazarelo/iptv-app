@@ -31,7 +31,6 @@ export class AlarmsPage {
                 output.data = JSON.parse(output.data)
                 output.timeLeft = this.minutesLeft(notification)
                 this.alarms.push(notification)
-                console.log(notification)
               }).catch(err=> console.log(err))
             })
           }
@@ -51,10 +50,10 @@ export class AlarmsPage {
     let diffDays = Math.floor(diffMs / 86400000);
     let diffHrs = Math.floor((diffMs % 86400000) / 3600000);
     let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
-    if(diffMins < 90){
+    if(diffMins < 90 && diffHrs == 0){
       return diffMins + ' min'
     }else if(diffHrs < 24){
-      return diffHrs + ' h'
+      return `${diffHrs}h${diffMins}m`
     }else if(diffDays < 31){
       return diffDays + ' days'
     }else if(diffMs < 12){
