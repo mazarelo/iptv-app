@@ -20,7 +20,7 @@
     <feed-item 
           *ngFor="let channel of channels; let i = index;" 
           [obj]="channel" [index]="i"
-          (goToPlayChannel)="playItem($event)"></feed-item>
+          (goToPlayChannel)="playChannel($event)"></feed-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
