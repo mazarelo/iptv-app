@@ -43,6 +43,9 @@ import { Insomnia } from '@ionic-native/insomnia';
 import { EpgModalPage } from '../pages/epg/epg'
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { AlarmsPage } from '../pages/alarms/alarms'
+import { DatabaseProvider } from '../providers/database/database.provider';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -108,6 +111,7 @@ import { AlarmsPage } from '../pages/alarms/alarms'
     M3u8Provider,
     Insomnia,
     LocalNotifications,
+    DatabaseProvider,
   ]
 })
 export class AppModule {}
