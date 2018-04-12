@@ -69,7 +69,7 @@ export class FavoritesPage implements OnInit{
     this.channels = this.data
   }
 
-  playChannel(item){
+  playItem(item){
     this.navCtrl.push( ChannelPage, {channel: item, list: this.data} )
   }
 
