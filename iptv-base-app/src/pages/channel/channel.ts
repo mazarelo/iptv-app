@@ -103,23 +103,22 @@ export class ChannelPage implements OnInit {
           hlsjsConfig: {
             debug: false
           }
-        }
+        },
+        nativeControlsForTouch: false
       };
       // Adds custom buttons
       // this.registerPlayerButtons()
       try{
-
-      
-      this.player = videojs('stream-video', options);
-      this.player.qualityPickerPlugin();
-      //this.player.requestFullscreen();
-      this.player.ready(function(){
-        this.src({
-          src: self.item.url,
-          type: "application/x-mpegURL",
+        this.player = videojs('stream-video', options);
+        this.player.qualityPickerPlugin();
+        //this.player.requestFullscreen();
+        this.player.ready(function(){
+          this.src({
+            src: self.item.url,
+            type: "application/x-mpegURL",
+          })
+          this.play()
         })
-        this.play()
-      })
       }catch(err){
         console.log("ERR VIDEOJS")
       }
