@@ -33,7 +33,7 @@ export class EpgModalPage implements OnInit {
     this.item = this.navParams.get('item')
     this.title = this.item.tvName
     this.plt.ready().then(data=>{
-      this.localNotifications.on( 'click', (notification, state)=>{
+      this.localNotifications.on('click').subscribe((notification)=>{
         let data: any = notification.data 
         if(data){
           this.playChannel(data.channel, [])
@@ -64,7 +64,7 @@ export class EpgModalPage implements OnInit {
       if(data){
         this.sendNotification(this.title, epg, 10)
       }else{
-        this.localNotifications.registerPermission().then(data=>{
+        this.localNotifications.requestPermission().then(data=>{
           if(data){
             this.sendNotification(this.title, epg, 10)
           }
@@ -82,7 +82,7 @@ export class EpgModalPage implements OnInit {
       this.localNotifications.schedule({
         id: new Date().getTime(),
         text: `"${epg.title.__text}" starts in ${delay.toString()}min`,
-        at: showOnDate,
+        trigger: {at: showOnDate},
         led: 'FF0000',
         sound: null,
         badge: 1,
