@@ -42,8 +42,8 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.backgroundColorByHexString('#43738d')
       //this.statusBar.show();
-      let splash = this.modalCtrl.create(Splash);
-      splash.present();
+      //let splash = this.modalCtrl.create(Splash);
+      //splash.present();
     });
   }
 
