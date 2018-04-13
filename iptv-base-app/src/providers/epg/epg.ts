@@ -17,7 +17,12 @@ declare var X2JS : any;
 @Injectable()
 export class EpgProvider {
   private epgPrefix : string = 'epg-list-'
-  constructor(public http : HttpClient, private storage : StorageProvider, private alertCtrl : AlertController, private loadingProvider : LoadingProvider,) {}
+  constructor(
+    public http : HttpClient, 
+    private storage : StorageProvider, 
+    private alertCtrl : AlertController, 
+    private loadingProvider : LoadingProvider,
+  ) {}
 
   convertXmlToJson(data : string) {
     let jsonData = this.x2jsParser(data)
