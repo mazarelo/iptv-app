@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController } from 'ionic-angular';
+import { NavParams, NavController, ViewController } from 'ionic-angular';
 import { ChannelPage } from '../channel/channel'
+import { ChannelsPage } from '../channels/channels';
 /**
  * Generated class for the ChannelsComponent component.
  *
@@ -13,22 +14,24 @@ import { ChannelPage } from '../channel/channel'
 })
 export class SearchPage {
   public title: string;
-  public channels = []
+  public items = []
+  private type: string;
   private data;
+  public searchText: string;
   private current = new Date().getTime()
-  //private options: StreamingVideoOptions
 
   constructor(
-    //private streamingMedia: StreamingMedia,
     public navParams: NavParams,
     public navCtrl: NavController,
+    public viewCtrl: ViewController,
   ) {
-    this.data = this.navParams.get('channels')
-    this.channels = this.data.slice(0,30)
+    this.data = this.navParams.get('items')
+    this.type = this.navParams.get('type')
+    this.items = this.data.slice(0,30)
   }
 
   initializeItems(){
-    this.channels = this.data
+    this.items = this.data
   }
 
   onInput(ev) {
@@ -38,23 +41,23 @@ export class SearchPage {
     let val = ev.target.value;
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
-      this.channels = this.channels.filter((item) => {
+      this.items = this.items.filter((item) => {
         return (item.tvName.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }
 
-  getCurrentEPGTimeBar(programme){
-    let stop = new Date(programme._stop).getTime()
-    let start = new Date(programme._start).getTime()
-
-    let output = Math.floor(( (this.current - start) * 100 / (stop - start) )).toString() + "%"
-    return output
+  dismiss(){
+    this.viewCtrl.dismiss();
   }
 
-  playChannel(item){
+  playChannel(data){
     // Push a new View
-    this.navCtrl.push( ChannelPage, {channel: item, list: this.data} )
+    switch(this.type){
+      case 'item':
+        this.navCtrl.push( ChannelPage, {channel: data, list: this.data} )
+      break;
+    }
     //this.videoProvider.start(item)
    }
 }

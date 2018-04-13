@@ -1,15 +1,20 @@
 <ion-header>
   <ion-navbar>
     <ion-toolbar>
-      <button ion-button menuToggle start>
-          <ion-icon name="menu"></ion-icon>
-        </button>
       <ion-buttons>
-          <ion-searchbar (ionInput)="onInput($event)"></ion-searchbar>
-      <!--<ion-buttons end>
-          <button ion-button icon-only (tap)="groupOptions()">
-            <ion-icon name="more"></ion-icon>
-          </button>-->
+          <ion-searchbar
+          [(ngModel)]="searchText"
+          [showCancelButton]="shouldShowCancel"
+          (ionInput)="onInput($event)"
+          (ionCancel)="onCancel($event)">
+        </ion-searchbar>
+
+        <!--<ion-searchbar (ionInput)="onInput($event)"></ion-searchbar>-->
+      </ion-buttons>
+        <ion-buttons end>
+        <button ion-button icon-only (tap)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </button>
       </ion-buttons>
     </ion-toolbar>
   </ion-navbar>
@@ -17,9 +22,9 @@
 <ion-content>
     <ion-list>
       <feed-item 
-          *ngFor="let channel of channels; let i = index;" 
-          [obj]="channel" [index]="i"
-          (goToPlayChannel)="playChannel($event)"
-          ></feed-item>
+        *ngFor="let items of items; let i = index;" 
+        [obj]="items" [index]="i"
+        (goToPlayChannel)="playChannel($event)"
+      ></feed-item>
     </ion-list>
 </ion-content>
