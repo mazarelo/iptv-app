@@ -1,4 +1,4 @@
-import { NavParams, NavController, ActionSheetController } from 'ionic-angular';
+import { NavParams, NavController, ActionSheetController, ModalController } from 'ionic-angular';
 import { Component, HostListener } from '@angular/core';
 import { ToasterProvider } from '../../providers/toaster/toaster'
 import { ChannelPage } from '../channel/channel'
@@ -15,7 +15,7 @@ import { SearchPage } from '../search/search'
   templateUrl: 'channels.html'
 })
 export class ChannelsPage {
-
+/*
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     event.preventDefault();
     switch(event.keyCode){
@@ -36,7 +36,7 @@ export class ChannelsPage {
       break;
     }
   }
-
+*/
   private activeElement: number = 0;
   public title: string;
   public channels = []
@@ -52,6 +52,7 @@ export class ChannelsPage {
     public toastProvider: ToasterProvider,
     private epgProvider: EpgProvider,
     private navController: NavController,
+    public modalCtrl: ModalController,
   ) {
     this.data = this.navParams.get('channels')
     this.title = this.navParams.get('title')
@@ -59,8 +60,7 @@ export class ChannelsPage {
     this.getCountryEpgList()
   }
 
-  ionViewDidEnter(){
-  }
+  ionViewDidEnter(){}
 
   goUpOnList(){
     if(this.activeElement == 0) return
@@ -74,6 +74,12 @@ export class ChannelsPage {
     this.activeElement = this.activeElement + 1
     let target: any = document.querySelector('.item-'+ this.activeElement)
     target.focus()
+  }
+
+
+  openSearchModal(){
+    let searchModal = this.modalCtrl.create(SearchPage, { items: this.channels, type: 'item' });
+    searchModal.present();
   }
   
   focusFirstElement(){
