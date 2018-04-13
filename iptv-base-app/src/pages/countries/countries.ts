@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController,NavParams , Slides } from 'ionic-angular';
+import { NavController,NavParams , Slides, ModalController } from 'ionic-angular';
 // import * as m3u from 'm3u8-reader'
 // import { M3u8Provider } from '../../providers/m3u8/m3u8'
 import { ChannelsPage } from '../channels/channels'
@@ -8,6 +8,7 @@ import {ToasterProvider} from '../../providers/toaster/toaster'
 // import { LoadingProvider } from '../../providers/loading/loading';
 import { ActionSheetController } from 'ionic-angular';
 import { EpgProvider } from '../../providers/epg/epg';
+import { SearchPage } from '../search/search';
 
 @Component({
   selector: 'page-countries',
@@ -32,6 +33,7 @@ export class CountriesPage implements OnInit {
     private actionSheetCtrl: ActionSheetController,
     private epgProvider: EpgProvider,
     private navController: NavController,
+    public modalCtrl: ModalController,
   ) {
     this.playlist = this.navParams.get('data')
     // get playlist url
@@ -91,6 +93,11 @@ export class CountriesPage implements OnInit {
       playlist: this.playlist.name,
       title: country
     });
+  }
+
+  openSearchModal(){
+    let searchModal = this.modalCtrl.create(SearchPage, { items: this.countries, type: 'group' });
+    searchModal.present();
   }
 
   getDataFromPlaylist(playlist){
