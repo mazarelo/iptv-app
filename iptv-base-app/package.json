@@ -86,7 +86,8 @@
     "xml-js": "^1.6.2",
     "xml2json": "^0.11.0",
     "zlibjs": "^0.3.1",
-    "zone.js": "0.8.18"
+    "zone.js": "0.8.18",
+    "cordova-android": "7.0.0"
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.1.6",
