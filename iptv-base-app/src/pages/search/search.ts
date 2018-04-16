@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams, NavController, ViewController } from 'ionic-angular';
 import { ChannelPage } from '../channel/channel'
-import { ChannelsPage } from '../channels/channels';
 /**
  * Generated class for the ChannelsComponent component.
  *
@@ -18,7 +17,6 @@ export class SearchPage {
   private type: string;
   private data;
   public searchText: string;
-  private current = new Date().getTime()
 
   constructor(
     public navParams: NavParams,
