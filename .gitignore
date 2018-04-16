@@ -13,3 +13,4 @@ iptv-base-app/*.swo
 iptv-base-app/*.log
 iptv-base-app/*.DS_Store
 iptv-base-app/www/build/*
+iptv-base-app/.gradle
