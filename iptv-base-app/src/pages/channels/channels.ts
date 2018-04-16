@@ -1,5 +1,5 @@
 import { NavParams, NavController, ActionSheetController, ModalController } from 'ionic-angular';
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { ToasterProvider } from '../../providers/toaster/toaster'
 import { ChannelPage } from '../channel/channel'
 import { EpgProvider } from '../../providers/epg/epg';

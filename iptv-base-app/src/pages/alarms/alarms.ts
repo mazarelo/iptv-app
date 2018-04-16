@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 import { ToasterProvider } from '../../providers/toaster/toaster';
 import { Platform } from 'ionic-angular/platform/platform';
 import { LocalNotifications } from '@ionic-native/local-notifications';
@@ -16,7 +15,6 @@ export class AlarmsPage {
 
   constructor(
     public navCtrl: NavController,
-    private storage: Storage,
     public toastProvider: ToasterProvider,
     private plt: Platform,
     private localNotifications: LocalNotifications
