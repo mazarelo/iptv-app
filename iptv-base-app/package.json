@@ -40,7 +40,7 @@
     "@ionic/pro": "1.0.16",
     "@ionic/storage": "^2.1.3",
     "com.moust.cordova.videoplayer": "https://github.com/moust/cordova-plugin-videoplayer.git",
-    "com.telerik.plugins.nativepagetransitions": "^0.6.5",
+    "cordova-android": "7.0.0",
     "cordova-browser": "5.0.3",
     "cordova-plugin-android-permissions": "^1.0.0",
     "cordova-plugin-badge": "^0.8.7",
@@ -113,13 +113,10 @@
       "cordova-plugin-zip": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-insomnia": {},
-      "com.telerik.plugins.nativepagetransitions": {},
       "cordova-plugin-local-notification": {},
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-badge": {}
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }
