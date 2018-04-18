@@ -26,6 +26,8 @@ export class HomePage implements OnInit {
     private alertCtrl: AlertController,
   ) {
     this.playlistProvider.list().subscribe(data=>{
+      console.log(data);
+      debugger;
       this.userPlaylists = data
     })
     /* detect orientation changes

@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import * as PouchDB from 'pouchdb';
+import PouchDB from 'pouchdb';
 
 @Injectable()
 export class DatabaseProvider {
@@ -9,8 +9,12 @@ export class DatabaseProvider {
     private listener: EventEmitter<any> = new EventEmitter();
  
     public constructor() {
+        this.initDb()
+    }
+
+    public initDb(){
         if(!this.isInstantiated) {
-            this.database = new PouchDB("iptv-database");
+            this.database = new PouchDB("channels");
             this.isInstantiated = true;
         }
     }
@@ -25,18 +29,18 @@ export class DatabaseProvider {
  
     public put(id: string, document: any) { 
        document._id = id;
-    return this.get(id).then(result => {
-        document._rev = result._rev;
-        return this.database.put(document);
-    }, error => {
-        if(error.status == "404") {
+        return this.get(id).then(result => {
+            document._rev = result._rev;
             return this.database.put(document);
-        } else {
-            return new Promise((resolve, reject) => {
-                reject(error);
-            });
-        }
-    });
+        }, error => {
+            if(error.status == "404") {
+                return this.database.put(document);
+            } else {
+                return new Promise((resolve, reject) => {
+                    reject(error);
+                });
+            }
+        });
     }
  
     public sync(remote: string) { 
