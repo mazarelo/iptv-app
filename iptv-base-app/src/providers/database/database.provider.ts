@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import * as PouchDB from 'pouchdb';
+import PouchDB from 'pouchdb';
 
 @Injectable()
 export class DatabaseProvider {
@@ -9,8 +9,12 @@ export class DatabaseProvider {
     private listener: EventEmitter<any> = new EventEmitter();
  
     public constructor() {
+        this.initDb()
+    }
+
+    public initDb(){
         if(!this.isInstantiated) {
-            this.database = new PouchDB("iptv-database");
+            this.database = new PouchDB("channels");
             this.isInstantiated = true;
         }
     }

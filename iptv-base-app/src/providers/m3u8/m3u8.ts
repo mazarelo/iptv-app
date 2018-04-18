@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import { AlertController } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { DatabaseProvider } from '../database/database.provider';
 
 /*
   Generated class for the M3u8Provider provider.
@@ -24,6 +25,7 @@ export class M3u8Provider {
     private alertCtrl: AlertController,
     private fileProvider: File,
     private androidPermissions: AndroidPermissions,
+    private database: DatabaseProvider,
     private storage: Storage) {
     }
 
@@ -138,6 +140,17 @@ export class M3u8Provider {
   convertM3uToJson(text, url){
     let dataArr = text.split('\n')
     let output = this.validateFile(dataArr)
+    // SAVE TO POUCHDB HERE
+
+    Object.keys(output).forEach((key,index) => {
+      output[key].forEach(element => {
+        element.group = key.toLowerCase()
+        this.database.put(element.id.toLowerCase() , element)
+      });
+    })
+
+    debugger;
+
     this.storage.set(this.urlStorePrefix+'-'+url, JSON.stringify(output));
     return output
   }
