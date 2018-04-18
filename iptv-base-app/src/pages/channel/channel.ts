@@ -6,8 +6,6 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Insomnia } from '@ionic-native/insomnia';
 
-import '../../assets/js/video.min.js'
-import '../../assets/js/videojs5-hlsjs-source-handler.min.js'
 /**
  * Generated class for the ChannelComponent component.
  *
@@ -124,7 +122,7 @@ export class ChannelPage implements OnInit {
       }
       //Registring new custom button
       // this.player.getChild('controlBar').addChild('myButton', {});
-      
+
       // VIDEOJS Error handling
       this.player.on('error', (e)=> {
         console.log("VIDEOJS ERROR:", e)
