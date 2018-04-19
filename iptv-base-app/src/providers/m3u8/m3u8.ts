@@ -140,17 +140,6 @@ export class M3u8Provider {
   convertM3uToJson(text, url){
     let dataArr = text.split('\n')
     let output = this.validateFile(dataArr)
-    // SAVE TO POUCHDB HERE
-
-    Object.keys(output).forEach((key,index) => {
-      output[key].forEach(element => {
-        element.group = key.toLowerCase()
-        this.database.put(element.id.toLowerCase() , element)
-      });
-    })
-
-    debugger;
-
     this.storage.set(this.urlStorePrefix+'-'+url, JSON.stringify(output));
     return output
   }
@@ -210,6 +199,9 @@ export class M3u8Provider {
           })
         }
       }
+
+      // Save to PouchDB
+      this.database.put(elObj.id.toLowerCase() , elObj)
     })
 
     output.countries.map(el =>{
