@@ -105,21 +105,20 @@ export class HomePage implements OnInit {
     }
   }
 
-  addPlayList(){
+  async addPlayList(){
     this.allowKeyArrows = false
-    this.playlistProvider.add().subscribe(response=>{
-      let data: any = response
-      if(!data.err){
-        this.userPlaylists.push(data)
-      }
-      this.allowKeyArrows = true
-    })
+    let playlist: any = await this.playlistProvider.add()
+    if(!playlist.err){
+      this.userPlaylists.push(playlist)
+    }
+    this.allowKeyArrows = true
     /*
     this.m3u8Provider.askPlaylistUrlOrFile().subscribe(data=>{
       console.log("data", data)
     })
     */
   }
+
   promptDeleteConfirmation(playlist){
       let alert = this.alertCtrl.create({
       title: 'Confirm Delete',
@@ -212,10 +211,9 @@ export class HomePage implements OnInit {
       actionSheet.present();
     }
 
-    deletePlaylist(playlist){
-      this.playlistProvider.remove(playlist).then(data => {
-        this.userPlaylists = this.userPlaylists.filter(el=> el.name !== playlist.name)
-      })
+    async deletePlaylist(playlist){
+      await this.playlistProvider.remove(playlist)
+      this.userPlaylists = this.userPlaylists.filter(el=> el.name !== playlist.name)
     }
    
   ngOnInit(){

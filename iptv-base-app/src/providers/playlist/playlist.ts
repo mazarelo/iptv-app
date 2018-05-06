@@ -24,11 +24,11 @@ export class PlayListProvider {
       private toasterProvider: ToasterProvider,
   ) {}
 
-  add(){
-    return new Observable(observer =>{
-      this.presentPlaylistDataPrompt().subscribe(data=>{
+  async add(){
+    return new Promise((resolve, reject) =>{
+      this.presentPlaylistDataPrompt().then(data=>{
         console.log("subscribe returning to add()", data)
-        observer.next(data)
+        resolve(data)
       })
     })
   }
@@ -66,7 +66,7 @@ export class PlayListProvider {
   use(){}
 
   presentPlaylistDataPrompt() {
-      return new Observable((observer)=>{
+      return new Promise((resolve, reject)=>{
         let alert = this.alertCtrl.create({
         title: 'New Playlist',
         inputs: [
@@ -94,42 +94,34 @@ export class PlayListProvider {
               role: 'cancel',
               handler: data => {
                   console.log('Cancel clicked');
-                  observer.next({err: true, message: 'canceled'})
+                  resolve({err: true, message: 'canceled'})
               }
             },
             {
-            text: 'Save',
-            handler: data => {
-                //let loader = this.loadingProvider.presentLoadingDefault('Downloading M3U list')
-                if (data.playlist.length > 0 && data.url.length > 0) {
-                  // Defines playlist structure
-                  let newPlaylist = { name: data.playlist, url: data.url, order: 0, type: null, data: null }
-                  console.log("PRE-RETRIEVE:", newPlaylist)
-                  this.retrieveList(data.url).then(response => {
-                    // Stores json response to playlist obj
-                    newPlaylist.data = response
-                    console.log("RETRIEVE DATA:", newPlaylist)
-                    return this.storage.set(this.playlistPrefix + data.playlist, newPlaylist)
-                  }).then( (data) =>{
-                    console.log("SAVED IN STORAGE:", data)
-                    //loader.dismiss()
-                    observer.next(newPlaylist)
-                  }).catch(err=>{
-                    //loader.dismiss()
-                    console.log('Err getting playlist',err)
-                  })
-                } else {
-                  // invalid data
-                  console.log('Invalid data', data)
-                  //loader.dismiss()
-                  return false;
-                }
+              text: 'Save',
+              handler: (data) =>{
+                this.savePlaylistHandler(data, resolve, reject)
               }
             }
         ]
         });
         alert.present();
     })
+  }
+
+  async savePlaylistHandler(data, resolve, reject){
+    //let loader = this.loadingProvider.presentLoadingDefault('Downloading M3U list')
+    if (data.playlist.length > 0 && data.url.length > 0) {
+      let newPlaylist = { name: data.playlist, url: data.url, order: 0, type: null, data: null }
+      let playListData = await this.retrieveList(data.url).catch(err=>console.log('Err getting playlist',err))
+      newPlaylist.data = playListData
+      await this.storage.set(this.playlistPrefix + data.playlist, newPlaylist)
+      resolve(newPlaylist)
+    } else {
+      console.log('Invalid data', data)
+      //loader.dismiss()
+      reject(false);
+    }
   }
 
   retrieveList(url){
@@ -147,7 +139,7 @@ export class PlayListProvider {
           resolve(data)
         }
       })
-  /*
+    /*
       this.favoritesProvider.list().then(data =>{
         if(data){
           this.favorites = data
@@ -157,11 +149,10 @@ export class PlayListProvider {
   })
   }
 
-  remove(playlist){
+  async remove(playlist){
     console.log('Deleting:',playlist)
-      return this.storage.remove(this.playlistPrefix + playlist.name).then(()=>{
-        return this.storage.remove('url-'+playlist.url)
-      })
+    await this.storage.remove(this.playlistPrefix + playlist.name)
+    return this.storage.remove('url-'+playlist.url)
   }
 
   uploadFile(){
