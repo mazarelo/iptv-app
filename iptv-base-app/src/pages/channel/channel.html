@@ -1,9 +1,9 @@
 <ion-content>
   <div class="video-container">
-    <div class="video-wrapper">
+    <div class="video-wrapper" [ngClass]="{'showProgressAndTime': showProgressAndTime}">
       <video *ngIf="item.url" 
         id="stream-video" 
-        poster="myPoster.jpg" 
+        poster="myPoster.jpg"
         class="video-js vjs-big-play-centered" controls ></video>
     </div>
   </div>

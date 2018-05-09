@@ -69,7 +69,10 @@ channel {
   .vjs-icon-custombutton:before {
     content: "\f11f"; }
 
+    
 // Removes progress bar and time
-.vjs-progress-holder, .vjs-remaining-time-display {
+.video-wrapper:not(.showProgressAndTime){
+  .vjs-progress-holder, .vjs-remaining-time-display {
     display: none!important;
   }
+}

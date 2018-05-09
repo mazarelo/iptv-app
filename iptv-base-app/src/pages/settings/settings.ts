@@ -41,9 +41,10 @@ export class SettingsPage {
     this.m3u8Provider.getList('').subscribe(data =>{
       console.log('retrieve list method: ', data)
       if(data.err){
-        this.m3u8Provider.askPlaylistUrlOrFile().subscribe(data =>{
+       /* this.m3u8Provider.askPlaylistUrlOrFile().subscribe(data =>{
           console.log('Returned to GetPlayList()',data)
         })
+        */
       }
     })
   }

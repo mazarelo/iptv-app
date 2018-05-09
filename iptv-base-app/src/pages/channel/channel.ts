@@ -25,6 +25,8 @@ export class ChannelPage implements OnInit {
   list
   current = new Date().getTime()
   amount = 30
+  showProgressAndTime = false;
+
   constructor(
     public navParams: NavParams,
     public plt: Platform,
@@ -45,6 +47,8 @@ export class ChannelPage implements OnInit {
     })
   }
 
+  ngOnInit(){}
+
   activateOrientationDetection(){
     // Detect orientation changes
     this.screenOrientation.onChange().subscribe(
@@ -61,8 +65,6 @@ export class ChannelPage implements OnInit {
       }
     );
   }
-
-  ngOnInit(){}
   
   registerPlayerButtons(){
     var Button = videojs.getComponent('Button');
@@ -87,14 +89,14 @@ export class ChannelPage implements OnInit {
     this.player.src('');
     this.player.src({
       src: this.item.url,
-      type: "application/x-mpegURL",
+      type: this.getFileExtention(this.item.url),
     })
     this.player.play();
   }
 
     playVideoJsHLS(){
       // https://github.com/streamroot/videojs5-hlsjs-source-handler
-      var self = this
+      var self = this;
       var options = {
         fluid: true,
         html5: {
@@ -104,30 +106,53 @@ export class ChannelPage implements OnInit {
         },
         nativeControlsForTouch: false
       };
-      // Adds custom buttons
-      // this.registerPlayerButtons()
+
       try{
         this.player = videojs('stream-video', options);
         this.player.qualityPickerPlugin();
         //this.player.requestFullscreen();
+        
         this.player.ready(function(){
           this.src({
             src: self.item.url,
-            type: "application/x-mpegURL",
+            type: self.getFileExtention(self.item.url),
           })
           this.play()
         })
       }catch(err){
-        console.log("ERR VIDEOJS")
+        console.log("ERR VIDEOJS", err)
+        this.navController.pop()
       }
-      //Registring new custom button
-      // this.player.getChild('controlBar').addChild('myButton', {});
 
       // VIDEOJS Error handling
       this.player.on('error', (e)=> {
         console.log("VIDEOJS ERROR:", e)
         this.navController.pop()
       })
+    }
+
+    getFileExtention(url){
+      const extension = url.split('.').pop();
+      switch(extension){
+        case 'mkv':
+          this.toggleProgressAndTimeBar()
+          return 'video/webm';
+          break;
+        case 'mp4':
+          this.toggleProgressAndTimeBar()
+          return 'video/mp4';
+          break;
+        case 'ogg':
+          this.toggleProgressAndTimeBar()
+          return 'video/ogg';
+          break;
+        default:
+         return"application/x-mpegURL";
+      }
+    }
+    
+    toggleProgressAndTimeBar(){
+      this.showProgressAndTime = true;
     }
 
   ionViewWillLeave(){
