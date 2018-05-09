@@ -25,9 +25,7 @@ export class HomePage implements OnInit {
     //private epgProvider: EpgProvider,
     private alertCtrl: AlertController,
   ) {
-    this.playlistProvider.list().subscribe(data=>{
-      this.userPlaylists = data
-    })
+    this.getPlaylist()
     /* detect orientation changes
       this.screenOrientation.onChange().subscribe(() => {
           console.log("Orientation Changed");
@@ -36,8 +34,11 @@ export class HomePage implements OnInit {
     */
   }
 
+  async getPlaylist() {
+    this.userPlaylists = await this.playlistProvider.list()
+  }
+
   keyEvents(event){
-    console.log(event)
     if(this.allowKeyArrows){
       event.preventDefault();
       switch(event.keyCode){
@@ -86,13 +87,11 @@ export class HomePage implements OnInit {
     }
   }
 
-  retrievePlaylists(){
-    this.playlistProvider.list().subscribe(response=>{
-      let data: any = response
-      if(!data.err){
-        this.userPlaylists = data
-      }
-    })
+  async retrievePlaylists(){
+    let playlists: any = await this.playlistProvider.list()
+    if(!playlists.err){
+      this.userPlaylists = playlists
+    }
   }
   
   goToPlaylist(item){

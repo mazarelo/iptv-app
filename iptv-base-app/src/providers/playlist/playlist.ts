@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { M3u8Provider } from '../m3u8/m3u8';
-// import { LoadingProvider } from '../loading/loading';
+import { LoadingProvider } from '../loading/loading';
 import { ToasterProvider } from '../toaster/toaster';
 
 @Injectable()
@@ -18,9 +18,8 @@ export class PlayListProvider {
       private alertCtrl: AlertController,
       private fileChooser: FileChooser,
       private androidPermissions: AndroidPermissions,
-      private m3uProvider: M3u8Provider,
-     // private loadingProvider: LoadingProvider,
       private m3u8Provider: M3u8Provider,
+      private loadingProvider: LoadingProvider,
       private toasterProvider: ToasterProvider,
   ) {}
 
@@ -41,26 +40,21 @@ export class PlayListProvider {
     return this.storage.get('playlist-'+ name)
   }
 
-  list(){
-    return new Observable( observer =>{
-      this.storage.listAll().then(data =>{
-          if(!data) return {err: true, message: 'no playlist'}
-          let playlists: any = []
-          let playlistArr = data.filter(el => el.indexOf(this.playlistPrefix) > -1)
-          playlistArr.map( (el, index) => {
-              if(el.indexOf(this.playlistPrefix) > -1){
-                this.storage.get(el).then(res=>{
-                  playlists.push(JSON.parse(res))
-                })
-              }
-          })
-          observer.next(playlists)
-      }, err =>{
-          console.log('Error:', err)
-          let error: any = {error: true, message: err}
-          observer.next(error)
+  async list(){
+    // return new Observable( observer => {
+      let playList: any = await this.storage.listAll().catch( err => {return { error: true, message: err} }) //.then(data =>{
+      
+      if(!playList) return {err: true, message: 'no playlist'}
+      let playlists: any = []
+      let playlistArr = playList.filter(el => el.indexOf(this.playlistPrefix) > -1)
+      playlistArr.map( (el, index) => {
+          if(el.indexOf(this.playlistPrefix) > -1){
+            this.storage.get(el).then(res=>{
+              playlists.push(JSON.parse(res))
+            })
+          }
       })
-    })
+      return playlists
   }
 
   use(){}
@@ -100,7 +94,7 @@ export class PlayListProvider {
             {
               text: 'Save',
               handler: (data) =>{
-                this.savePlaylistHandler(data, resolve, reject)
+                this.savePlaylistHandler(data).then(data=> resolve(data))
               }
             }
         ]
@@ -109,44 +103,43 @@ export class PlayListProvider {
     })
   }
 
-  async savePlaylistHandler(data, resolve, reject){
-    //let loader = this.loadingProvider.presentLoadingDefault('Downloading M3U list')
-    if (data.playlist.length > 0 && data.url.length > 0) {
-      let newPlaylist = { name: data.playlist, url: data.url, order: 0, type: null, data: null }
-      let playListData = await this.retrieveList(data.url).catch(err=>console.log('Err getting playlist',err))
-      newPlaylist.data = playListData
-      await this.storage.set(this.playlistPrefix + data.playlist, newPlaylist)
-      resolve(newPlaylist)
-    } else {
-      console.log('Invalid data', data)
-      //loader.dismiss()
-      reject(false);
-    }
+  savePlaylistHandler(data){
+    return new Promise(async (resolve, reject) => {
+      let loader = this.loadingProvider.presentLoadingDefault('Generating M3U list')
+
+      if (data.playlist.length > 0 && data.url.length > 0) {
+        let newPlaylist = { name: data.playlist, url: data.url, order: 0, type: null, data: null }
+        newPlaylist.data = await this.retrieveList(data.url).catch(err=>console.log('Err getting playlist',err))
+        await this.storage.set(this.playlistPrefix + data.playlist, newPlaylist)
+
+        loader.dismiss()
+        resolve(newPlaylist)
+      } else {
+        console.log('Invalid data', data)
+        if(loader) loader.dismiss()
+        reject(false);
+      }
+    })
   }
 
-  retrieveList(url){
-    return new Promise((resolve,reject)=>{
-      //let loader = this.loadingProvider.presentLoadingDefault('Generating M3U list')
-      this.m3u8Provider.getList(url).subscribe(data =>{
-        console.log('retrieve list method: ', data)
-        if(data.err){
-          this.toasterProvider.presentToast('Couldnt load playlist')
-          //loader.dismiss()
-          resolve(null)
-        }else{
-          this.toasterProvider.presentToast('Playlist saved')
-          //loader.dismiss()
-          resolve(data)
-        }
-      })
+  async retrieveList(url){
+      let playlist: any = await this.m3u8Provider.getList(url)// .subscribe(data =>{
+
+      if(playlist.err){
+        this.toasterProvider.presentToast('Couldnt load playlist')
+        return null
+      }else{
+        this.toasterProvider.presentToast('Playlist saved')
+        return playlist
+      }
+
     /*
-      this.favoritesProvider.list().then(data =>{
-        if(data){
-          this.favorites = data
-        }
-      })
-  */
-  })
+        this.favoritesProvider.list().then(data =>{
+          if(data){
+            this.favorites = data
+          }
+        })
+    */
   }
 
   async remove(playlist){
@@ -164,7 +157,7 @@ export class PlayListProvider {
     .then(result => {
       this.openFilePicker().then(uri => {
         console.log('URI FROM FILEPICKER: ',uri)
-        this.m3uProvider.getPlaylistFromFileSystem(uri).then(data=>{
+        this.m3u8Provider.getPlaylistFromFileSystem(uri).then(data=>{
           console.log('DATA FROM BUILD PLAYLIST', data)
         })
       })
@@ -175,7 +168,7 @@ export class PlayListProvider {
           console.log("HAS PERMISSIONS")
           this.openFilePicker().then(uri => {
             console.log('URI FROM FILEPICKER: ',uri)
-            this.m3uProvider.getPlaylistFromFileSystem(uri).then(data=>{
+            this.m3u8Provider.getPlaylistFromFileSystem(uri).then(data=>{
               console.log('DATA FROM BUILD PLAYLIST', data)
             })
           })
@@ -189,7 +182,7 @@ export class PlayListProvider {
               // this.uploadPlaylistToApp()
               this.openFilePicker().then(uri => {
                 console.log('URI FROM FILEPICKER: ',uri)
-                this.m3uProvider.getPlaylistFromFileSystem(uri).then(data=>{
+                this.m3u8Provider.getPlaylistFromFileSystem(uri).then(data=>{
                   console.log('DATA FROM BUILD PLAYLIST', data)
                 })
               })

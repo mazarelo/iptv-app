@@ -1,6 +1,7 @@
 import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/toPromise';
 
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
@@ -29,14 +30,13 @@ export class M3u8Provider {
     private storage: Storage) {
     }
 
-  fetchAndBuildPlayList(url){
-    if(!url){
-      alert("URL NOT FOUND")
-    }
-    if(url.indexOf('content://') == -1){
-      return this.http.get(url, { responseType: 'text' }).map(data => this.convertM3uToJson(data, url))
-    }
+   fetchAndBuildPlayList(url){
+      if(!url) alert("URL NOT FOUND")
 
+      if(url.indexOf('content://') == -1){
+        return this.http.get(url, { responseType: 'text' }).map(data => this.convertM3uToJson(data, url)).toPromise()
+      }
+    /*
     return  new Observable(observer => {
       this.getPlaylistFromFileSystem(url).then(data =>{
         if(data){
@@ -48,72 +48,57 @@ export class M3u8Provider {
         console.log("ERRRRR from file read", err)
       })
      })
+     */
   }
 
-  getPlaylistFromFileSystem(url){
+  async getPlaylistFromFileSystem(url){
     let folderPath = url.split('\\').pop().split('/')
     folderPath.pop()
     folderPath = folderPath.join("/")
     let fileName = url.split('\\').pop().split('/').pop();
     console.log("FOLDER:", folderPath, "FILE:", fileName)
-    return this.androidPermissions.requestPermissions(
+    let permissions: any = await this.androidPermissions.requestPermissions(
       [
         this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE,
         this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
-      ])
-    .then(res => {
-      console.log('SO...permission?', res)
-      if(res.hasPermission){
-        return this.fileProvider.resolveDirectoryUrl(folderPath).then(val =>{
-          console.log("RESOLVIGN PATH:", val)
-          return this.fileProvider.getFile(val , fileName,  {create: true, exclusive: false})
-        }).catch(err=> console.log('ERR resolving dir:', err))
+      ]).catch(err=> console.log('ERR resolving dir:', err))
+
+      console.log('SO...permission?', permissions)
+      if(permissions.hasPermission){
+        let dirPath: any = await this.fileProvider.resolveDirectoryUrl(folderPath)
+        console.log("RESOLVIGN PATH:", dirPath)
+        return this.fileProvider.getFile(dirPath , fileName,  {create: true, exclusive: false})
       }
-    }) 
+
   }
 
   // this.storage.get('playlist').then((val) => {})
-  getList(url) : any{
-    return new Observable(observer => {
-      // Checks if there is any formated playlist stored
-     this.storage.get(this.urlStorePrefix+'-'+url).then((val) => {
-        if(val){
-          try{
-            observer.next(JSON.parse(val))
-          }catch(err){
-            observer.next({err: true, message: 'Error parsing json'})
-          }
-        }else{
-          this.buildPlaylist(url).subscribe(data=>{
-            if(data){
-              observer.next(data)
-            }
-            observer.next({err: true, message: 'No playlist found'})
-          })
-        }
-      }).catch(err =>{
+   getList(url) : any {
+    return new Promise( async (resolve, reject) =>{
+      let storageResult = await this.storage.get(this.urlStorePrefix+'-'+url).catch(err =>{
         console.log("Err getting stored playlist", err)
-        observer.next({err: true, message: 'No playlist found'})
+        resolve({err: true, message: 'No playlist found'})
       })
+
+      if(storageResult){
+        try{
+          resolve(JSON.parse(storageResult))
+        }catch(err){
+          console.log("ERROR PARSING DATA:", err)
+          resolve({err: true, message: 'Error parsing json'})
+        }
+      }else{
+        let playlist = await this.buildPlaylist(url)
+        if(playlist) resolve(playlist)
+
+          resolve({err: true, message: 'No playlist found'})
+      }
     })
   }
 
-  buildPlaylist(url){
-    return new Observable(observer => {
-      console.log("BUILDING PLAYLIST")
-      this.fetchAndBuildPlayList(url).subscribe(data =>{
-        console.log("FETCHING PLAYLIST", data)
-        if(data){
-          observer.next(data)
-        }else{
-          console.log('ERR in GET:', data)
-          observer.next(false)
-        }
-      }, err=>{
-        console.log("Error from Fetch")
-        observer.next(false)
-      })
-    });
+   async buildPlaylist(url){
+    let playlist: any = await this.fetchAndBuildPlayList(url).catch(err=> alert("Error"))
+    return playlist ? playlist : false
   }
 
   getCountries(){
@@ -124,7 +109,8 @@ export class M3u8Provider {
   validateFile(dataArr){
     if(dataArr.length < 1) return false
 
-    let output:any
+    let output:any = null
+    
     switch(true){
       case dataArr[0].indexOf('#EXTM3U') > -1:
         if(dataArr[1].indexOf('#EXTINF:-1,') > -1, dataArr[1].indexOf('#EXTINF:0,') > -1){
@@ -144,14 +130,14 @@ export class M3u8Provider {
     return output
   }
 
-  parseM3uWithOptions(data){
+  async parseM3uWithOptions(data){
     let output:any = {}
     let previous = null
 
-    data.forEach((el, index) =>{
+    data.map( async (el, index) =>{
       if(index == 0) return false
       if(el.match(/ group-title="([^"]*)"/) == null && el.indexOf("http") > -1){
-        let previousCountry =  output[previous]
+        let previousCountry = output[previous]
         output[previous][previousCountry.length -1].url = el.toString().replace("\r", "")
         return false
       }
@@ -163,7 +149,7 @@ export class M3u8Provider {
       
       if(!attrs) return false
 
-      attrs.forEach(attr=>{
+      attrs.map(attr=>{
         let splited = attr.split('=')
         splited[1] = splited[1].replace(/"/g,'')
         options[splited[0]] = splited[1] 
@@ -172,7 +158,7 @@ export class M3u8Provider {
       if(!options['tvg-name']) return false
 
       let elObj = {
-        id: options['tvg-id'],
+        id: options['tvg-id'] ? options['tvg-id'] : options['tvg-name'].replace(/\s/g, '-'),
         groupName: options['group-title'],
         tvLogo: options['tvg-logo'],
         tvName: options['tvg-name'],
@@ -201,12 +187,17 @@ export class M3u8Provider {
       }
 
       // Save to PouchDB
-      this.database.put(elObj.id.toLowerCase() , elObj)
+      if(elObj.id) {
+        await this.database.put(elObj.id.toLowerCase() , elObj).catch(err => console.log("CouchDB ERR:", err))
+      }
     })
 
     output.countries.map(el =>{
       el.channels = output[el.name].length
     })
+
+    let docs = await this.database.fetch()
+    console.log('COUCHDB:', docs)
 
     return output
   }
@@ -215,7 +206,7 @@ export class M3u8Provider {
     let output:any = {}
     let previous = null
 
-    data.forEach((el, index) =>{
+    data.map((el, index) =>{
       if(index == 0) return false
       
       if(el.match(/#EXTINF:-1,/) == null && el.indexOf("http") > -1){
@@ -231,48 +222,4 @@ export class M3u8Provider {
     return output
   }
 
-  askPlaylistUrlOrFile() {
-    return new Observable(observer => { 
-      let alert = this.alertCtrl.create({
-        title: 'Playlist url',
-        inputs: [
-          { name: 'url', placeholder: 'Url' }
-        ],
-        buttons: [
-          /* {
-            text: 'Local File',
-            handler: data => {
-              observer.next(false)
-            }
-          }, */
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: data =>{
-              console.log(data)
-            }
-          },
-          {
-            text: 'Ok',
-            handler: data => {
-              var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
-              var regex = new RegExp(expression);
-
-              if(data.url.match(regex)){
-                this.buildPlaylist(data.url).subscribe(result=>{
-                  if(result){
-                    console.log(result)
-                    alert.dismiss()
-                    observer.next(result)
-                  }
-                })
-              }
-              observer.next(false)
-            }
-          }
-        ]
-      })
-      alert.present();
-    })
-  }
 }

@@ -8,9 +8,7 @@ export class LoadingProvider {
     constructor(public loadingCtrl : LoadingController) {}
 
     presentLoadingDefault(text) {
-        let loading : any = this
-            .loadingCtrl
-            .create({content: text});
+        let loading : any = this.loadingCtrl.create({content: text});
         loading.present();
         return loading
     }

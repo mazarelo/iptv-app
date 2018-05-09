@@ -53,6 +53,6 @@ export class DatabaseProvider {
     }
  
     public getChangeListener() {
-          return this.listener;
-     }
+        return this.listener;
+    }
 }
