@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
-    "lint": "ionic-app-scripts lint",
+    "lint": "tslint --fix --format verbose --project tsconfig.json --config tslint.json",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve"
   },
@@ -74,12 +74,13 @@
     "rxjs": "5.5.2",
     "safe-json-parse": "^4.0.0",
     "sw-toolbox": "3.6.0",
+    "tslint-config-airbnb": "^5.8.0",
     "video.js": "^6.6.0",
     "videojs-contrib-dash": "^2.9.2",
     "videojs-contrib-hls": "^5.12.2",
     "videojs-contrib-media-sources": "^4.6.2",
     "videojs-flash": "^2.1.0",
-    "videojs-mux": "^2.2.2",
+    "videojs-mux": "^2.2.3",
     "x2js": "^3.1.1",
     "xml-js": "^1.6.2",
     "xml2json": "^0.11.0",
