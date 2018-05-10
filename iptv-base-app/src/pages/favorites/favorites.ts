@@ -1,27 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { FavoritesProvider } from '../../providers/favorites/favorites'
-import { ActionSheetController } from 'ionic-angular';
+import { NavController, ActionSheetController } from 'ionic-angular';
+import { FavoritesProvider } from '../../providers/favorites/favorites';
 import { ToasterProvider } from '../../providers/toaster/toaster';
-import { ChannelPage } from '../channel/channel'
+import { ChannelPage } from '../channel/channel';
 
 @Component({
   selector: 'page-favorites',
-  templateUrl: 'favorites.html'
+  templateUrl: 'favorites.html',
 })
 export class FavoritesPage implements OnInit{
-  public channels: any = []
-  private data: any = []
+  public channels: any = [];
+  private data: any = [];
   
   constructor(
     public navCtrl: NavController,
     public actionSheetCtrl: ActionSheetController,
     private favorites: FavoritesProvider,
-    private toastProvider: ToasterProvider
+    private toastProvider: ToasterProvider,
   ) {}
 
   presentActionSheet(index) {
-    let actionSheet = this.actionSheetCtrl.create({
+    const actionSheet = this.actionSheetCtrl.create({
       title: 'Choose',
       buttons: [
         /*{
@@ -32,71 +31,71 @@ export class FavoritesPage implements OnInit{
           }
         },*/
         {
-          text: "Play",
+          text: 'Play',
           icon: 'arrow-dropright-circle',
-          handler: ()=>{
-            this.playChannel(this.channels[index].url)
-          }
+          handler: () => {
+            this.playChannel(this.channels[index].url);
+          },
         },
         {
           text: 'Remove from Favorites',
           icon: 'heart-outline',
           handler: () => {
-            this.favorites.remove(this.channels[index]).subscribe(data=>{
-              if(!data) {
-                this.toastProvider.presentToast('Could not remove from Favorites')
-                return false
+            this.favorites.remove(this.channels[index]).subscribe((data) => {
+              if (!data) {
+                this.toastProvider.presentToast('Could not remove from Favorites');
+                return false;
               }
-              this.channels = data
-              this.data = data
-              this.toastProvider.presentToast('Removed from Favorites')
-            })
-          }
+              this.channels = data;
+              this.data = data;
+              this.toastProvider.presentToast('Removed from Favorites');
+            });
+          },
         },{
           text: 'Cancel',
           icon: 'cross',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
     actionSheet.present();
   }
 
-  initializeItems(){
-    this.channels = this.data
+  initializeItems() {
+    this.channels = this.data;
   }
 
-  playChannel(item){
-    this.navCtrl.push( ChannelPage, {channel: item, list: this.data} )
+  playChannel(item) {
+    this.navCtrl.push(ChannelPage, { channel: item, list: this.data });
   }
 
   doInfinite(infiniteScroll) {
-    let count = this.channels.length
-    for (let i = this.channels.length; i < (count+30); i++) {
-      if(this.data[i]){
-        this.channels.push( this.data[i] );
-      }else{
+    this.channels.map((el) => {
+      if (el) {
+        this.channels.push(el);
+      }else {
         return infiniteScroll.complete();
       }
-    }
+    });
+
     infiniteScroll.complete();
   }
 
   doRefresh(refresher) {
-    this.favorites.list().then(data => {
+    this.favorites.list().then((data) => {
       this.channels = data; 
-      this.data = data
+      this.data = data;
       refresher.complete();
-   })
+    });
   }
 
-  ngOnInit(){
-    this.favorites.list().then(data => {
+  ngOnInit() {
+    this.favorites.list().then((data) => {
       this.channels = data; 
-      this.data = data
-   })
+      this.data = data;
+    });
   }
 }

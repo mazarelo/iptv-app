@@ -21,29 +21,30 @@ import { M3u8Provider } from '../providers/m3u8/m3u8';
 import { ToasterProvider } from '../providers/toaster/toaster';
 import { FavoritesProvider } from '../providers/favorites/favorites';
 import { IonicStorageModule } from '@ionic/storage';
-import { AndroidExoplayer } from '@ionic-native/android-exoplayer'
-import { VideoProvider } from '../providers/video/video'
-import { StorageProvider } from '../providers/storage/storage'
-import { PlayListProvider } from '../providers/playlist/playlist'
+import { AndroidExoplayer } from '@ionic-native/android-exoplayer';
+import { VideoProvider } from '../providers/video/video';
+import { StorageProvider } from '../providers/storage/storage';
+import { PlayListProvider } from '../providers/playlist/playlist';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { FileChooser } from '@ionic-native/file-chooser';
-import { Splash } from '../pages/splash/splash'
+import { Splash } from '../pages/splash/splash';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { File } from '@ionic-native/file';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
-import { CountriesPage } from '../pages/countries/countries'
-import { ParserProvider } from '../providers/parser/parser'
-import { EpgProvider } from '../providers/epg/epg'
+import { CountriesPage } from '../pages/countries/countries';
+import { ParserProvider } from '../providers/parser/parser';
+import { EpgProvider } from '../providers/epg/epg';
 import { DownloadProvider } from '../providers/download/download';
 import { LoadingProvider } from '../providers/loading/loading';
-import {PressDirective} from '../directives/longpress/longpress'
-import { FeedItemComponent } from '../directives/feed-item/feed-item'
+import { PressDirective } from '../directives/longpress/longpress';
+import { FeedItemComponent } from '../directives/feed-item/feed-item';
 import { VirtualIonImg } from '../directives/virtual-list-image/virtual-list-image';
 import { Insomnia } from '@ionic-native/insomnia';
-import { EpgModalPage } from '../pages/epg/epg'
+import { EpgModalPage } from '../pages/epg/epg';
 import { LocalNotifications } from '@ionic-native/local-notifications';
-import { AlarmsPage } from '../pages/alarms/alarms'
+import { AlarmsPage } from '../pages/alarms/alarms';
 import { DatabaseProvider } from '../providers/database/database.provider';
+import { AdMobFree } from '@ionic-native/admob-free';
 
 
 @NgModule({
@@ -107,11 +108,12 @@ import { DatabaseProvider } from '../providers/database/database.provider';
     EpgProvider,
     DownloadProvider,
     LoadingProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AdMobFree,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     M3u8Provider,
     Insomnia,
     LocalNotifications,
     DatabaseProvider,
-  ]
+  ],
 })
 export class AppModule {}

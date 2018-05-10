@@ -1,31 +1,31 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, ActionSheetController, AlertController } from 'ionic-angular';
-//import * as m3u from 'm3u8-reader'
+// import * as m3u from 'm3u8-reader'
 import { PlayListProvider } from '../../providers/playlist/playlist';
-import { CountriesPage } from '../countries/countries'
-//import { EpgProvider } from '../../providers/epg/epg';
+import { CountriesPage } from '../countries/countries';
+// import { EpgProvider } from '../../providers/epg/epg';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
 })
 export class HomePage implements OnInit {
   @ViewChild('focused') focused;
   
-  private activeElement = 0
-  private allowKeyArrows = true
-  public countries = []
+  private activeElement = 0;
+  private allowKeyArrows = true;
+  public countries = [];
   public favorites = [];
-  public userPlaylists: any = []
-  public editMode: boolean = false
+  public userPlaylists: any = [];
+  public editMode: boolean = false;
   constructor(
     public navController: NavController,
     private playlistProvider: PlayListProvider,
     private actionSheetCtrl: ActionSheetController,
-    //private epgProvider: EpgProvider,
+    // private epgProvider: EpgProvider,
     private alertCtrl: AlertController,
   ) {
-    this.getPlaylist()
+    this.getPlaylist();
     /* detect orientation changes
       this.screenOrientation.onChange().subscribe(() => {
           console.log("Orientation Changed");
@@ -35,82 +35,80 @@ export class HomePage implements OnInit {
   }
 
   async getPlaylist() {
-    this.userPlaylists = await this.playlistProvider.list()
+    this.userPlaylists = await this.playlistProvider.list();
   }
 
-  keyEvents(event){
-    if(this.allowKeyArrows){
+  keyEvents(event) {
+    if (this.allowKeyArrows) {
       event.preventDefault();
-      switch(event.keyCode){
+      switch (event.keyCode){
         case 40:
-          this.goDownOnList()
-        break;
+          this.goDownOnList();
+          break;
         case 38:
-          this.goUpOnList()
-        break;
+          this.goUpOnList();
+          break;
         case 13:
           // pressed enter
-          if(this.activeElement !== this.userPlaylists.length){
-            this.goToPlaylist(this.userPlaylists[this.activeElement])
-          }else{
-            this.addPlayList()
+          if (this.activeElement !== this.userPlaylists.length) {
+            this.goToPlaylist(this.userPlaylists[this.activeElement]);
+          }else {
+            this.addPlayList();
           }
-        break;
+          break;
         case 27:
         case 8:
           // pressed back btn
-          this.navController.pop()
-        break;
+          this.navController.pop();
+          break;
       }
     }
   }
   
-  goUpOnList(){
-    if(this.activeElement == 0) return
-    this.activeElement = this.activeElement - 1
-    console.log('GO UP ON LIST', this.activeElement)
+  goUpOnList() {
+    if (this.activeElement === 0) return;
+    this.activeElement = this.activeElement - 1;
     
-    let target: any = document.querySelector('.home-item-'+ this.activeElement)
-    if(target){
-      target.focus()
+    const target: any = document.querySelector('.home-item-' + this.activeElement);
+    if (target) {
+      target.focus();
     }
   }
 
-  goDownOnList(){
-    if(this.activeElement == this.userPlaylists.length -1) return
-    this.activeElement = this.activeElement + 1
-    console.log('GO DOWN ON LIST', this.activeElement)
+  goDownOnList() {
+    if (this.activeElement === this.userPlaylists.length - 1) return;
+    this.activeElement = this.activeElement + 1;
     
-    let target: any = document.querySelector('.home-item-'+ this.activeElement)
-    if(target){
-      target.focus()
+    const target: any = document.querySelector('.home-item-' + this.activeElement);
+    if (target) {
+      target.focus();
     }
   }
 
-  async retrievePlaylists(){
-    let playlists: any = await this.playlistProvider.list()
-    if(!playlists.err){
-      this.userPlaylists = playlists
+  async retrievePlaylists() {
+    const playlists: any = await this.playlistProvider.list();
+    if (!playlists.err) {
+      this.userPlaylists = playlists;
     }
   }
   
-  goToPlaylist(item){
-    if(!this.editMode){
+  goToPlaylist(item) {
+    if (!this.editMode) {
       this.navController.push(CountriesPage, {
         data: item,
       });
-    }else{
-      this.promptDeleteConfirmation(item)
+    }else {
+      this.promptDeleteConfirmation(item);
     }
   }
 
-  async addPlayList(){
-    this.allowKeyArrows = false
-    let playlist: any = await this.playlistProvider.add()
-    if(!playlist.err){
-      this.userPlaylists.push(playlist)
+  async addPlayList() {
+    this.allowKeyArrows = false;
+    const playlist: any = await this.playlistProvider.add();
+    if (!playlist.err) {
+      this.userPlaylists.push(playlist);
     }
-    this.allowKeyArrows = true
+    this.allowKeyArrows = true;
     /*
     this.m3u8Provider.askPlaylistUrlOrFile().subscribe(data=>{
       console.log("data", data)
@@ -118,33 +116,33 @@ export class HomePage implements OnInit {
     */
   }
 
-  promptDeleteConfirmation(playlist){
-      let alert = this.alertCtrl.create({
+  promptDeleteConfirmation(playlist) {
+    const alert = this.alertCtrl.create({
       title: 'Confirm Delete',
-      message: 'Do you want to delete "'+ playlist.name +'" playlist?',
+      message: 'Do you want to delete "' + playlist.name + '" playlist?',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-          }
+          },
         },
         {
           text: 'Delete',
           handler: () => {
-            this.editMode = false
-            this.deletePlaylist(playlist)
-          }
-        }
-      ]
+            this.editMode = false;
+            this.deletePlaylist(playlist);
+          },
+        },
+      ],
     });
     alert.present();
   }
-  loadPlaylistOptions(playlist){
-    let actionSheet = this.actionSheetCtrl.create({
-        title: playlist.name + ' options',
-        subTitle: '',
-        buttons: [
+  loadPlaylistOptions(playlist) {
+    const actionSheet = this.actionSheetCtrl.create({
+      title: playlist.name + ' options',
+      subTitle: '',
+      buttons: [
           /*{
             text: 'Hide',
             role: 'destructive',
@@ -152,30 +150,30 @@ export class HomePage implements OnInit {
               console.log('Destructive clicked');
             }
           },*/
-          {
-            text: 'Delete Playlist',
-            icon: 'trash',
-            handler:() => {
-              this.promptDeleteConfirmation(playlist)
-            }
+        {
+          text: 'Delete Playlist',
+          icon: 'trash',
+          handler:() => {
+            this.promptDeleteConfirmation(playlist);
           },
-          {
-            text: 'Cancel',
-            icon: 'cross',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
-            }
-          }
-        ]
-      });
-      actionSheet.present();
+        },
+        {
+          text: 'Cancel',
+          icon: 'cross',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+      ],
+    });
+    actionSheet.present();
   }
-  loadOptions(){
-      let actionSheet = this.actionSheetCtrl.create({
-        title: '',
-        subTitle: '',
-        buttons: [
+  loadOptions() {
+    const actionSheet = this.actionSheetCtrl.create({
+      title: '',
+      subTitle: '',
+      buttons: [
           /*{
             text: 'Hide',
             role: 'destructive',
@@ -183,46 +181,46 @@ export class HomePage implements OnInit {
               console.log('Destructive clicked');
             }
           },*/
-          {
-            text: "Add Playlist",
-            icon: 'add',
-            handler: () => {
-              this.addPlayList()
-            }
+        {
+          text: 'Add Playlist',
+          icon: 'add',
+          handler: () => {
+            this.addPlayList();
           },
-          {
-            text: 'Delete Playlist',
-            icon: 'trash',
-            handler:() => {
-              this.editMode = true
-            }
+        },
+        {
+          text: 'Delete Playlist',
+          icon: 'trash',
+          handler:() => {
+            this.editMode = true;
           },
-          {
-            text: 'Cancel',
-            icon: 'cross',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
-            }
-          }
-        ]
-      });
-      actionSheet.present();
-    }
+        },
+        {
+          text: 'Cancel',
+          icon: 'cross',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+      ],
+    });
+    actionSheet.present();
+  }
 
-    async deletePlaylist(playlist){
-      await this.playlistProvider.remove(playlist)
-      this.userPlaylists = this.userPlaylists.filter(el=> el.name !== playlist.name)
-    }
+  async deletePlaylist(playlist) {
+    await this.playlistProvider.remove(playlist);
+    this.userPlaylists = this.userPlaylists.filter(el => el.name !== playlist.name);
+  }
    
-  ngOnInit(){
+  ngOnInit() {
     this.focused.nativeElement.focus();
   }
 
-  ionViewWillLeave(){
+  ionViewWillLeave() {
   }
   
-  ionViewDidLoad(){
+  ionViewDidLoad() {
   }
  
 }

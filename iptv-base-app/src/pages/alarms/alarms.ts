@@ -3,59 +3,65 @@ import { NavController } from 'ionic-angular';
 import { ToasterProvider } from '../../providers/toaster/toaster';
 import { Platform } from 'ionic-angular/platform/platform';
 import { LocalNotifications } from '@ionic-native/local-notifications';
-import { ChannelPage } from '../channel/channel'
+import { ChannelPage } from '../channel/channel';
 
 @Component({
   selector: 'page-alarms',
   templateUrl: 'alarms.html',
 })
 export class AlarmsPage {
-  public title = 'Alarms'
-  public alarms = []
+  public title = 'Alarms';
+  public alarms = [];
 
   constructor(
     public navCtrl: NavController,
     public toastProvider: ToasterProvider,
     private plt: Platform,
-    private localNotifications: LocalNotifications
+    private localNotifications: LocalNotifications,
   ) {
-    this.plt.ready().then(data=>{
-      if(data){
-        this.localNotifications.getScheduledIds().then(data=>{
-          if(data.length > 0){
-            data.forEach(notId => {
-              this.localNotifications.get(notId).then(notification=>{
-                let output: any = notification
-                output.data = JSON.parse(output.data)
-                output.timeLeft = this.minutesLeft(notification)
-                this.alarms.push(notification)
-              }).catch(err=> console.log(err))
-            })
-          }
-        })
+    this.init();
+  }
+
+  async init() {
+    const platformReady = await this.plt.ready();
+    if (platformReady) {
+      const localNotData = await this.localNotifications.getScheduledIds();
+      if (localNotData.length > 0) {
+        localNotData.map(async (notId) => {
+          const notification = await this.localNotifications.get(notId)
+            .catch(err => console.log(err));
+
+          const output: any = notification;
+          output.data = JSON.parse(output.data);
+          output.timeLeft = this.minutesLeft(notification);
+          this.alarms.push(notification);
+        });
       }
-    })
+    }
   }
 
-  playChannel(item){
-    this.navCtrl.push( ChannelPage, {channel: item, list: []} )
+  playChannel(item) {
+    this.navCtrl.push(ChannelPage, { channel: item, list: [] });
   }
 
-  minutesLeft(item){
-    let start = new Date(item.trigger.at).getTime()
-    let now = new Date().getTime()
-    let diffMs = (start - now); 
-    let diffDays = Math.floor(diffMs / 86400000);
-    let diffHrs = Math.floor((diffMs % 86400000) / 3600000);
-    let diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
-    if(diffMins < 90 && diffHrs == 0){
-      return diffMins + ' min'
-    }else if(diffHrs < 24){
-      return `${diffHrs}h${diffMins}m`
-    }else if(diffDays < 31){
-      return diffDays + ' days'
-    }else if(diffMs < 12){
-      return diffMs + ' months'
+  minutesLeft(item) {
+    const start = new Date(item.trigger.at).getTime();
+    const now = new Date().getTime();
+    const diffMs = (start - now); 
+    const diffDays = Math.floor(diffMs / 86400000);
+    const diffHrs = Math.floor((diffMs % 86400000) / 3600000);
+    const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000);
+    if (diffMins < 90 && diffHrs === 0) {
+      return diffMins + ' min';
+    }
+    if (diffHrs < 24) {
+      return `${diffHrs}h${diffMins}m`;
+    }
+    if (diffDays < 31) {
+      return diffDays + ' days';
+    } 
+    if (diffMs < 12) {
+      return diffMs + ' months';
     }
   }
 }

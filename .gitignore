@@ -11,6 +11,7 @@ iptv-base-app/plugins
 iptv-base-app/*.swp
 iptv-base-app/*.swo
 iptv-base-app/*.log
-iptv-base-app/*.DS_Store
+.DS_Store
 iptv-base-app/www/build/*
 iptv-base-app/.gradle
+iptv-base-app/.sourcemaps/

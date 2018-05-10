@@ -1,8 +1,6 @@
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
-
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 import { AlertController } from 'ionic-angular';
@@ -20,7 +18,7 @@ import { DatabaseProvider } from '../database/database.provider';
 @Injectable()
 export class M3u8Provider {
   public data;
-  private urlStorePrefix = 'url'
+  private urlStorePrefix = 'url';
   constructor(
     public http: HttpClient,
     private alertCtrl: AlertController,
@@ -28,14 +26,16 @@ export class M3u8Provider {
     private androidPermissions: AndroidPermissions,
     private database: DatabaseProvider,
     private storage: Storage) {
+  }
+
+  fetchAndBuildPlayList(url) {
+    if (!url) alert('URL NOT FOUND');
+
+    if (url.indexOf('content://') === -1) {
+      return this.http.get(url, { responseType: 'text' }).map(
+        data => this.convertM3uToJson(data, url),
+      ).toPromise();
     }
-
-   fetchAndBuildPlayList(url){
-      if(!url) alert("URL NOT FOUND")
-
-      if(url.indexOf('content://') == -1){
-        return this.http.get(url, { responseType: 'text' }).map(data => this.convertM3uToJson(data, url)).toPromise()
-      }
     /*
     return  new Observable(observer => {
       this.getPlaylistFromFileSystem(url).then(data =>{
@@ -51,175 +51,177 @@ export class M3u8Provider {
      */
   }
 
-  async getPlaylistFromFileSystem(url){
-    let folderPath = url.split('\\').pop().split('/')
-    folderPath.pop()
-    folderPath = folderPath.join("/")
-    let fileName = url.split('\\').pop().split('/').pop();
-    console.log("FOLDER:", folderPath, "FILE:", fileName)
-    let permissions: any = await this.androidPermissions.requestPermissions(
+  async getPlaylistFromFileSystem(url) {
+    let folderPath = url.split('\\').pop().split('/');
+    folderPath.pop();
+    folderPath = folderPath.join('/');
+    const fileName = url.split('\\').pop().split('/').pop();
+    console.log('FOLDER:', folderPath, 'FILE:', fileName);
+    const permissions: any = await this.androidPermissions.requestPermissions(
       [
         this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE,
-        this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
-      ]).catch(err=> console.log('ERR resolving dir:', err))
+        this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
+      ]).catch(err => console.log('ERR resolving dir:', err));
 
-      console.log('SO...permission?', permissions)
-      if(permissions.hasPermission){
-        let dirPath: any = await this.fileProvider.resolveDirectoryUrl(folderPath)
-        console.log("RESOLVIGN PATH:", dirPath)
-        return this.fileProvider.getFile(dirPath , fileName,  {create: true, exclusive: false})
-      }
+    console.log('SO...permission?', permissions);
+    if (permissions.hasPermission) {
+      const dirPath: any = await this.fileProvider.resolveDirectoryUrl(folderPath);
+      console.log('RESOLVIGN PATH:', dirPath);
+      return this.fileProvider.getFile(dirPath , fileName,  { create: true, exclusive: false });
+    }
 
   }
 
   // this.storage.get('playlist').then((val) => {})
-   getList(url) : any {
-    return new Promise( async (resolve, reject) =>{
-      let storageResult = await this.storage.get(this.urlStorePrefix+'-'+url).catch(err =>{
-        console.log("Err getting stored playlist", err)
-        resolve({err: true, message: 'No playlist found'})
-      })
+  getList(url) : any {
+    return new Promise(async (resolve, reject) => {
+      const storageResult = await this.storage.get(this.urlStorePrefix + '-' + url).catch((err) => {
+        console.log('Err getting stored playlist', err);
+        resolve({ err: true, message: 'No playlist found' });
+      });
 
-      if(storageResult){
-        try{
-          resolve(JSON.parse(storageResult))
-        }catch(err){
-          console.log("ERROR PARSING DATA:", err)
-          resolve({err: true, message: 'Error parsing json'})
+      if (storageResult) {
+        try {
+          resolve(JSON.parse(storageResult));
+        }catch (err) {
+          console.log('ERROR PARSING DATA:', err);
+          resolve({ err: true, message: 'Error parsing json' });
         }
-      }else{
-        let playlist = await this.buildPlaylist(url)
-        if(playlist) resolve(playlist)
+      }else {
+        const playlist = await this.buildPlaylist(url);
+        if (playlist) resolve(playlist);
 
-          resolve({err: true, message: 'No playlist found'})
+        resolve({ err: true, message: 'No playlist found' });
       }
-    })
+    });
   }
 
-   async buildPlaylist(url){
-    let playlist: any = await this.fetchAndBuildPlayList(url).catch(err=> alert("Error"))
-    return playlist ? playlist : false
+  async buildPlaylist(url) {
+    const playlist: any = await this.fetchAndBuildPlayList(url).catch(err => alert('Error'));
+    return playlist ? playlist : false;
   }
 
-  getCountries(){
-    return this.data.countries
+  getCountries() {
+    return this.data.countries;
   }
 
 
-  validateFile(dataArr){
-    if(dataArr.length < 1) return false
+  validateFile(dataArr) {
+    if (dataArr.length < 1) return false;
 
-    let output:any = null
+    let output:any = null;
     
-    switch(true){
+    switch (true){
       case dataArr[0].indexOf('#EXTM3U') > -1:
-        if(dataArr[1].indexOf('#EXTINF:-1,') > -1, dataArr[1].indexOf('#EXTINF:0,') > -1){
-          output = this.parseM3uSimple(dataArr)
-        }else{
-          output = this.parseM3uWithOptions(dataArr)
+        if (dataArr[1].indexOf('#EXTINF:-1,') > -1, dataArr[1].indexOf('#EXTINF:0,') > -1) {
+          output = this.parseM3uSimple(dataArr);
+        }else {
+          output = this.parseM3uWithOptions(dataArr);
         }
-      break;
+        break;
     }
-    return output
+    return output;
   }
 
-  convertM3uToJson(text, url){
-    let dataArr = text.split('\n')
-    let output = this.validateFile(dataArr)
-    this.storage.set(this.urlStorePrefix+'-'+url, JSON.stringify(output));
-    return output
+  convertM3uToJson(text, url) {
+    const dataArr = text.split('\n');
+    const output = this.validateFile(dataArr);
+    this.storage.set(this.urlStorePrefix + '-' + url, JSON.stringify(output));
+    return output;
   }
 
-  async parseM3uWithOptions(data){
-    let output:any = {}
-    let previous = null
+  async parseM3uWithOptions(data) {
+    const output:any = {};
+    let previous = null;
 
-    data.map( async (el, index) =>{
-      if(index == 0) return false
-      if(el.match(/ group-title="([^"]*)"/) == null && el.indexOf("http") > -1){
-        let previousCountry = output[previous]
-        output[previous][previousCountry.length -1].url = el.toString().replace("\r", "")
-        return false
+    data.map(async (el, index) => {
+      if (index === 0) return false;
+      if (el.match(/ group-title="([^"]*)"/) == null && el.indexOf('http') > -1) {
+        const previousCountry = output[previous];
+        output[previous][previousCountry.length - 1].url = el.toString().replace('\r', '');
+        return false;
       }
 
       // Build object dynamicly
-      el = el.replace('#EXTINF:-1 ', '').replace('#EXTINF:-0 ', '').split(',')[0]
-      let attrs = el.match(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g)
-      let options = {}
+      const newEl = el.replace('#EXTINF:-1 ', '').replace('#EXTINF:-0 ', '').split(',')[0];
+      const attrs = newEl.match(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g);
+      const options = {};
       
-      if(!attrs) return false
+      if (!attrs) return false;
 
-      attrs.map(attr=>{
-        let splited = attr.split('=')
-        splited[1] = splited[1].replace(/"/g,'')
-        options[splited[0]] = splited[1] 
-      })
+      attrs.map((attr) => {
+        const splited = attr.split('=');
+        splited[1] = splited[1].replace(/"/g,'');
+        options[splited[0]] = splited[1]; 
+      });
       
-      if(!options['tvg-name']) return false
+      if (!options['tvg-name']) return false;
 
-      let elObj = {
+      const elObj = {
         id: options['tvg-id'] ? options['tvg-id'] : options['tvg-name'].replace(/\s/g, '-'),
         groupName: options['group-title'],
         tvLogo: options['tvg-logo'],
         tvName: options['tvg-name'],
-      }
+      };
       
-      if(elObj.groupName) {
-        let groupName: string = elObj.groupName
-        previous = groupName
+      if (elObj.groupName) {
+        const groupName: string = elObj.groupName;
+        previous = groupName;
         
-        if(output[groupName]){
-          output[groupName].push(elObj)
-        } else{
-         output[groupName] = []
-         output[groupName].push(elObj)
+        if (output[groupName]) {
+          output[groupName].push(elObj);
+        } else {
+          output[groupName] = [];
+          output[groupName].push(elObj);
 
-         if(!output.countries){
-           output.countries = []
-         }
+          if (!output.countries) {
+            output.countries = [];
+          }
          
-         output.countries.push({ 
+          output.countries.push({ 
             name: groupName, 
             channels: null,
-            image: null 
-          })
+            image: null, 
+          });
         }
       }
-
       // Save to PouchDB
-      if(elObj.id) {
-        await this.database.put(elObj.id.toLowerCase() , elObj).catch(err => console.log("CouchDB ERR:", err))
-      }
-    })
+      // if (elObj.id) {
+      //   await this.database.put(elObj.id.toLowerCase() , elObj).catch(
+      //     (err) => {},
+      //   );
+      // }
+    });
 
-    output.countries.map(el =>{
-      el.channels = output[el.name].length
-    })
+    output.countries.map((el) => {
+      el.channels = output[el.name].length;
+    });
 
-    let docs = await this.database.fetch()
-    console.log('COUCHDB:', docs)
+    // CouchDB list check
+    // const docs = await this.database.fetch();
+    // console.log('COUCHDB:', docs);
 
-    return output
+    return output;
   }
 
-  parseM3uSimple(data: Array<any>){
-    let output:any = {}
-    let previous = null
+  parseM3uSimple(data: any[]) {
+    const output:any = {};
+    let previous = null;
 
-    data.map((el, index) =>{
-      if(index == 0) return false
+    data.map((el, index) => {
+      if (index === 0) return false;
       
-      if(el.match(/#EXTINF:-1,/) == null && el.indexOf("http") > -1){
-        let previousEl =  output[previous]
-        output[previousEl.length -1]['url'] = el.toString().replace("\r", "")
-        return false
+      if (el.match(/#EXTINF:-1,/) == null && el.indexOf('http') > -1) {
+        const previousEl =  output[previous];
+        output[previousEl.length - 1]['url'] = el.toString().replace('\r', '');
+        return false;
       }
     
-      let name = el.split('#EXTINF:-1,')[1]
-      output.push({tvName: name})
-      previous = index
-    })
-    return output
+      const name = el.split('#EXTINF:-1,')[1];
+      output.push({ tvName: name });
+      previous = index;
+    });
+    return output;
   }
 
 }

@@ -1,4 +1,4 @@
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
@@ -19,63 +19,64 @@ export class FavoritesProvider {
     public http: HttpClient,
     private storage: Storage) {}
 
-  add(fav){
-    return new Observable(observer => {
-        this.list().then((data) => {
-            let favList = []
-            if(data){
-                favList = data
-                let filteredArr = favList.filter(el=> el.tvName == fav.tvName)
-                if(filteredArr.length > 0){
-                    observer.next(false)
-                    return false
-                }
-            }
+  add(fav) {
+    return new Observable((observer) => {
+      this.list().then((data) => {
+        let favList = [];
+        if (data) {
+          favList = data;
+          const filteredArr = favList.filter(el => el.tvName === fav.tvName);
+          if (filteredArr.length > 0) {
+            observer.next(false);
+            return false;
+          }
+        }
             
-            favList.push(fav)
-            this.storage.set('favorites', JSON.stringify(favList)).then(el=>{
-                this.list().then(favs=>{
-                    observer.next(favs)
-                })
-            })
-            .catch(err =>{
-                observer.next(false)
-            })
+        favList.push(fav);
+        this.storage.set('favorites', JSON.stringify(favList)).then((el) => {
+          this.list().then((favs) => {
+            observer.next(favs);
+          });
         })
-    })
+            .catch((err) => {
+              observer.next(false);
+            });
+      });
+    });
   }
 
-  getAllFromContry(country){
-    return new Observable(observer =>{
-      this.list().then(data =>{
-        observer.next( data.filter(item => item.groupName == country) )
-      })      
-    })
+  getAllFromContry(country) {
+    return new Observable((observer) => {
+      this.list().then((data) => {
+        observer.next(data.filter(item => item.groupName === country));
+      });      
+    });
   }
 
-  remove(fav){
-    return new Observable(observer => {
-        this.list().then((data) => {
-            let favList:any = []
-            if(data){
-                favList = data
-            }
+  remove(fav) {
+    return new Observable((observer) => {
+      this.list().then((data) => {
+        let favList:any = [];
+        if (data) {
+          favList = data;
+        }
 
-            let filteredArr = favList.filter(el => el.tvName !!== fav.tvName)
+        const filteredArr = favList.filter(el => el.tvName ! !== fav.tvName);
             
-            this.storage.set('favorites', JSON.stringify(filteredArr)).then(el=>{
-                observer.next(filteredArr)
-            })
-            .catch(err =>{
-                observer.next(false)
-            })
+        this.storage.set('favorites', JSON.stringify(filteredArr)).then((el) => {
+          observer.next(filteredArr);
         })
-    })
+            .catch((err) => {
+              observer.next(false);
+            });
+      });
+    });
   }
   
   // this.storage.get('playlist').then((val) => {})
-  list(){
-    return this.storage.get('favorites').then((val) => JSON.parse(val))
+  async list() {
+    const favoriteList = await  this.storage.get('favorites');
+    return JSON.parse(favoriteList);
   }
 
 }

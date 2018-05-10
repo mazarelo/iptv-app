@@ -17,14 +17,14 @@ declare let videojs: any;
 
 @Component({
   selector: 'channel',
-  templateUrl: 'channel.html'
+  templateUrl: 'channel.html',
 })
 export class ChannelPage implements OnInit {
-  item
-  player
-  list
-  current = new Date().getTime()
-  amount = 30
+  item;
+  player;
+  list;
+  current = new Date().getTime();
+  amount = 30;
   showProgressAndTime = false;
 
   constructor(
@@ -37,141 +37,143 @@ export class ChannelPage implements OnInit {
     private platform: Platform,
     private insomnia: Insomnia,
   ) {
-    this.item = this.navParams.get('channel')
-    this.list = this.navParams.get('list')
+    this.item = this.navParams.get('channel');
+    this.list = this.navParams.get('list');
     
-    this.platform.ready().then(data=>{
-      this.statusBar.hide()
-      this.insomnia.keepAwake().then( () => console.log('success'), () => console.log('error'));
-      //this.activateOrientationDetection()
-    })
+    this.platform.ready().then((data) => {
+      this.statusBar.hide();
+      this.insomnia.keepAwake();
+      // this.activateOrientationDetection()
+    });
   }
 
-  ngOnInit(){}
+  ngOnInit() {}
 
-  activateOrientationDetection(){
+  activateOrientationDetection() {
     // Detect orientation changes
     this.screenOrientation.onChange().subscribe(
       (data) => {
-        if(this.screenOrientation.type.indexOf('landscape') > -1){
+        if (this.screenOrientation.type.indexOf('landscape') > -1) {
           // Not working
-          this.player.enterFullWindow()
-          this.player.height( '100%' )
-        }else{
+          this.player.enterFullWindow();
+          this.player.height('100%');
+        }else {
           // Not working
-          this.player.exitFullWindow()
-          this.player.height( '200px' )
+          this.player.exitFullWindow();
+          this.player.height('200px');
         }
-      }
+      },
     );
   }
   
-  registerPlayerButtons(){
-    var Button = videojs.getComponent('Button');
-    var MyButton = videojs.extend(Button, {
-      constructor: function() {
-        Button.apply(this, arguments);
+  registerPlayerButtons() {
+    const button = videojs.getComponent('Button');
+    const myButton = videojs.extend(button, {
+      constructor() {
+        button.apply(this, arguments);
         /* initialize your button */
       },
-      handleClick: function() {
+      handleClick() {
         /* do something on click */
       },
-      buildCSSClass: function() {
-        return "vjs-icon-next-item vjs-control vjs-button";
-      }
+      buildCSSClass() {
+        return 'vjs-icon-next-item vjs-control vjs-button';
+      },
     });
-    videojs.registerComponent('MyButton', MyButton);
+    videojs.registerComponent('MyButton', myButton);
   }
 
-  playItem(item){
-    this.item = item
+  playItem(item) {
+    this.item = item;
     this.player.pause();
     this.player.src('');
     this.player.src({
       src: this.item.url,
       type: this.getFileExtention(this.item.url),
-    })
+    });
     this.player.play();
   }
 
-    playVideoJsHLS(){
+  playVideoJsHLS() {
       // https://github.com/streamroot/videojs5-hlsjs-source-handler
-      var self = this;
-      var options = {
-        fluid: true,
-        html5: {
-          hlsjsConfig: {
-            debug: false
-          }
+    const options = {
+      fluid: true,
+      html5: {
+        hlsjsConfig: {
+          debug: false,
         },
-        nativeControlsForTouch: false
-      };
+      },
+      nativeControlsForTouch: false,
+    };
 
-      try{
-        this.player = videojs('stream-video', options);
-        this.player.qualityPickerPlugin();
-        //this.player.requestFullscreen();
-        
-        this.player.ready(function(){
-          this.src({
-            src: self.item.url,
-            type: self.getFileExtention(self.item.url),
-          })
-          this.play()
-        })
-      }catch(err){
-        console.log("ERR VIDEOJS", err)
-        this.navController.pop()
-      }
+    try {
+      this.player = videojs('stream-video', options);
+      this.player.qualityPickerPlugin();
+        // this.player.requestFullscreen();
+      const self = this;
+      this.player.ready(function () {
+        this.src({
+          src: self.item.url,
+          type: self.getFileExtention(self.item.url),
+        });
+        this.play();
+      });
+    }catch (err) {
+      console.log('ERR VIDEOJS', err);
+      this.navController.pop();
+    }
 
       // VIDEOJS Error handling
-      this.player.on('error', (e)=> {
-        console.log("VIDEOJS ERROR:", e)
-        this.navController.pop()
-      })
-    }
+    this.player.on('error', (e) => {
+      console.log('VIDEOJS ERROR:', e);
+      this.navController.pop();
+    });
+  }
 
-    getFileExtention(url){
-      const extension = url.split('.').pop();
-      switch(extension){
-        case 'mkv':
-          this.toggleProgressAndTimeBar()
-          return 'video/webm';
-          break;
-        case 'mp4':
-          this.toggleProgressAndTimeBar()
-          return 'video/mp4';
-          break;
-        case 'ogg':
-          this.toggleProgressAndTimeBar()
-          return 'video/ogg';
-          break;
-        default:
-         return"application/x-mpegURL";
-      }
+  getFileExtention(url) {
+    const extension = url.split('.').pop();
+    switch (extension){
+      case 'mkv':
+        this.showProgressAndTimeBar();
+        return 'video/webm';
+      case 'mp4':
+        this.showProgressAndTimeBar();
+        return 'video/mp4';
+      case 'ogg':
+        this.showProgressAndTimeBar();
+        return 'video/ogg';
+      default:
+        this.hideProgressAndTimeBar();
+        return'application/x-mpegURL';
     }
+  }
     
-    toggleProgressAndTimeBar(){
-      this.showProgressAndTime = true;
-    }
+  showProgressAndTimeBar() {
+    this.showProgressAndTime = true;
+  }
 
-  ionViewWillLeave(){
-    this.player.dispose()
-    if(!this.statusBar.isVisible){
-      this.statusBar.show()
+  hideProgressAndTimeBar() {
+    this.showProgressAndTime = false;
+  }
+
+  ionViewWillLeave() {
+    this.player.dispose();
+    if (!this.statusBar.isVisible) {
+      this.statusBar.show();
     }
     this.insomnia.allowSleepAgain().then(() => console.log('success'), () => console.log('error'));
   }
 
   ngAfterViewInit() {
-    this.platform.ready().then(data=>{
-      this.playVideoJsHLS()
+    this.platform.ready().then((data) => {
+      this.playVideoJsHLS();
     // this.videoProvider.playVideoJsHLS(this.item)
-    })
+    });
   }
 
   doInfinite(infiniteScroll) {
-    this.amount = this.amount + 30
+    this.amount = this.amount + 30;
     infiniteScroll.complete();
   }
+
 }
