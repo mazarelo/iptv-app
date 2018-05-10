@@ -1,3 +1,6 @@
+body, html{
+    background: #262626;
+}
 .item-md,
 .toolbar-title-md {
     //background: transparent!important;
@@ -27,7 +30,7 @@
     }
 }
 
-.item-md{
+.item-md, .item-ios{
   background: transparent!important;
 }
 
@@ -39,8 +42,8 @@ ion-item{
 }
 
 *{
-  letter-spacing: .5px;
-text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
-text-rendering: optimizeLegibility !important;
--webkit-font-smoothing: antialiased !important;
+    letter-spacing: .5px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
 }
