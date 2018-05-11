@@ -33,10 +33,13 @@ ion-slides {
         will-change: background;
         transition: background .3s ease-out;
         &:focus, 
-        &.active,
-        &:hover{
+        &.active{
+            background: rgba(255,255,255,.1)!important;
+        }
+        /*&:hover{
           background: rgba(255,255,255,.1)!important;
         }
+        */
 
         &.editable{
           animation: WIGGLE 1s infinite;

@@ -10,9 +10,10 @@ modal-epg{
         will-change: opacity;
         transition:opacity .3s ease-out;
         
-        &:hover, &:focus{
+       /* &:hover, &:focus{
           opacity:.8;
         }
+        */
       }
     } 
   }

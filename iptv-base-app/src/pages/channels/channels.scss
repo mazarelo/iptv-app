@@ -12,10 +12,13 @@ channels {
       background: rgba(255, 255, 255, 0)!important;
       outline: 0;
       &:focus,
-      &.active,
-      &:hover{
+      &.active,{
         background: rgba(255, 255, 255, .1)!important;
       }
+      /*&:hover{
+        background: rgba(255, 255, 255, .1)!important;
+      }
+      */
     }
   }
 
