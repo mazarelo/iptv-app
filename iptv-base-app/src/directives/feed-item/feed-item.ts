@@ -12,7 +12,8 @@ export class FeedItemComponent implements OnInit, OnDestroy {
   @Input() obj: any;
   @Input() index: number;
   @Output() goToPlayChannel = new EventEmitter();
-  channel;
+  @Output() loadOptions = new EventEmitter();
+  item;
   private current = new Date().getTime();
   constructor(
       public navCtrl: NavController,
@@ -24,7 +25,7 @@ export class FeedItemComponent implements OnInit, OnDestroy {
     ) {}
 
   playChannel(item) {
-    this.goToPlayChannel.emit(this.channel);
+    this.goToPlayChannel.emit(this.item);
   }
 
   getCurrentEPGTimeBar(programme) {
@@ -36,7 +37,7 @@ export class FeedItemComponent implements OnInit, OnDestroy {
   }
 
   itemOptions(index) {
-    const item = this.channel;
+    const item = this.item;
     const actionSheet = this.actionSheetCtrl.create({
       title: item.tvName,
       subTitle: item.tvGroup,
@@ -107,9 +108,19 @@ export class FeedItemComponent implements OnInit, OnDestroy {
     profileModal.present();
   }
 
+  mapPropsToGeneric(obj) {
+    if (obj.tvName) {
+      obj.name = obj.tvName;
+      delete obj.tvName;
+
+      obj.logo = obj.tvLogo;
+      delete obj.tvLogo;
+    }
+    return obj;
+  }
 
   ngOnInit() {
-    this.channel = this.obj;
+    this.item = this.mapPropsToGeneric(this.obj);
   }
 
   ngOnDestroy() {

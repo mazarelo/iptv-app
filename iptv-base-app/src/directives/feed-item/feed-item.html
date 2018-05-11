@@ -1,17 +1,17 @@
-<ion-item *ngIf="channel"
+<ion-item *ngIf="item"
   tappable
-  [ngClass]="{'active': channel.active}"
+  [ngClass]="{'active': item.active}"
   aria-checked="true" tabindex="{{index}}"
   class="items-template item-{{index}}"
   (press)="itemOptions(i)"
-  (tap)="playChannel(channel)">
+  (tap)="playChannel(item)">
       <ion-thumbnail item-start >
-        <virtual-ion-img  *ngIf="channel.tvLogo" [src]="channel.tvLogo" [cache]="true" ></virtual-ion-img>
-        <!--<ion-img *ngIf="channel.tvLogo" [src]="channel.tvLogo" [cache]="true" ></ion-img>-->
+        <virtual-ion-img  *ngIf="item.logo" [src]="item.logo" [cache]="true" ></virtual-ion-img>
+        <!--<ion-img *ngIf="item.logo" [src]="item.logo" [cache]="true" ></ion-img>-->
       </ion-thumbnail>
-      <h2>{{channel.tvName}}</h2>
-      <div *ngIf="channel.epg" class="epg" >
-          <div *ngFor="let epg of channel.epg">
+      <h2>{{item.name}}</h2>
+      <div *ngIf="item.epg" class="epg" >
+          <div *ngFor="let epg of item.epg">
             <p>
               <ion-icon name="information-circle"></ion-icon> {{epg.title.__text}}
             </p>
