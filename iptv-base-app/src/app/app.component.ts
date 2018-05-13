@@ -40,7 +40,7 @@ export class MyApp {
 
   async initializeApp() {
     await this.platform.ready();
-    this.statusBar.backgroundColorByHexString('#43738d');
+    this.statusBar.backgroundColorByHexString('#262626');
     /*
       const bannerConfig: AdMobFreeBannerConfig = {
         id: 'ca-app-pub-1728583878769269/5801917485',
