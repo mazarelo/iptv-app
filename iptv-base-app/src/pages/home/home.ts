@@ -10,7 +10,6 @@ import { CountriesPage } from '../countries/countries';
   templateUrl: 'home.html',
 })
 export class HomePage implements OnInit {
-  @ViewChild('focused') focused;
   
   private activeElement = 0;
   private allowKeyArrows = true;
@@ -214,7 +213,6 @@ export class HomePage implements OnInit {
   }
    
   ngOnInit() {
-    this.focused.nativeElement.focus();
   }
 
   ionViewWillLeave() {

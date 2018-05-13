@@ -16,21 +16,22 @@
 
 <ion-content class="card-background-page">
   <ion-grid >
-    <ion-row #focused tabindex="0" (keydown)="keyEvents($event)" autofocus>
+    <ion-row (keydown)="keyEvents($event)">
       <ion-col *ngFor="let playlist of userPlaylists;let i=index;" col-12 col-md-4 col-lg-3 col-xl-2 >
         <ion-card 
-          (tap)="goToPlaylist(playlist)"
-          (press)="loadPlaylistOptions(playlist)"
-          aria-checked="true" tabindex="-1"
+          aria-checked="true"
+          tabindex="{{i+1}}" 
           class="home-item-{{i}}"
-          [ngClass]="{'editable': editMode}">
+          [ngClass]="{'editable': editMode}"
+          (tap)="goToPlaylist(playlist)"
+          (press)="loadPlaylistOptions(playlist)">
             <div class="image-overlay"></div>
             <div class="card-title">{{ playlist.name }}</div>
             <!--<div class="card-subtitle">{{playlist.url}}</div>-->
         </ion-card>
       </ion-col>
       <ion-col *ngIf="!editMode" col-12 col-md-4 col-lg-3 col-xl-2>
-        <ion-card (click)="addPlayList()" class="card card-md item-{{userPlaylists.length}}" tabindex="1">
+        <ion-card (click)="addPlayList()" class="card card-md item-{{userPlaylists.length}}">
           <div class="image-overlay"></div>
           <div class="card-title">+</div>
           <div class="card-subtitle">add playlist</div>
