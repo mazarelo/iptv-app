@@ -60,15 +60,12 @@ channel {
   }
 }
 
-// VIDEOJS CUSTOM STYLES
-
 .vjs-icon-custombutton {
   font-family: VideoJS;
   font-weight: normal;
   font-style: normal; }
   .vjs-icon-custombutton:before {
     content: "\f11f"; }
-
     
 // Removes progress bar and time
 .video-wrapper:not(.showProgressAndTime){
@@ -76,3 +73,16 @@ channel {
     display: none!important;
   }
 }
+
+.video-js{
+  .vjs-control-bar{
+    background-color: rgba(0,0,0,0);
+  }
+  
+  .vjs-chromecast-button{
+      background: url(../../assets/imgs/chromecast.svg) no-repeat center center;
+      background-size: 15px;
+      box-sizing: border-box;
+  }
+}
+

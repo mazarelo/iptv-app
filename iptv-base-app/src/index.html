@@ -10,7 +10,6 @@
     <!--<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />-->
     <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
     <link rel="manifest" href="manifest.json">
-    <link href="assets/css/video-js.min.css" rel="stylesheet">
 
     <meta name="theme-color" content="#4e8ef7">
 
@@ -20,17 +19,9 @@
 
     <!-- cordova.js required for cordova apps (remove if not needed) -->
     <script src="cordova.js"></script>
-    <script src="assets/js/xml2json.js"></script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>-->
-    <script src="assets/js/video.min.js"></script>
-    <!--<script src="assets/js/videojs-chromecast.min.js"></script>-->
-    <script src="assets/js/videojs5-hlsjs-source-handler.min.js"></script>
-
-    <!--<script src="http://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>-->
-    <!--<script src="assets/js/videojs-chromecast.min.js"></script>-->
-
-    <!--<script src="assets/js/dash.all.min.js"></script>
-    <script src="assets/js/videojs-dash.min.js"></script>-->
+    <script>
+        window.HELP_IMPROVE_VIDEOJS = false;
+    </script>
 
     <!-- un-comment this code to enable service worker
   <script>
@@ -46,12 +37,11 @@
             background: #4a7a94;
         }
     </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.20.5/video-js.min.css" rel="stylesheet">
     <link href="build/main.css" rel="stylesheet">
-
 </head>
 
 <body>
-
     <!-- Ionic's root component and where the app will load -->
     <ion-app></ion-app>
 
@@ -62,6 +52,16 @@
        It contains all of the dependencies in node_modules -->
     <script src="build/vendor.js"></script>
 
+    <script src="assets/js/xml2json.js"></script>
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="http://cdn.dashjs.org/latest/dash.all.min.js"></script>
+    -->
+    
+    <script src="http://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/5.20.5/video.min.js"></script>
+    <script src="assets/js/videojs5-hlsjs-source-handler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js-chromecast/2.0.0/videojs-chromecast.min.js"></script>
     <!-- The main bundle js is generated during the build process -->
     <script src="build/main.js"></script>
 
