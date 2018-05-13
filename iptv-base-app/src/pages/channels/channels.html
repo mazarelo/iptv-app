@@ -20,7 +20,8 @@
       <div *ngFor="let channel of channels; let i = index;" class="item-wrapper">
           <feed-item 
             *ngIf="i < amount"
-            [obj]="channel" [index]="i"
+            [obj]="channel" 
+            [index]="i"
             (goToPlayChannel)="playChannel($event)"
             ></feed-item>
             </div>

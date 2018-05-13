@@ -11,7 +11,7 @@ channels {
       width: 100%;
       background: rgba(255, 255, 255, 0)!important;
       outline: 0;
-      &:focus,
+      // &:focus,
       &.active,{
         background: rgba(255, 255, 255, .1)!important;
       }

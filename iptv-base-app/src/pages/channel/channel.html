@@ -3,18 +3,13 @@
     <div class="video-wrapper" [ngClass]="{'showProgressAndTime': showProgressAndTime}">
       <video *ngIf="item.url" 
         id="stream-video" 
-        poster="myPoster.jpg"
-        class="video-js vjs-big-play-centered" controls ></video>
+        class="video-js vjs-big-play-centered vjs-sublime-skin"
+        controls controlsList="nodownload"></video>
     </div>
   </div>
 </ion-content>
 <!-- Channels menu -->
 <ion-menu side="right" [content]="content">
-  <!--<ion-header>
-    <ion-toolbar>
-      <ion-title>Channels</ion-title>
-    </ion-toolbar>
-  </ion-header>-->
   <ion-content>
     <ion-list>
       <div *ngFor="let channel of list; let i = index;">
