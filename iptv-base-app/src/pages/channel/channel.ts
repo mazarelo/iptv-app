@@ -13,6 +13,7 @@ import { Insomnia } from '@ionic-native/insomnia';
  * Components.
  */
 declare let videojs: any;
+declare let Hls: any;
 // declare let Hls: any;
 
 @Component({
@@ -98,9 +99,16 @@ export class ChannelPage implements OnInit {
       // https://github.com/streamroot/videojs5-hlsjs-source-handler
     const options = {
       fluid: true,
-      html5: {
-        hlsjsConfig: {
-          debug: false,
+      html5:{
+        hls: {
+          withCredentials: false,
+        },
+      },
+      chromecast:{
+        appId:'ZENA-PLAYER',
+        metadata:{
+          title: this.item.name,
+          subtitle: 'Synopsis display on tech wrapper',
         },
       },
       nativeControlsForTouch: false,
@@ -108,7 +116,7 @@ export class ChannelPage implements OnInit {
 
     try {
       this.player = videojs('stream-video', options);
-      this.player.qualityPickerPlugin();
+      // this.player.qualityPickerPlugin();
         // this.player.requestFullscreen();
       const self = this;
       this.player.ready(function () {
@@ -167,8 +175,28 @@ export class ChannelPage implements OnInit {
   ngAfterViewInit() {
     this.platform.ready().then((data) => {
       this.playVideoJsHLS();
-    // this.videoProvider.playVideoJsHLS(this.item)
+      // this.playNativeHls();
     });
+  }
+
+  playNativeHls() {
+    const video: any = document.getElementById('stream-video');
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(this.item.url);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        video.play();
+      });
+    }else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = this.item.url;
+      video.addEventListener('loadedmetadata', () => {
+        video.play();
+      });
+    }else {
+      video.src(this.item.url);
+      video.play();
+    }
   }
 
   doInfinite(infiniteScroll) {
