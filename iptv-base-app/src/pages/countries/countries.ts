@@ -93,10 +93,6 @@ export class CountriesPage implements OnInit {
     }
   }
 
-  getFlagUrL(country) {
-    return 'assets/imgs/flags/' + country.toLowerCase().replace(' ', '-') + '.jpg';
-  }
-
   goToCountry(country) {
     this.navCtrl.push(ChannelsPage, {
       channels: this.playlist.data[country],
