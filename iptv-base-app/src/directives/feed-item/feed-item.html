@@ -1,7 +1,7 @@
 <ion-item *ngIf="item"
   tappable
   [ngClass]="{'active': item.active}"
-  aria-checked="true" tabindex="{{index}}"
+  aria-checked="true" tabindex="{{index+1}}"
   class="items-template item-{{index}}"
   (press)="itemOptions(i)"
   (tap)="playChannel(item)">
