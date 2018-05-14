@@ -57,38 +57,33 @@ export class MyApp {
         console.log(err);
       }
     */
-    // this.statusBar.show();
-    // let splash = this.modalCtrl.create(Splash);
-    // splash.present();
+    // this.backButtonInit();
   }
 
   backButtonInit() {
     this.platform.registerBackButtonAction(() => {
       const nav = this.app.getActiveNavs()[0];
       const activeView = nav.getActive();                
-
-      if (activeView.name === 'FirstPage') {
-        if (nav.canGoBack()) { // Can we go back?
-          nav.pop();
-        } else {
-          const alert = this.alertCtrl.create({
-            title: 'App termination',
-            message: 'Do you want to close the app?',
-            buttons: [{
-              text: 'Cancel',
-              role: 'cancel',
-              handler: () => {
-                console.log('Application exit prevented!');
-              },
-            },{
-              text: 'Close App',
-              handler: () => {
-                this.platform.exitApp(); // Close this application
-              },
-            }],
-          });
-          alert.present();
-        }
+      if (nav.canGoBack()) {
+        nav.pop();
+      } else {
+        const alert = this.alertCtrl.create({
+          title: 'App termination',
+          message: 'Do you want to close the app?',
+          buttons: [{
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Application exit prevented!');
+            },
+          },{
+            text: 'Close App',
+            handler: () => {
+              this.platform.exitApp(); 
+            },
+          }],
+        });
+        alert.present();
       }
     });
   }
