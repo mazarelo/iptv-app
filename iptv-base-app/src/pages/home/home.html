@@ -19,12 +19,13 @@
     <ion-row (keydown)="keyEvents($event)">
       <ion-col *ngFor="let playlist of userPlaylists;let i=index;" col-12 col-md-4 col-lg-3 col-xl-2 >
         <ion-card 
+          tappable
+          (press)="loadPlaylistOptions(playlist)"
+          (tap)="goToPlaylist(playlist)"
           aria-checked="true"
           tabindex="{{i+1}}" 
           class="home-item-{{i}}"
-          [ngClass]="{'editable': editMode}"
-          (tap)="goToPlaylist(playlist)"
-          (press)="loadPlaylistOptions(playlist)">
+          [ngClass]="{'editable': editMode}">
             <div class="image-overlay"></div>
             <div class="card-title">{{ playlist.name }}</div>
             <!--<div class="card-subtitle">{{playlist.url}}</div>-->
