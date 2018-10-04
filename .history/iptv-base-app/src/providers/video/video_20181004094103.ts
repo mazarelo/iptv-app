@@ -9,6 +9,7 @@ export class VideoProvider {
 
   constructor(
     private platform: Platform,
+    // private storage: Storage
     ) {}
 
   start(item) {

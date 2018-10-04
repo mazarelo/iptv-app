@@ -39,6 +39,7 @@ export class PlayListProvider {
   }
 
   async list() {
+    // return new Observable( observer => {
     const playList: any = await this.storage.listAll().catch((err) => {
       return { error: true, message: err }; 
     });
@@ -138,6 +139,13 @@ export class PlayListProvider {
     }
     this.toasterProvider.presentToast('Playlist saved');
     return playlist;
+    /*
+        this.favoritesProvider.list().then(data =>{
+          if(data){
+            this.favorites = data
+          }
+        })
+    */
   }
 
   async remove(playlist) {

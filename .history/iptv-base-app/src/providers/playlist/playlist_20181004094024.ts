@@ -138,6 +138,13 @@ export class PlayListProvider {
     }
     this.toasterProvider.presentToast('Playlist saved');
     return playlist;
+    /*
+        this.favoritesProvider.list().then(data =>{
+          if(data){
+            this.favorites = data
+          }
+        })
+    */
   }
 
   async remove(playlist) {

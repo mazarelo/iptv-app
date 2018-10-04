@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, ActionSheetController, AlertController } from 'ionic-angular';
+// import * as m3u from 'm3u8-reader'
 import { PlayListProvider } from '../../providers/playlist/playlist';
 import { CountriesPage } from '../countries/countries';
+// import { EpgProvider } from '../../providers/epg/epg';
 
 @Component({
   selector: 'page-home',
@@ -19,6 +21,7 @@ export class HomePage implements OnInit {
     public navController: NavController,
     private playlistProvider: PlayListProvider,
     private actionSheetCtrl: ActionSheetController,
+    // private epgProvider: EpgProvider,
     private alertCtrl: AlertController,
   ) {
     this.getPlaylist();
@@ -99,6 +102,11 @@ export class HomePage implements OnInit {
       this.userPlaylists.push(playlist);
     }
     this.allowKeyArrows = true;
+    /*
+    this.m3u8Provider.askPlaylistUrlOrFile().subscribe(data=>{
+      console.log("data", data)
+    })
+    */
   }
 
   promptDeleteConfirmation(playlist) {
@@ -128,6 +136,13 @@ export class HomePage implements OnInit {
       title: playlist.name + ' options',
       subTitle: '',
       buttons: [
+          /*{
+            text: 'Hide',
+            role: 'destructive',
+            handler: () => {
+              console.log('Destructive clicked');
+            }
+          },*/
         {
           text: 'Delete Playlist',
           icon: 'trash',
@@ -152,6 +167,13 @@ export class HomePage implements OnInit {
       title: '',
       subTitle: '',
       buttons: [
+          /*{
+            text: 'Hide',
+            role: 'destructive',
+            handler: () => {
+              console.log('Destructive clicked');
+            }
+          },*/
         {
           text: 'Add Playlist',
           icon: 'add',
