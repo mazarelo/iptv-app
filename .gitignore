@@ -15,3 +15,6 @@ iptv-base-app/*.log
 iptv-base-app/www/build/*
 iptv-base-app/.gradle
 iptv-base-app/.sourcemaps/
+*/.DS_Store
+.vscode
+.DS_Store
