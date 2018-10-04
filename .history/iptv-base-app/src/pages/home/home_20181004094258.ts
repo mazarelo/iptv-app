@@ -152,6 +152,13 @@ export class HomePage implements OnInit {
       title: '',
       subTitle: '',
       buttons: [
+          /*{
+            text: 'Hide',
+            role: 'destructive',
+            handler: () => {
+              console.log('Destructive clicked');
+            }
+          },*/
         {
           text: 'Add Playlist',
           icon: 'add',

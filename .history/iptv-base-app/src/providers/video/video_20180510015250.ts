@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+// import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 import { Platform } from 'ionic-angular';
+// import { VideoPlayer } from '@ionic-native/video-player';
 declare let videojs: any;
 declare let Hls: any;
 
@@ -9,6 +11,7 @@ export class VideoProvider {
 
   constructor(
     private platform: Platform,
+    // private storage: Storage
     ) {}
 
   start(item) {

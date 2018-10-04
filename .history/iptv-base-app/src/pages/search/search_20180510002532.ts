@@ -56,5 +56,6 @@ export class SearchPage {
         this.navCtrl.push(ChannelPage, { channel: data, list: this.data });
         break;
     }
+    // this.videoProvider.start(item)
   }
 }

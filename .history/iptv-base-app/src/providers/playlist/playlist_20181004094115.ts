@@ -138,6 +138,7 @@ export class PlayListProvider {
     }
     this.toasterProvider.presentToast('Playlist saved');
     return playlist;
+
   }
 
   async remove(playlist) {

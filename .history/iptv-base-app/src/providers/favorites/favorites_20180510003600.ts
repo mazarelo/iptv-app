@@ -73,6 +73,7 @@ export class FavoritesProvider {
     });
   }
   
+  // this.storage.get('playlist').then((val) => {})
   async list() {
     const favoriteList = await  this.storage.get('favorites');
     return JSON.parse(favoriteList);

@@ -29,6 +29,7 @@ export class MyApp {
 
     this.initializeApp();
 
+    // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage, icon: 'list' },
       { title: 'Favorites', component: FavoritesPage, icon: 'heart-outline' },
@@ -40,6 +41,23 @@ export class MyApp {
   async initializeApp() {
     await this.platform.ready();
     this.statusBar.backgroundColorByHexString('#262626');
+    /*
+      const bannerConfig: AdMobFreeBannerConfig = {
+        id: 'ca-app-pub-1728583878769269/5801917485',
+        autoShow: true,
+        size: 'SMART_BANNER',
+      };
+      
+      try {
+        this.admobFree.banner.config(bannerConfig);
+        const resultBanner = await this.admobFree.banner.prepare();
+        this.admobFree.banner.show();
+        console.log(resultBanner);
+      }catch (err) {
+        console.log(err);
+      }
+    */
+    // this.backButtonInit();
   }
 
   backButtonInit() {
@@ -71,6 +89,10 @@ export class MyApp {
   }
 
   openPage(page) {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+
 }
