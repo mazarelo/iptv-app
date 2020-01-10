@@ -71,7 +71,7 @@
     "m3u8-parser": "^4.0.0",
     "m3u8-reader": "^1.1.0",
     "mux.js": "^4.4.1",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.13.0",
     "pako": "^1.0.6",
     "pouchdb": "^6.4.3",
     "rxjs": "5.5.2",
@@ -96,7 +96,7 @@
     "zone.js": "0.8.18"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "3.1.6",
+    "@ionic/app-scripts": "^3.2.4",
     "@types/pouchdb": "^6.3.2",
     "typescript": "2.4.2"
   },

@@ -1,8 +1,8 @@
 {
   "name": "iptv",
-  "app_id": "604d831c",
-  "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "type": "ionic-angular",
+  "id": "604d831c"
 }
